@@ -1,0 +1,621 @@
+# Instrument registry for the daily cross-asset brief.
+#
+# UNIT CONVENTIONS (the thing most likely to be silently wrong):
+#   quote_unit   - what a raw stored value means:
+#                    percent   -> 4.25 means 4.25%
+#                    index     -> index points (SPX, VIX)
+#                    usd       -> price in USD
+#                    fx_rate   -> units of quote ccy per base ccy
+#   change_unit  - how a day-over-day change is expressed:
+#                    bp   -> (curr - prev) * 100      [only for quote_unit: percent]
+#                    pct  -> (curr / prev - 1) * 100  [prices, indices, fx]
+#                    pts  -> (curr - prev)            [VIX and other point-quoted vols]
+#   dollar_direction - FX ONLY. +1 if a RISE in this quote means a STRONGER dollar.
+#                      This is explicit rather than inferred because Yahoo's short-form
+#                      tickers are a trap: "EURUSD=X" is EUR/USD but "JPY=X" is USD/JPY.
+#
+# sources: ordered list, index 0 is primary, rest are fallbacks.
+# bounds: hard sanity range on the LEVEL. Outside -> reject, never store.
+# max_abs_change: hard sanity range on the day-over-day CHANGE, in change_unit.
+# stale_tolerance_days: how many business days old a value may be before flagged stale.
+#                       FRED ICE BofA OAS series publish T+1, hence 2.
+
+meta:
+  # All change calculations compare consecutive stored session dates for the
+  # same instrument. See README for the snapshot-time convention.
+  version: 1
+  zscore_window: 60
+  zscore_min_obs: 30
+
+instruments:
+
+  # ---------------------------------------------------------------- RATES
+  - id: ust_3m
+    name: US 3M Treasury
+    asset_class: rates
+    quote_unit: percent
+    change_unit: bp
+    sources:
+      - {provider: treasury_par_nominal, symbol: "3 Mo"}
+      - {provider: fred, symbol: DGS3MO}
+    tradingview: "TVC:US03MY"
+    bounds: {min: -1.0, max: 20.0}
+    max_abs_change: 75
+    stale_tolerance_days: 1
+
+  - id: ust_2y
+    name: US 2Y Treasury
+    tier: core
+    asset_class: rates
+    quote_unit: percent
+    change_unit: bp
+    sources:
+      - {provider: treasury_par_nominal, symbol: "2 Yr"}
+      - {provider: fred, symbol: DGS2}
+    tradingview: "TVC:US02Y"
+    bounds: {min: -1.0, max: 20.0}
+    max_abs_change: 60
+    stale_tolerance_days: 1
+
+  - id: ust_5y
+    name: US 5Y Treasury
+    asset_class: rates
+    quote_unit: percent
+    change_unit: bp
+    sources:
+      - {provider: treasury_par_nominal, symbol: "5 Yr"}
+      - {provider: fred, symbol: DGS5}
+    tradingview: "TVC:US05Y"
+    bounds: {min: -1.0, max: 20.0}
+    max_abs_change: 50
+    stale_tolerance_days: 1
+
+  - id: ust_10y
+    name: US 10Y Treasury
+    tier: core
+    asset_class: rates
+    quote_unit: percent
+    change_unit: bp
+    sources:
+      - {provider: treasury_par_nominal, symbol: "10 Yr"}
+      - {provider: fred, symbol: DGS10}
+    tradingview: "TVC:US10Y"
+    bounds: {min: -1.0, max: 20.0}
+    max_abs_change: 50
+    stale_tolerance_days: 1
+
+  - id: ust_30y
+    name: US 30Y Treasury
+    asset_class: rates
+    quote_unit: percent
+    change_unit: bp
+    sources:
+      - {provider: treasury_par_nominal, symbol: "30 Yr"}
+      - {provider: fred, symbol: DGS30}
+    tradingview: "TVC:US30Y"
+    bounds: {min: -1.0, max: 20.0}
+    max_abs_change: 50
+    stale_tolerance_days: 1
+
+  - id: ust_real_5y
+    name: US 5Y TIPS Real Yield
+    asset_class: rates
+    quote_unit: percent
+    change_unit: bp
+    sources:
+      - {provider: treasury_par_real, symbol: "5 YR"}
+      - {provider: fred, symbol: DFII5}
+    tradingview: "FRED:DFII5"
+    bounds: {min: -5.0, max: 10.0}
+    max_abs_change: 50
+    stale_tolerance_days: 1
+
+  - id: ust_real_10y
+    name: US 10Y TIPS Real Yield
+    asset_class: rates
+    quote_unit: percent
+    change_unit: bp
+    sources:
+      - {provider: treasury_par_real, symbol: "10 YR"}
+      - {provider: fred, symbol: DFII10}
+    tradingview: "FRED:DFII10"
+    bounds: {min: -5.0, max: 10.0}
+    max_abs_change: 50
+    stale_tolerance_days: 1
+
+  - id: ust_real_30y
+    name: US 30Y TIPS Real Yield
+    asset_class: rates
+    quote_unit: percent
+    change_unit: bp
+    sources:
+      - {provider: treasury_par_real, symbol: "30 YR"}
+      - {provider: fred, symbol: DFII30}
+    tradingview: "FRED:DFII30"
+    bounds: {min: -5.0, max: 10.0}
+    max_abs_change: 50
+    stale_tolerance_days: 1
+
+  # --------------------------------------------------------------- CREDIT
+  - id: hy_oas
+    name: ICE BofA US High Yield OAS
+    calendar: SIFMA_US
+    asset_class: credit
+    quote_unit: percent
+    change_unit: bp
+    sources:
+      - {provider: fred, symbol: BAMLH0A0HYM2}
+    tradingview: "FRED:BAMLH0A0HYM2"
+    bounds: {min: 0.5, max: 30.0}
+    max_abs_change: 150
+    stale_tolerance_days: 2   # publishes T+1
+
+  - id: ig_oas
+    name: ICE BofA US Corporate OAS
+    calendar: SIFMA_US
+    asset_class: credit
+    quote_unit: percent
+    change_unit: bp
+    sources:
+      - {provider: fred, symbol: BAMLC0A0CM}
+    tradingview: "FRED:BAMLC0A0CM"
+    bounds: {min: 0.2, max: 12.0}
+    max_abs_change: 60
+    stale_tolerance_days: 2   # publishes T+1
+
+  - id: hyg
+    name: iShares High Yield Corp Bond ETF
+    asset_class: credit
+    quote_unit: usd
+    change_unit: pct
+    sources:
+      - {provider: yahoo, symbol: HYG}
+    tradingview: "AMEX:HYG"
+    bounds: {min: 20.0, max: 200.0}
+    max_abs_change: 10
+    stale_tolerance_days: 1
+
+  - id: lqd
+    name: iShares Investment Grade Corp Bond ETF
+    asset_class: credit
+    quote_unit: usd
+    change_unit: pct
+    sources:
+      - {provider: yahoo, symbol: LQD}
+    tradingview: "AMEX:LQD"
+    bounds: {min: 40.0, max: 250.0}
+    max_abs_change: 10
+    stale_tolerance_days: 1
+
+  # --------------------------------------------------------------- EQUITY
+  - id: spx
+    name: S&P 500
+    tier: core
+    asset_class: equity
+    quote_unit: index
+    change_unit: pct
+    sources:
+      - {provider: yahoo, symbol: "^GSPC"}
+    tradingview: "SP:SPX"
+    bounds: {min: 500.0, max: 30000.0}
+    max_abs_change: 15
+    stale_tolerance_days: 1
+
+  - id: ndx
+    name: Nasdaq 100
+    asset_class: equity
+    quote_unit: index
+    change_unit: pct
+    sources:
+      - {provider: yahoo, symbol: "^NDX"}
+    tradingview: "NASDAQ:NDX"
+    bounds: {min: 500.0, max: 60000.0}
+    max_abs_change: 15
+    stale_tolerance_days: 1
+
+  - id: rut
+    name: Russell 2000
+    asset_class: equity
+    quote_unit: index
+    change_unit: pct
+    sources:
+      - {provider: yahoo, symbol: "^RUT"}
+    tradingview: "TVC:RUT"
+    bounds: {min: 200.0, max: 10000.0}
+    max_abs_change: 15
+    stale_tolerance_days: 1
+
+  - id: spy
+    name: SPDR S&P 500 ETF
+    asset_class: equity
+    quote_unit: usd
+    change_unit: pct
+    sources:
+      - {provider: yahoo, symbol: SPY}
+    tradingview: "AMEX:SPY"
+    bounds: {min: 50.0, max: 3000.0}
+    max_abs_change: 15
+    stale_tolerance_days: 1
+
+  - id: rsp
+    name: Invesco S&P 500 Equal Weight ETF
+    asset_class: equity
+    quote_unit: usd
+    change_unit: pct
+    sources:
+      - {provider: yahoo, symbol: RSP}
+    tradingview: "AMEX:RSP"
+    bounds: {min: 20.0, max: 1000.0}
+    max_abs_change: 15
+    stale_tolerance_days: 1
+
+  - id: xlk
+    name: Technology Sector
+    asset_class: equity
+    quote_unit: usd
+    change_unit: pct
+    sources: [{provider: yahoo, symbol: XLK}]
+    tradingview: "AMEX:XLK"
+    bounds: {min: 10.0, max: 1000.0}
+    max_abs_change: 18
+    stale_tolerance_days: 1
+
+  - id: xlf
+    name: Financials Sector
+    asset_class: equity
+    quote_unit: usd
+    change_unit: pct
+    sources: [{provider: yahoo, symbol: XLF}]
+    tradingview: "AMEX:XLF"
+    bounds: {min: 5.0, max: 500.0}
+    max_abs_change: 18
+    stale_tolerance_days: 1
+
+  - id: xle
+    name: Energy Sector
+    asset_class: equity
+    quote_unit: usd
+    change_unit: pct
+    sources: [{provider: yahoo, symbol: XLE}]
+    tradingview: "AMEX:XLE"
+    bounds: {min: 10.0, max: 500.0}
+    max_abs_change: 18
+    stale_tolerance_days: 1
+
+  - id: xlv
+    name: Health Care Sector
+    asset_class: equity
+    quote_unit: usd
+    change_unit: pct
+    sources: [{provider: yahoo, symbol: XLV}]
+    tradingview: "AMEX:XLV"
+    bounds: {min: 10.0, max: 500.0}
+    max_abs_change: 18
+    stale_tolerance_days: 1
+
+  - id: xli
+    name: Industrials Sector
+    asset_class: equity
+    quote_unit: usd
+    change_unit: pct
+    sources: [{provider: yahoo, symbol: XLI}]
+    tradingview: "AMEX:XLI"
+    bounds: {min: 10.0, max: 500.0}
+    max_abs_change: 18
+    stale_tolerance_days: 1
+
+  - id: xlp
+    name: Consumer Staples Sector
+    asset_class: equity
+    quote_unit: usd
+    change_unit: pct
+    sources: [{provider: yahoo, symbol: XLP}]
+    tradingview: "AMEX:XLP"
+    bounds: {min: 10.0, max: 500.0}
+    max_abs_change: 18
+    stale_tolerance_days: 1
+
+  - id: xlu
+    name: Utilities Sector
+    asset_class: equity
+    quote_unit: usd
+    change_unit: pct
+    sources: [{provider: yahoo, symbol: XLU}]
+    tradingview: "AMEX:XLU"
+    bounds: {min: 10.0, max: 500.0}
+    max_abs_change: 18
+    stale_tolerance_days: 1
+
+  - id: xly
+    name: Consumer Discretionary Sector
+    asset_class: equity
+    quote_unit: usd
+    change_unit: pct
+    sources: [{provider: yahoo, symbol: XLY}]
+    tradingview: "AMEX:XLY"
+    bounds: {min: 10.0, max: 500.0}
+    max_abs_change: 18
+    stale_tolerance_days: 1
+
+  - id: xlb
+    name: Materials Sector
+    asset_class: equity
+    quote_unit: usd
+    change_unit: pct
+    sources: [{provider: yahoo, symbol: XLB}]
+    tradingview: "AMEX:XLB"
+    bounds: {min: 10.0, max: 500.0}
+    max_abs_change: 18
+    stale_tolerance_days: 1
+
+  - id: xlre
+    name: Real Estate Sector
+    asset_class: equity
+    quote_unit: usd
+    change_unit: pct
+    sources: [{provider: yahoo, symbol: XLRE}]
+    tradingview: "AMEX:XLRE"
+    bounds: {min: 5.0, max: 500.0}
+    max_abs_change: 18
+    stale_tolerance_days: 1
+
+  - id: xlc
+    name: Communication Services Sector
+    asset_class: equity
+    quote_unit: usd
+    change_unit: pct
+    sources: [{provider: yahoo, symbol: XLC}]
+    tradingview: "AMEX:XLC"
+    bounds: {min: 10.0, max: 500.0}
+    max_abs_change: 18
+    stale_tolerance_days: 1
+
+  # ------------------------------------------------------------------ VOL
+  - id: vix
+    name: CBOE Volatility Index
+    asset_class: vol
+    quote_unit: index
+    change_unit: pts
+    sources:
+      - {provider: yahoo, symbol: "^VIX"}
+    tradingview: "CBOE:VIX"
+    bounds: {min: 5.0, max: 100.0}
+    max_abs_change: 40
+    stale_tolerance_days: 1
+
+  - id: vix3m
+    name: CBOE 3-Month Volatility Index
+    asset_class: vol
+    quote_unit: index
+    change_unit: pts
+    # Yahoo's ^VIX3M stopped updating (stale since 2026-07-17) while retaining
+    # full back history; ^VXV, the pre-2017 ticker, is delisted. CBOE publishes
+    # this index itself, so it is the authoritative source. Yahoo stays as a
+    # fallback because its history is intact even though its feed is stale.
+    sources:
+      - {provider: cboe, symbol: "VIX3M"}
+      - {provider: yahoo, symbol: "^VIX3M"}
+    tradingview: "CBOE:VIX3M"
+    bounds: {min: 5.0, max: 100.0}
+    max_abs_change: 30
+    stale_tolerance_days: 1
+
+  # ----------------------------------------------------------- COMMODITY
+  # NOTE: Yahoo continuous front-month contracts. Roll artifacts appear at
+  # contract expiry. See README for the roll-gap detection in the validation gate.
+  - id: wti
+    name: WTI Crude (front)
+    tier: core
+    asset_class: commodity
+    quote_unit: usd
+    change_unit: pct
+    sources:
+      - {provider: yahoo, symbol: "CL=F"}
+    tradingview: "NYMEX:CL1!"
+    # Front-month WTI settled at -$37.63 on 2020-04-20. Negative prices are real
+    # market history, not bad ticks. NOTE: percent changes across a sign flip are
+    # meaningless; the step-2 validation gate must flag sign crossings rather
+    # than compute a change through zero.
+    bounds: {min: -60.0, max: 250.0}
+    max_abs_change: 25
+    stale_tolerance_days: 1
+
+  - id: brent
+    name: Brent Crude (front)
+    asset_class: commodity
+    quote_unit: usd
+    change_unit: pct
+    sources:
+      - {provider: yahoo, symbol: "BZ=F"}
+    tradingview: "ICEEUR:BRN1!"
+    bounds: {min: 5.0, max: 250.0}
+    max_abs_change: 25
+    stale_tolerance_days: 1
+
+  - id: natgas
+    name: Henry Hub Natural Gas (front)
+    asset_class: commodity
+    quote_unit: usd
+    change_unit: pct
+    sources:
+      - {provider: yahoo, symbol: "NG=F"}
+    tradingview: "NYMEX:NG1!"
+    bounds: {min: 0.5, max: 30.0}
+    max_abs_change: 35
+    stale_tolerance_days: 1
+
+  - id: gold
+    name: Gold (front)
+    tier: core
+    asset_class: commodity
+    quote_unit: usd
+    change_unit: pct
+    sources:
+      - {provider: yahoo, symbol: "GC=F"}
+    tradingview: "COMEX:GC1!"
+    bounds: {min: 500.0, max: 10000.0}
+    max_abs_change: 12
+    stale_tolerance_days: 1
+
+  - id: silver
+    name: Silver (front)
+    asset_class: commodity
+    quote_unit: usd
+    change_unit: pct
+    sources:
+      - {provider: yahoo, symbol: "SI=F"}
+    tradingview: "COMEX:SI1!"
+    bounds: {min: 5.0, max: 200.0}
+    max_abs_change: 20
+    stale_tolerance_days: 1
+
+  - id: copper
+    name: Copper (front)
+    asset_class: commodity
+    quote_unit: usd
+    change_unit: pct
+    sources:
+      - {provider: yahoo, symbol: "HG=F"}
+    tradingview: "COMEX:HG1!"
+    bounds: {min: 0.5, max: 20.0}
+    max_abs_change: 20
+    stale_tolerance_days: 1
+
+  # ------------------------------------------------------------------- FX
+  # dollar_direction is MANDATORY here and deliberately explicit.
+  # Yahoo quirk: "EURUSD=X" = EUR/USD, but "JPY=X" = USD/JPY. Never infer from ticker.
+  - id: eurusd
+    name: EUR/USD
+    tier: core
+    asset_class: fx
+    quote_unit: fx_rate
+    change_unit: pct
+    dollar_direction: -1
+    dxy_component: {weight: -0.576}
+    sources:
+      - {provider: yahoo, symbol: "EURUSD=X"}
+    tradingview: "FX:EURUSD"
+    bounds: {min: 0.5, max: 2.0}
+    max_abs_change: 8
+    stale_tolerance_days: 1
+
+  - id: usdjpy
+    name: USD/JPY
+    tier: core
+    asset_class: fx
+    quote_unit: fx_rate
+    change_unit: pct
+    dollar_direction: 1
+    dxy_component: {weight: 0.136}
+    sources:
+      - {provider: yahoo, symbol: "JPY=X"}
+    tradingview: "FX:USDJPY"
+    bounds: {min: 50.0, max: 400.0}
+    max_abs_change: 8
+    stale_tolerance_days: 1
+
+  - id: gbpusd
+    name: GBP/USD
+    tier: core
+    asset_class: fx
+    quote_unit: fx_rate
+    change_unit: pct
+    dollar_direction: -1
+    dxy_component: {weight: -0.119}
+    sources:
+      - {provider: yahoo, symbol: "GBPUSD=X"}
+    tradingview: "FX:GBPUSD"
+    bounds: {min: 0.8, max: 3.0}
+    max_abs_change: 8
+    stale_tolerance_days: 1
+
+  - id: usdcad
+    name: USD/CAD
+    tier: core
+    asset_class: fx
+    quote_unit: fx_rate
+    change_unit: pct
+    dollar_direction: 1
+    dxy_component: {weight: 0.091}
+    sources:
+      - {provider: yahoo, symbol: "CAD=X"}
+    tradingview: "FX:USDCAD"
+    bounds: {min: 0.8, max: 2.5}
+    max_abs_change: 8
+    stale_tolerance_days: 1
+
+  - id: usdsek
+    name: USD/SEK
+    tier: core
+    asset_class: fx
+    quote_unit: fx_rate
+    change_unit: pct
+    dollar_direction: 1
+    dxy_component: {weight: 0.042}
+    sources:
+      - {provider: yahoo, symbol: "SEK=X"}
+    tradingview: "FX:USDSEK"
+    bounds: {min: 3.0, max: 20.0}
+    max_abs_change: 8
+    stale_tolerance_days: 1
+
+  - id: usdchf
+    name: USD/CHF
+    tier: core
+    asset_class: fx
+    quote_unit: fx_rate
+    change_unit: pct
+    dollar_direction: 1
+    dxy_component: {weight: 0.036}
+    sources:
+      - {provider: yahoo, symbol: "CHF=X"}
+    tradingview: "FX:USDCHF"
+    bounds: {min: 0.5, max: 2.0}
+    max_abs_change: 8
+    stale_tolerance_days: 1
+
+  # SUBSTITUTION, not a rename. Offshore CNH is the better risk-sentiment signal
+  # because it floats freely, but Yahoo has no usable CNH history (both CNH=X and
+  # USDCNH=X return a single row). Onshore CNY is managed by the PBoC within a
+  # daily band around its fix, so it moves less and is partly a policy decision
+  # rather than a market price. Treat CNY moves as a weaker, laggier signal than
+  # CNH would have been, and do not read small daily changes as market sentiment.
+  - id: usdcny
+    name: USD/CNY (onshore, PBoC-managed)
+    asset_class: fx
+    quote_unit: fx_rate
+    change_unit: pct
+    dollar_direction: 1
+    sources:
+      - {provider: yahoo, symbol: "CNY=X"}
+      - {provider: yahoo, symbol: "USDCNY=X"}
+    tradingview: "FX_IDC:USDCNY"
+    bounds: {min: 4.0, max: 12.0}
+    max_abs_change: 4
+    stale_tolerance_days: 1
+
+  - id: usdmxn
+    name: USD/MXN
+    asset_class: fx
+    quote_unit: fx_rate
+    change_unit: pct
+    dollar_direction: 1
+    sources:
+      - {provider: yahoo, symbol: "MXN=X"}
+    tradingview: "FX_IDC:USDMXN"
+    bounds: {min: 5.0, max: 40.0}
+    max_abs_change: 12
+    stale_tolerance_days: 1
+
+  - id: audusd
+    name: AUD/USD
+    asset_class: fx
+    quote_unit: fx_rate
+    change_unit: pct
+    dollar_direction: -1
+    sources:
+      - {provider: yahoo, symbol: "AUDUSD=X"}
+    tradingview: "FX:AUDUSD"
+    bounds: {min: 0.3, max: 1.5}
+    max_abs_change: 8
+    stale_tolerance_days: 1

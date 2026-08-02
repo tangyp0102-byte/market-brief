@@ -1,0 +1,63 @@
+name: daily brief
+
+on:
+  schedule:
+    # 18:00 US/Eastern: after Treasury publishes the par yield curve, which a
+    # 16:15 run would systematically miss. GitHub handles DST, so this stays
+    # 18:00 local through both EST and EDT.
+    # Scheduled runs can queue late under load; the pipeline is idempotent and
+    # guarded by the NYSE calendar, so a delayed or repeated run is harmless.
+    - cron: "0 18 * * 1-5"
+      timezone: "America/New_York"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: daily-brief
+  cancel-in-progress: false
+
+jobs:
+  brief:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - run: pip install -r requirements.txt
+
+      # The suite needs no network and no API key, so a broken pipeline is
+      # caught before it can publish anything.
+      - run: python -m pytest tests/ -q
+
+      # Seven years of history is too bulky to commit on every run. Cache keys
+      # are immutable, so each run writes a new entry and restores the most
+      # recent by prefix. If the cache is ever evicted, mb.daily notices the
+      # store is too thin and rebuilds from scratch rather than publishing NaNs.
+      - name: Restore market history
+        uses: actions/cache@v4
+        with:
+          path: |
+            data/history.parquet
+            data/roll_flags.csv
+          key: market-history-${{ github.run_id }}
+          restore-keys: market-history-
+
+      - name: Run the daily pipeline
+        env:
+          FRED_API_KEY: ${{ secrets.FRED_API_KEY }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: python -m mb.daily
+
+      - name: Publish
+        run: |
+          git config user.name "market-brief"
+          git config user.email "actions@github.com"
+          git add site data/briefs
+          git diff --staged --quiet || git commit -m "brief $(date -u +%Y-%m-%d)"
+          git push

@@ -1,0 +1,251 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Market brief &middot; 2026-08-02</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Newsreader:opsz,wght@6..72,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ground: #e9eaec;
+  --panel: #fcfcfd;
+  --ink: #14161a;
+  --muted: #767c86;
+  --hair: #d2d5da;
+  --rise: #1b6b54;
+  --fall: #9e3524;
+  --provisional: #6e6480;
+  --provisional-bg: #edeaf1;
+}
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--ground);
+  color: var(--ink);
+  font-family: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  font-size: 14px;
+  line-height: 1.55;
+  font-variant-numeric: tabular-nums;
+}
+.sheet {
+  max-width: 940px;
+  margin: 0 auto;
+  padding: 40px 24px 80px;
+}
+.eyebrow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 18px;
+  align-items: baseline;
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+  border-bottom: 1px solid var(--hair);
+  padding-bottom: 12px;
+}
+.eyebrow .date { color: var(--ink); font-weight: 600; }
+.verdict {
+  margin: 34px 0 4px;
+  font-family: Newsreader, Georgia, "Times New Roman", serif;
+  font-size: clamp(28px, 5vw, 44px);
+  line-height: 1.12;
+  font-weight: 400;
+  letter-spacing: -0.015em;
+}
+.confidence {
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.meter { margin: 26px 0 8px; }
+.meter-track {
+  position: relative;
+  height: 3px;
+  background: var(--hair);
+}
+.meter-fill { position: absolute; inset: 0 auto 0 0; background: var(--ink); }
+.meter-label {
+  display: flex;
+  justify-content: space-between;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-top: 8px;
+}
+h2 {
+  margin: 46px 0 14px;
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: var(--muted);
+}
+table { width: 100%; border-collapse: collapse; }
+th {
+  text-align: right;
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-weight: 500;
+  color: var(--muted);
+  padding: 0 0 6px;
+  border-bottom: 1px solid var(--hair);
+}
+th:first-child, td:first-child { text-align: left; }
+td {
+  padding: 5px 0;
+  border-bottom: 1px solid rgba(210, 213, 218, 0.5);
+  white-space: nowrap;
+}
+td.name { white-space: normal; padding-right: 12px; }
+td.num { text-align: right; padding-left: 14px; }
+.rise { color: var(--rise); }
+.fall { color: var(--fall); }
+.flat { color: var(--muted); }
+.undef { color: var(--muted); font-style: italic; }
+a { color: inherit; text-decoration: none; border-bottom: 1px solid var(--hair); }
+a:hover { border-bottom-color: var(--ink); }
+a:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+.tag {
+  display: inline-block;
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 1px 5px;
+  margin-left: 6px;
+  border: 1px solid var(--hair);
+  color: var(--muted);
+}
+.moved { border-color: var(--ink); color: var(--ink); }
+.holds { color: var(--rise); }
+.breaks { color: var(--fall); }
+.note {
+  margin: 12px 0 0;
+  padding-left: 14px;
+  border-left: 2px solid var(--hair);
+  color: var(--muted);
+  font-size: 13px;
+}
+.note.conflict { border-left-color: var(--fall); color: var(--fall); }
+
+/* Signature: the boundary between record and commentary. */
+.boundary { margin: 64px 0 0; }
+.boundary-rule {
+  border: 0;
+  border-top: 1px solid var(--ink);
+  margin: 0;
+}
+.boundary-label {
+  margin-top: -0.72em;
+  text-align: center;
+}
+.boundary-label span {
+  background: var(--ground);
+  padding: 0 14px;
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ink);
+}
+.commentary {
+  margin-top: 34px;
+  padding: 26px 28px;
+  background: var(--provisional-bg);
+  color: var(--provisional);
+}
+.commentary p { margin: 0 0 15px; }
+.commentary p:last-child { margin-bottom: 0; }
+.commentary .section {
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--provisional);
+  opacity: 0.75;
+  margin-bottom: 4px;
+}
+.commentary .caveat {
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 1px solid rgba(110, 100, 128, 0.28);
+  font-size: 12px;
+  opacity: 0.85;
+}
+.withheld {
+  margin-top: 34px;
+  padding: 20px 24px;
+  border: 1px solid var(--fall);
+  color: var(--fall);
+  font-size: 13px;
+}
+footer {
+  margin-top: 56px;
+  padding-top: 16px;
+  border-top: 1px solid var(--hair);
+  font-size: 11px;
+  color: var(--muted);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 20px;
+  justify-content: space-between;
+}
+@media (max-width: 620px) {
+  .sheet { padding: 26px 16px 56px; }
+  body { font-size: 13px; }
+  td.num { padding-left: 8px; }
+  .hide-narrow { display: none; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .sheet > * { animation: rise 0.4s ease-out both; }
+  @keyframes rise { from { opacity: 0; transform: translateY(4px); } }
+}
+</style>
+</head>
+<body>
+<main class="sheet">
+
+  <div class="eyebrow">
+    <span class="date">2026-08-02</span>
+    <span>gate blocked</span>
+    <span>z-window 60 sessions</span>
+  </div>
+
+  <h1 class="verdict">No clean signal</h1>
+  <div class="confidence">not classified</div>
+
+  <div class="meter">
+    <div class="meter-track"><div class="meter-fill" style="width:2%"></div></div>
+    <div class="meter-label">
+      <span>Intensity 0.00</span>
+      <span>more active than 0% of sessions</span>
+    </div>
+  </div>
+
+  <p class='note'>Core blocs unavailable: equity, rates, dollar, gold, energy. Not classified.</p>
+
+  <h2>Signals &mdash; one per bloc</h2>
+  <p class='note'>No signals available for this session.</p>
+  
+
+  
+
+  <div class="boundary">
+    <hr class="boundary-rule">
+    <div class="boundary-label"><span>Below: commentary, not record</span></div>
+  </div>
+
+  <div class='commentary'><p>The validation gate blocked publication.</p><p class='caveat'>Generated from the figures above without a language model.</p></div>
+
+  <footer>
+    <span>Instrument names link to TradingView.</span>
+    
+  </footer>
+
+</main>
+</body>
+</html>

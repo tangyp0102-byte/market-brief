@@ -1,0 +1,19 @@
+﻿__pycache__/
+*.pyc
+.pytest_cache/
+.env
+.venv/
+venv/
+*.zip
+market-brief-preview.html
+
+# Raw vendor payloads: useful locally for debugging a parser, too bulky to
+# carry in the repository.
+data/raw/
+
+# NOT ignored, and deliberately so:
+#   data/history.parquet  - the workflow restores this from cache, but a
+#                           local copy is what makes the repo self-contained
+#   data/roll_flags.csv   - hand-editable decisions about contract rolls
+#   data/briefs/*.json    - the archive
+#   site/*.html           - the published pages

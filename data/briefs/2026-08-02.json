@@ -1,0 +1,30 @@
+{
+  "factsheet": {
+    "session": "2026-08-02",
+    "gate": {
+      "verdict": "blocked",
+      "half_session": false,
+      "missing": [],
+      "stale": [],
+      "undefined": [],
+      "review": []
+    },
+    "regime": {
+      "id": null,
+      "name": "No clean signal",
+      "confidence": "none",
+      "intensity": 0.0,
+      "intensity_percentile": 0.0
+    },
+    "signals": [],
+    "confirmations": [],
+    "largest_moves": [],
+    "notes": [
+      "Core blocs unavailable: equity, rates, dollar, gold, energy. Not classified."
+    ]
+  },
+  "headline": "No brief for this session.",
+  "body": "The validation gate blocked publication.",
+  "generated": false,
+  "unverified_numbers": []
+}
