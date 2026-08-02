@@ -50,18 +50,30 @@ def test_page_renders_valid_standalone_html(pieces):
     assert "<link rel=\"stylesheet\" href=\"style" not in html
 
 
-def test_tape_appears_before_the_commentary(pieces):
-    """The checkable layer must be read first."""
+def test_commentary_is_labelled_and_separated_from_the_record(pieces):
+    """The commentary now sits above the tape, but stays marked as commentary.
+
+    The original layout put the tape first on the argument that the checkable
+    layer should be read first. In practice the reader wants the summary at the
+    top and drills into the numbers afterwards. What the ordering was actually
+    protecting - knowing which parts are verified - is carried by the label,
+    the tint and the caveat, not by vertical position, so all three stay.
+    """
     html = page.render_page(*pieces)
-    boundary = html.index("Below: commentary, not record")
-    assert html.index("Signals &mdash; one per bloc") < boundary
-    assert html.index("Rates") < boundary
-    assert html.index("class='commentary'") > boundary
+    body = html[html.index("<main"):]
+
+    label = body.index("commentary-label")
+    boundary = body.index("Below: the record")
+    signals = body.index("Signals &mdash; one per bloc")
+
+    assert label < boundary < signals
+    assert "Commentary &mdash; not record" in body
+    assert "Read it as commentary" in body or "without a language model" in body
 
 
 def test_boundary_label_is_present(pieces):
     html = page.render_page(*pieces)
-    assert "Below: commentary, not record" in html
+    assert "Below: the record" in html
 
 
 def test_commentary_carries_its_own_caveat(pieces):
@@ -334,11 +346,14 @@ def _with_calendar(pieces, session="2026-07-31", repo="owner/repo"):
 
 
 def _cal_data(html):
+    """Parse the embedded data exactly as a browser would.
+
+    No entity decoding: script content is not html-decoded by browsers, so a
+    test that decodes first would pass on markup that throws in the page. That
+    is precisely how an escaped payload once shipped a dead calendar.
+    """
     import json
     raw = html.split('id="cal-data">')[1].split("</script>")[0]
-    for a, b in [("&quot;", '"'), ("&#x27;", "'"), ("&lt;", "<"),
-                 ("&gt;", ">"), ("&amp;", "&")]:
-        raw = raw.replace(a, b)
     return json.loads(raw)
 
 
@@ -556,3 +571,33 @@ def test_workflow_refreshes_older_pages_after_each_run():
     text = wf.read_text()
     assert "--rebuild" in text
     assert text.index("python -m mb.daily $ARGS") < text.index("--rebuild")
+
+
+def test_calendar_payload_is_parseable_without_entity_decoding(pieces):
+    """Browsers do not html-decode script content; JSON.parse would throw.
+
+    Escaping the payload once left the calendar as two dead arrows. The check
+    that missed it decoded the entities itself, verifying the bug was
+    self-consistent rather than that the widget worked.
+    """
+    html = _with_calendar(pieces)
+    raw = html.split('id="cal-data">')[1].split("</script>")[0]
+    assert "&quot;" not in raw
+    assert "&#x27;" not in raw
+    import json
+    json.loads(raw)          # must not raise
+
+
+def test_calendar_payload_cannot_close_its_own_script_tag(pieces):
+    """A regime name containing '</script>' would end the block early."""
+    built, result, written = pieces
+    html = page.render_page(
+        built, result, written,
+        archive=[{"date": "2026-07-30", "regime": "x",
+                  "regime_name": "</script><b>injected"}],
+    )
+    raw = html.split('id="cal-data">')[1].split("</script>")[0]
+    import json
+    data = json.loads(raw)
+    assert "injected" in data["available"]["2026-07-30"]["name"]
+    assert "<b>injected" not in html.split('id="cal-data">')[0]

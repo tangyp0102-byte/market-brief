@@ -167,7 +167,7 @@ a:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
 .note.conflict { border-left-color: var(--fall); color: var(--fall); }
 
 /* Signature: the boundary between record and commentary. */
-.boundary { margin: 64px 0 0; }
+.boundary { margin: 52px 0 0; }
 .boundary-rule {
   border: 0;
   border-top: 1px solid var(--ink);
@@ -185,8 +185,15 @@ a:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
   text-transform: uppercase;
   color: var(--ink);
 }
+.commentary-label {
+  margin: 34px 0 0;
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--provisional);
+}
 .commentary {
-  margin-top: 34px;
+  margin-top: 8px;
   padding: 26px 28px;
   background: var(--provisional-bg);
   color: var(--provisional);
@@ -242,8 +249,8 @@ details.archive summary {
   border-bottom: 1px solid var(--hair);
 }
 details.archive summary::-webkit-details-marker { display: none; }
-details.archive summary::after { content: "  +"; }
-details[open].archive summary::after { content: "  \2212"; }
+details.archive summary::after { content: " +"; }
+details[open].archive summary::after { content: " −"; }
 details.archive summary:hover { color: var(--ink); }
 details.archive summary:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
 .months {
@@ -672,12 +679,16 @@ def _calendar(archive, session, holiday_dates, repo) -> str:
         e["date"]: {"regime": e.get("regime"), "name": e.get("regime_name", "")}
         for e in archive
     }
+    # Deliberately NOT html-escaped: a browser does not decode entities inside
+    # a script element, so &quot; would reach JSON.parse verbatim and throw,
+    # leaving the calendar as a pair of dead arrows. Only "</" needs
+    # neutralising, since that is the one sequence able to close the tag early.
     data = json.dumps({
         "available": available,
         "holidays": list(holiday_dates or ()),
         "current": str(session),
         "repo": repo,
-    })
+    }).replace("</", "<\\/")
     count = len(available)
     return f"""<details class="archive">
 <summary>Browse sessions &mdash; {count} analysed</summary>
@@ -696,7 +707,7 @@ def _calendar(archive, session, holiday_dates, repo) -> str:
   <div class="cal-panel hidden" id="cal-panel"></div>
 </div>
 </details>
-<script type="application/json" id="cal-data">{_esc(data)}</script>
+<script type="application/json" id="cal-data">{data}</script>
 <script>{CALENDAR_SCRIPT}</script>"""
 
 
@@ -800,20 +811,21 @@ def render_page(
 
   {notes}
 
+  {archive_block}
+
+  <p class="commentary-label">Commentary &mdash; not record</p>
+  {_commentary(result_brief)}
+
+  <div class="boundary">
+    <hr class="boundary-rule">
+    <div class="boundary-label"><span>Below: the record</span></div>
+  </div>
+
   <h2>Signals &mdash; one per bloc</h2>
   {_signals_table(result)}
   {_confirmations_block(result)}
 
   {_tape_tables(built, registry)}
-
-  <div class="boundary">
-    <hr class="boundary-rule">
-    <div class="boundary-label"><span>Below: commentary, not record</span></div>
-  </div>
-
-  {_commentary(result_brief)}
-
-  {archive_block}
 
   <footer>
     <span>Instrument names link to TradingView.</span>
