@@ -231,9 +231,19 @@ def run(
     dated = page.write_page(
         site_dir / f"{built.session}.html", built, result, written, registry, archive
     )
-    page.write_page(
-        site_dir / "index.html", built, result, written, registry, archive
-    )
+
+    # index.html is the most recent PUBLISHABLE brief, not the most recent
+    # attempt. A blocked session - a holiday, a forced run on a weekend, a data
+    # failure - must not overwrite the last good page with an empty one.
+    if built.rows:
+        page.write_page(
+            site_dir / "index.html", built, result, written, registry, archive
+        )
+    else:
+        messages.append(
+            "Gate produced no tape, so index.html was left pointing at the "
+            "previous session rather than being replaced with an empty page."
+        )
 
     return DailyResult(
         session=built.session, ran=True, verdict=built.verdict,
