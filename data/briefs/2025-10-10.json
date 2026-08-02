@@ -1,0 +1,220 @@
+{
+  "factsheet": {
+    "session": "2025-10-10",
+    "gate": {
+      "verdict": "pass",
+      "half_session": false,
+      "missing": [],
+      "stale": [],
+      "undefined": [],
+      "review": []
+    },
+    "regime": {
+      "id": "growth_scare",
+      "name": "Growth scare / flight to quality",
+      "confidence": "strong",
+      "intensity": 2.1,
+      "intensity_percentile": 0.99
+    },
+    "signals": [
+      {
+        "bloc": "equity",
+        "instrument": "spx",
+        "change": -2.71,
+        "unit": "%",
+        "z": -4.82,
+        "percentile": 1.0,
+        "moved": true,
+        "quiet_vol": true
+      },
+      {
+        "bloc": "rates",
+        "instrument": "ust_30y",
+        "change": -9.0,
+        "unit": "bp",
+        "z": -2.17,
+        "percentile": 0.95,
+        "moved": true,
+        "quiet_vol": false
+      },
+      {
+        "bloc": "bills",
+        "instrument": "ust_3m",
+        "change": -1.0,
+        "unit": "bp",
+        "z": -0.17,
+        "percentile": 0.3,
+        "moved": false,
+        "quiet_vol": false
+      },
+      {
+        "bloc": "curve",
+        "instrument": "ust_2s10s",
+        "change": -1.0,
+        "unit": "bp",
+        "z": -0.29,
+        "percentile": 0.25,
+        "moved": false,
+        "quiet_vol": false
+      },
+      {
+        "bloc": "real_rates",
+        "instrument": "ust_real_10y",
+        "change": -5.0,
+        "unit": "bp",
+        "z": -1.31,
+        "percentile": 0.82,
+        "moved": true,
+        "quiet_vol": false
+      },
+      {
+        "bloc": "inflation",
+        "instrument": "be_10y",
+        "change": -4.0,
+        "unit": "bp",
+        "z": -1.89,
+        "percentile": 0.93,
+        "moved": true,
+        "quiet_vol": false
+      },
+      {
+        "bloc": "dollar",
+        "instrument": "dxy",
+        "change": 0.55,
+        "unit": "%",
+        "z": 1.24,
+        "percentile": 0.79,
+        "moved": true,
+        "quiet_vol": false
+      },
+      {
+        "bloc": "gold",
+        "instrument": "gold",
+        "change": 0.75,
+        "unit": "%",
+        "z": 0.49,
+        "percentile": 0.43,
+        "moved": false,
+        "quiet_vol": false
+      },
+      {
+        "bloc": "energy",
+        "instrument": "wti",
+        "change": -4.24,
+        "unit": "%",
+        "z": -2.62,
+        "percentile": 0.98,
+        "moved": true,
+        "quiet_vol": false
+      },
+      {
+        "bloc": "industrial",
+        "instrument": "copper",
+        "change": -4.47,
+        "unit": "%",
+        "z": -4.04,
+        "percentile": 1.0,
+        "moved": true,
+        "quiet_vol": false
+      },
+      {
+        "bloc": "vol",
+        "instrument": "vix",
+        "change": 5.23,
+        "unit": "pt",
+        "z": 4.46,
+        "percentile": 0.99,
+        "moved": true,
+        "quiet_vol": true
+      },
+      {
+        "bloc": "credit",
+        "instrument": "credit_excess",
+        "change": -0.87,
+        "unit": "%",
+        "z": -3.92,
+        "percentile": 0.99,
+        "moved": true,
+        "quiet_vol": true
+      }
+    ],
+    "confirmations": [
+      {
+        "id": "vol_up",
+        "holds": true,
+        "detail": "VIX +5.23pt"
+      },
+      {
+        "id": "credit_weak",
+        "holds": true,
+        "detail": "duration-hedged HY -0.87%"
+      },
+      {
+        "id": "defensives_lead",
+        "holds": true,
+        "detail": "defensives -0.59% vs cyclicals -2.30%"
+      },
+      {
+        "id": "gold_up",
+        "holds": true,
+        "detail": "gold +0.75%"
+      },
+      {
+        "id": "dollar_up",
+        "holds": true,
+        "detail": "dxy +0.55%"
+      }
+    ],
+    "largest_moves": [
+      {
+        "name": "Nasdaq 100",
+        "change": -3.49,
+        "unit": "%",
+        "z": -4.94,
+        "quiet_vol": true
+      },
+      {
+        "name": "Technology Sector",
+        "change": -4.07,
+        "unit": "%",
+        "z": -4.84,
+        "quiet_vol": true
+      },
+      {
+        "name": "S&P 500",
+        "change": -2.71,
+        "unit": "%",
+        "z": -4.82,
+        "quiet_vol": true
+      },
+      {
+        "name": "SPDR S&P 500 ETF",
+        "change": -2.7,
+        "unit": "%",
+        "z": -4.62,
+        "quiet_vol": true
+      },
+      {
+        "name": "CBOE 3-Month Volatility Index",
+        "change": 3.43,
+        "unit": "pt",
+        "z": 4.57,
+        "quiet_vol": true
+      },
+      {
+        "name": "CBOE Volatility Index",
+        "change": 5.23,
+        "unit": "pt",
+        "z": 4.46,
+        "quiet_vol": true
+      }
+    ],
+    "notes": [
+      "equities and yields fall together: demand for duration and safety"
+    ]
+  },
+  "headline": "Growth scare / flight to quality (strong confidence).",
+  "body": "WHAT MOVED\n\nThe S&P 500 fell two point seven one percent and the Technology Sector declined four point zero seven percent, both extreme moves on a quiet vol day. Long-dated Treasuries rallied sharply with the ten-year real rate dropping five basis points and the thirty-year yield falling nine basis points, while the VIX rose five point two three points and credit excess spreads tightened by zero point eight seven percent.\n\nLIKELY DRIVER\n\nThe pattern is consistent with a growth scare regime at strong confidence and intensity two point one. Equities and yields are falling together, which the session notes attribute to demand for duration and safety. The simultaneous strength in the dollar at plus zero point five five percent, gold at plus zero point zero seven five percent, and a five point two three point rise in the VIX alongside the equity selloff suggests a broad shift toward defensive positioning rather than a pure monetary repricing.\n\nWHAT TO WATCH\n\nConfirmation would require credit excess spreads to remain under pressure and defensives to continue outpacing cyclicals in the days ahead. Refutation would come from a snapback in equity prices or a fresh decline in real rates without concurrent weakness in credit, which would instead point to a pure duration rally disconnected from growth concerns.",
+  "generated": true,
+  "unverified_numbers": []
+}
