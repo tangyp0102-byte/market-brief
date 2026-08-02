@@ -214,6 +214,65 @@ a:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
   color: var(--fall);
   font-size: 13px;
 }
+.sessions {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+  margin-top: 18px;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.sessions a { border-bottom: none; color: var(--muted); }
+.sessions a:hover { color: var(--ink); }
+.sessions .spacer { flex: 1; }
+
+details.archive { margin-top: 30px; }
+details.archive summary {
+  cursor: pointer;
+  list-style: none;
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+  padding: 10px 0;
+  border-top: 1px solid var(--hair);
+  border-bottom: 1px solid var(--hair);
+}
+details.archive summary::-webkit-details-marker { display: none; }
+details.archive summary::after { content: "  +"; }
+details[open].archive summary::after { content: "  \2212"; }
+details.archive summary:hover { color: var(--ink); }
+details.archive summary:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+.months {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 22px 30px;
+  padding: 22px 0 6px;
+}
+.months h3 {
+  margin: 0 0 8px;
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: var(--muted);
+}
+.months a, .months span.current {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 3px 0;
+  border-bottom: 1px solid rgba(210, 213, 218, 0.45);
+  font-size: 12px;
+}
+.months a { color: var(--ink); }
+.months a:hover { border-bottom-color: var(--ink); }
+.months span.current { color: var(--muted); font-style: italic; }
+.months .label { color: var(--muted); font-size: 11px; text-align: right; }
+.months a.classified .label { color: var(--ink); }
+
 footer {
   margin-top: 56px;
   padding-top: 16px;
@@ -375,6 +434,79 @@ def _commentary(result_brief: brief_mod.Brief) -> str:
     )
 
 
+MONTHS = ["January", "February", "March", "April", "May", "June", "July",
+          "August", "September", "October", "November", "December"]
+
+
+def _session_nav(archive: list[dict], session) -> str:
+    """Previous / next links around the session being viewed."""
+    dates = [e["date"] for e in archive]
+    current = str(session)
+    if current not in dates:
+        dates = sorted(set(dates + [current]), reverse=True)
+    i = dates.index(current)
+
+    older = dates[i + 1] if i + 1 < len(dates) else None
+    newer = dates[i - 1] if i > 0 else None
+
+    left = (f'<a href="{_esc(older)}.html">&larr; {_esc(older)}</a>'
+            if older else "<span></span>")
+    right = (f'<a href="{_esc(newer)}.html">{_esc(newer)} &rarr;</a>'
+             if newer else '<a href="index.html">Latest &rarr;</a>')
+    return f'<nav class="sessions">{left}<span class="spacer"></span>{right}</nav>'
+
+
+def _archive_block(archive: list[dict], session) -> str:
+    """Every analysed session, grouped by month behind a disclosure.
+
+    Native <details> rather than a select element or a fetched index: a select
+    needs JavaScript to navigate on change, and fetch fails outright on file://
+    URLs, which would break opening a page straight from disk. This works in
+    both places with no script at all.
+    """
+    if not archive:
+        return ""
+
+    by_month: dict[tuple[int, int], list[dict]] = {}
+    for entry in archive:
+        try:
+            y, m, _ = (int(x) for x in entry["date"].split("-"))
+        except ValueError:
+            continue
+        by_month.setdefault((y, m), []).append(entry)
+
+    blocks = []
+    for (year, month), entries in sorted(by_month.items(), reverse=True):
+        rows = []
+        for entry in entries:
+            day = entry["date"].split("-")[-1]
+            label = entry.get("regime_name") or ""
+            if entry.get("regime") is None and label:
+                label = "no signal"
+            classified = " classified" if entry.get("regime") else ""
+            if entry["date"] == str(session):
+                rows.append(
+                    f'<span class="current"><span>{_esc(day)}</span>'
+                    f'<span class="label">viewing</span></span>'
+                )
+            else:
+                rows.append(
+                    f'<a class="{classified.strip()}" href="{_esc(entry["date"])}.html">'
+                    f'<span>{_esc(day)}</span>'
+                    f'<span class="label">{_esc(label)}</span></a>'
+                )
+        blocks.append(
+            f"<section><h3>{MONTHS[month - 1]} {year}</h3>{''.join(rows)}</section>"
+        )
+
+    count = len(archive)
+    return (
+        f'<details class="archive"><summary>All {count} analysed '
+        f'session{"s" if count != 1 else ""}</summary>'
+        f'<div class="months">{"".join(blocks)}</div></details>'
+    )
+
+
 def render_page(
     built: tape_mod.Tape,
     result: classify_mod.Classification,
@@ -412,12 +544,13 @@ def render_page(
         for n in result.notes
     )
 
-    archive_links = ""
-    if archive:
-        links = " ".join(
-            f'<a href="{_esc(d)}.html">{_esc(d)}</a>' for d in archive[:8]
-        )
-        archive_links = f"<span>Earlier: {links}</span>"
+    archive = archive or []
+    # Accept a bare list of dates as well as the richer records, so a caller
+    # that only has filenames still gets working navigation.
+    archive = [{"date": e} if isinstance(e, str) else e for e in archive]
+    nav = _session_nav(archive, session)
+    archive_block = _archive_block(archive, session)
+    generated = dt.datetime.now(dt.timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
 
     return f"""<!doctype html>
 <html lang="en">
@@ -432,6 +565,8 @@ def render_page(
 </head>
 <body>
 <main class="sheet">
+
+  {nav}
 
   <div class="eyebrow">
     <span class="date">{_esc(session)}</span>
@@ -465,9 +600,11 @@ def render_page(
 
   {_commentary(result_brief)}
 
+  {archive_block}
+
   <footer>
     <span>Instrument names link to TradingView.</span>
-    {archive_links}
+    <span>Generated {generated}</span>
   </footer>
 
 </main>

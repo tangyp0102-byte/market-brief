@@ -302,3 +302,106 @@ def test_workflow_allows_a_manual_session_and_force():
     inputs = doc[True]["workflow_dispatch"]["inputs"]
     assert "session" in inputs
     assert "force" in inputs
+
+
+# ---------------------------------------------------------------- navigation
+
+ARCHIVE = [
+    {"date": "2026-08-03", "regime": "hawkish_repricing",
+     "regime_name": "Hawkish repricing", "intensity": 1.67},
+    {"date": "2026-07-31", "regime": None,
+     "regime_name": "No clean signal", "intensity": 1.28},
+    {"date": "2026-07-30", "regime": None,
+     "regime_name": "No clean signal", "intensity": 1.23},
+    {"date": "2026-06-23", "regime": "growth_scare",
+     "regime_name": "Growth scare", "intensity": 0.98},
+]
+
+
+def _with_archive(pieces, session="2026-07-31"):
+    built, result, written = pieces
+    built.session = dt.date.fromisoformat(session)
+    return page.render_page(built, result, written, archive=ARCHIVE)
+
+
+def test_archive_uses_no_javascript(pieces):
+    """A select needs JS to navigate; fetch fails on file:// URLs. Neither works."""
+    html = _with_archive(pieces)
+    assert "<script" not in html
+    assert "details class=\"archive\"" in html
+
+
+def test_archive_lists_every_analysed_session(pieces):
+    html = _with_archive(pieces)
+    assert "All 4 analysed sessions" in html
+    for entry in ARCHIVE:
+        if entry["date"] != "2026-07-31":
+            assert f'href="{entry["date"]}.html"' in html
+
+
+def test_archive_groups_by_month(pieces):
+    html = _with_archive(pieces)
+    assert "August 2026" in html
+    assert "July 2026" in html
+    assert "June 2026" in html
+
+
+def test_archive_shows_the_regime_for_each_session(pieces):
+    """A wall of dates is unscannable; the label is what makes it browsable."""
+    html = _with_archive(pieces)
+    assert "Hawkish repricing" in html
+    assert "Growth scare" in html
+    assert "no signal" in html
+
+
+def test_current_session_is_marked_not_linked(pieces):
+    html = _with_archive(pieces)
+    assert 'href="2026-07-31.html"' not in html
+    assert "viewing" in html
+
+
+def test_prev_next_navigation_points_at_neighbours(pieces):
+    html = _with_archive(pieces)
+    nav = html[html.index('class="sessions"'):html.index('class="eyebrow"')]
+    assert "2026-07-30" in nav      # older
+    assert "2026-08-03" in nav      # newer
+
+
+def test_newest_session_links_forward_to_index(pieces):
+    html = _with_archive(pieces, session="2026-08-03")
+    nav = html[html.index('class="sessions"'):html.index('class="eyebrow"')]
+    assert 'href="index.html"' in nav
+
+
+def test_page_records_when_it_was_generated(pieces):
+    html = _with_archive(pieces)
+    assert "Generated" in html and "UTC" in html
+
+
+def test_archive_accepts_bare_date_strings(pieces):
+    """Callers holding only filenames should still get working navigation."""
+    built, result, written = pieces
+    html = page.render_page(built, result, written,
+                            archive=["2026-07-30", "2026-07-29"])
+    assert 'href="2026-07-30.html"' in html
+
+
+def test_build_archive_reads_regime_from_stored_briefs(tmp_path):
+    import json
+    for date, rid, name in [("2026-07-30", None, "No clean signal"),
+                            ("2026-07-31", "hawkish_repricing", "Hawkish repricing")]:
+        (tmp_path / f"{date}.json").write_text(json.dumps(
+            {"factsheet": {"regime": {"id": rid, "name": name, "intensity": 1.5}}}))
+
+    entries = daily.build_archive(tmp_path)
+    assert [e["date"] for e in entries] == ["2026-07-31", "2026-07-30"]
+    assert entries[0]["regime"] == "hawkish_repricing"
+
+
+def test_build_archive_skips_unreadable_briefs(tmp_path):
+    """A half-written file must not become a dead link."""
+    (tmp_path / "2026-07-31.json").write_text("{not json")
+    (tmp_path / "2026-07-30.json").write_text(
+        '{"factsheet": {"regime": {"id": null, "name": "No clean signal"}}}')
+    entries = daily.build_archive(tmp_path)
+    assert [e["date"] for e in entries] == ["2026-07-30"]

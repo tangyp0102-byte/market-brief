@@ -87,6 +87,36 @@ class DailyResult:
         return "\n".join(lines)
 
 
+def build_archive(briefs_dir: Path) -> list[dict]:
+    """Every session that has already been analysed, newest first.
+
+    Read from the stored brief JSONs rather than from the site directory, so the
+    list only contains sessions whose analysis - and any model call - actually
+    completed. A half-written page would otherwise appear as a dead entry.
+
+    Carries the regime and intensity alongside the date so the archive can be
+    scanned for interesting sessions instead of being a wall of identical links.
+    """
+    briefs_dir = Path(briefs_dir)
+    if not briefs_dir.exists():
+        return []
+
+    entries = []
+    for path in briefs_dir.glob("*.json"):
+        try:
+            payload = json.loads(path.read_text())
+        except (json.JSONDecodeError, OSError):
+            continue
+        regime = payload.get("factsheet", {}).get("regime", {})
+        entries.append({
+            "date": path.stem,
+            "regime": regime.get("id"),
+            "regime_name": regime.get("name", ""),
+            "intensity": regime.get("intensity"),
+        })
+    return sorted(entries, key=lambda e: e["date"], reverse=True)
+
+
 def commodity_moves(history: pd.DataFrame, session: pd.Timestamp) -> dict[str, float]:
     """Percent moves of the commodity contracts for one session."""
     from . import transforms as tf
@@ -222,10 +252,7 @@ def run(
         "unverified_numbers": written.unverified_numbers,
     }, indent=2))
 
-    archive = sorted(
-        (p.stem for p in briefs_dir.glob("*.json") if p.stem != str(built.session)),
-        reverse=True,
-    )
+    archive = build_archive(briefs_dir)
 
     site_dir = Path(site_dir)
     dated = page.write_page(
