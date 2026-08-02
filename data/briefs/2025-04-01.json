@@ -1,0 +1,194 @@
+{
+  "factsheet": {
+    "session": "2025-04-01",
+    "gate": {
+      "verdict": "pass",
+      "half_session": false,
+      "missing": [],
+      "stale": [],
+      "undefined": [],
+      "review": []
+    },
+    "regime": {
+      "id": null,
+      "name": "No clean signal",
+      "confidence": "none",
+      "intensity": 0.59,
+      "intensity_percentile": 0.35
+    },
+    "signals": [
+      {
+        "bloc": "equity",
+        "instrument": "spx",
+        "change": 0.38,
+        "unit": "%",
+        "z": 0.44,
+        "percentile": 0.4,
+        "moved": false,
+        "quiet_vol": false
+      },
+      {
+        "bloc": "rates",
+        "instrument": "ust_30y",
+        "change": -7.0,
+        "unit": "bp",
+        "z": -1.3,
+        "percentile": 0.81,
+        "moved": true,
+        "quiet_vol": false
+      },
+      {
+        "bloc": "bills",
+        "instrument": "ust_3m",
+        "change": 0.0,
+        "unit": "bp",
+        "z": 0.06,
+        "percentile": 0.19,
+        "moved": false,
+        "quiet_vol": true
+      },
+      {
+        "bloc": "curve",
+        "instrument": "ust_2s10s",
+        "change": -4.0,
+        "unit": "bp",
+        "z": -1.26,
+        "percentile": 0.8,
+        "moved": true,
+        "quiet_vol": false
+      },
+      {
+        "bloc": "real_rates",
+        "instrument": "ust_real_10y",
+        "change": -1.0,
+        "unit": "bp",
+        "z": -0.08,
+        "percentile": 0.06,
+        "moved": false,
+        "quiet_vol": false
+      },
+      {
+        "bloc": "inflation",
+        "instrument": "be_10y",
+        "change": -5.0,
+        "unit": "bp",
+        "z": -2.59,
+        "percentile": 0.98,
+        "moved": true,
+        "quiet_vol": false
+      },
+      {
+        "bloc": "dollar",
+        "instrument": "dxy",
+        "change": 0.15,
+        "unit": "%",
+        "z": 0.49,
+        "percentile": 0.4,
+        "moved": false,
+        "quiet_vol": false
+      },
+      {
+        "bloc": "gold",
+        "instrument": "gold",
+        "change": -0.12,
+        "unit": "%",
+        "z": -0.47,
+        "percentile": 0.43,
+        "moved": false,
+        "quiet_vol": false
+      },
+      {
+        "bloc": "energy",
+        "instrument": "wti",
+        "change": -0.39,
+        "unit": "%",
+        "z": -0.23,
+        "percentile": 0.21,
+        "moved": false,
+        "quiet_vol": false
+      },
+      {
+        "bloc": "industrial",
+        "instrument": "copper",
+        "change": -0.02,
+        "unit": "%",
+        "z": -0.28,
+        "percentile": 0.25,
+        "moved": false,
+        "quiet_vol": false
+      },
+      {
+        "bloc": "vol",
+        "instrument": "vix",
+        "change": -0.51,
+        "unit": "pt",
+        "z": -0.39,
+        "percentile": 0.42,
+        "moved": false,
+        "quiet_vol": false
+      },
+      {
+        "bloc": "credit",
+        "instrument": "credit_excess",
+        "change": -0.41,
+        "unit": "%",
+        "z": -1.29,
+        "percentile": 0.84,
+        "moved": true,
+        "quiet_vol": false
+      }
+    ],
+    "confirmations": [],
+    "largest_moves": [
+      {
+        "name": "5y Inflation Breakeven",
+        "change": -7.0,
+        "unit": "bp",
+        "z": -2.69,
+        "quiet_vol": false
+      },
+      {
+        "name": "10y Inflation Breakeven",
+        "change": -5.0,
+        "unit": "bp",
+        "z": -2.59,
+        "quiet_vol": false
+      },
+      {
+        "name": "Health Care Sector",
+        "change": -1.83,
+        "unit": "%",
+        "z": -2.44,
+        "quiet_vol": false
+      },
+      {
+        "name": "US 30Y Treasury",
+        "change": -7.0,
+        "unit": "bp",
+        "z": -1.3,
+        "quiet_vol": false
+      },
+      {
+        "name": "HY Credit Excess (duration-hedged)",
+        "change": -0.41,
+        "unit": "%",
+        "z": -1.29,
+        "quiet_vol": false
+      },
+      {
+        "name": "2s10s Curve Slope",
+        "change": -4.0,
+        "unit": "bp",
+        "z": -1.26,
+        "quiet_vol": false
+      }
+    ],
+    "notes": [
+      "Composite intensity 0.59 is below the 65% threshold of 0.85. Most sessions are noise, and this is one of them."
+    ]
+  },
+  "headline": "No clean signal. Composite intensity 0.59, above 35% of sessions.",
+  "body": "Largest moves by z-score:\n  5y Inflation Breakeven: -7.00bp  (z -2.69)\n  10y Inflation Breakeven: -5.00bp  (z -2.59)\n  Health Care Sector: -1.83%  (z -2.44)\n  US 30Y Treasury: -7.00bp  (z -1.30)\n  HY Credit Excess (duration-hedged): -0.41%  (z -1.29)\n  2s10s Curve Slope: -4.00bp  (z -1.26)\n\nBlocs clearing their move threshold: rates, curve, inflation, credit.\n\nNo cross-asset signature was identified. Most sessions are noise.",
+  "generated": false,
+  "unverified_numbers": []
+}
