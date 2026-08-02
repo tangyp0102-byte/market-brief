@@ -135,7 +135,7 @@ a:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
 .note.conflict { border-left-color: var(--fall); color: var(--fall); }
 
 /* Signature: the boundary between record and commentary. */
-.boundary { margin: 64px 0 0; }
+.boundary { margin: 52px 0 0; }
 .boundary-rule {
   border: 0;
   border-top: 1px solid var(--ink);
@@ -153,8 +153,15 @@ a:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
   text-transform: uppercase;
   color: var(--ink);
 }
+.commentary-label {
+  margin: 34px 0 0;
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--provisional);
+}
 .commentary {
-  margin-top: 34px;
+  margin-top: 8px;
   padding: 26px 28px;
   background: var(--provisional-bg);
   color: var(--provisional);
@@ -210,8 +217,8 @@ details.archive summary {
   border-bottom: 1px solid var(--hair);
 }
 details.archive summary::-webkit-details-marker { display: none; }
-details.archive summary::after { content: "  +"; }
-details[open].archive summary::after { content: "  2"; }
+details.archive summary::after { content: " +"; }
+details[open].archive summary::after { content: " −"; }
 details.archive summary:hover { color: var(--ink); }
 details.archive summary:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
 .months {
@@ -241,6 +248,125 @@ details.archive summary:focus-visible { outline: 2px solid var(--ink); outline-o
 .months span.current { color: var(--muted); font-style: italic; }
 .months .label { color: var(--muted); font-size: 11px; text-align: right; }
 .months a.classified .label { color: var(--ink); }
+
+
+/* Calendar picker. Needs script, unlike everything else on this page: month
+   navigation and the "not yet generated" panel cannot be expressed in static
+   markup. The data is inlined rather than fetched, so it still works when the
+   file is opened straight from disk - fetch() fails on file:// URLs. */
+.cal { padding: 20px 0 4px; }
+.cal-head {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 12px;
+}
+.cal-head button {
+  font: inherit;
+  font-size: 13px;
+  background: none;
+  border: 1px solid var(--hair);
+  color: var(--muted);
+  padding: 2px 9px;
+  cursor: pointer;
+}
+.cal-head button:hover:not(:disabled) { border-color: var(--ink); color: var(--ink); }
+.cal-head button:disabled { opacity: 0.3; cursor: default; }
+.cal-head button:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+.cal-month {
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  min-width: 150px;
+}
+.cal-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 2px;
+  max-width: 420px;
+}
+.cal-grid .dow {
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  text-align: center;
+  padding-bottom: 4px;
+}
+.cal-grid button, .cal-grid .pad {
+  font: inherit;
+  font-size: 12px;
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid transparent;
+  background: none;
+  color: var(--muted);
+  cursor: default;
+  padding: 0;
+}
+.cal-grid button.closed { color: var(--hair); }
+.cal-grid button.missing { color: var(--muted); cursor: pointer; }
+.cal-grid button.missing:hover { border-color: var(--hair); }
+.cal-grid button.has {
+  color: var(--ink);
+  background: #dfe1e5;
+  cursor: pointer;
+  font-weight: 500;
+}
+.cal-grid button.has:hover { background: var(--ink); color: var(--panel); }
+.cal-grid button.classified { box-shadow: inset 0 -2px 0 var(--ink); }
+.cal-grid button.current { outline: 1px solid var(--ink); outline-offset: -1px; }
+.cal-grid button:focus-visible { outline: 2px solid var(--ink); outline-offset: 1px; }
+.cal-key {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 16px;
+  margin-top: 14px;
+  font-size: 10px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.cal-key i { display: inline-block; width: 9px; height: 9px; margin-right: 5px; vertical-align: -1px; }
+.cal-key .k-has { background: #dfe1e5; }
+.cal-key .k-cls { background: #dfe1e5; box-shadow: inset 0 -2px 0 var(--ink); }
+.cal-key .k-non { border: 1px solid var(--hair); }
+.cal-panel {
+  margin-top: 16px;
+  padding: 16px 18px;
+  border: 1px solid var(--hair);
+  font-size: 13px;
+  max-width: 560px;
+}
+.cal-panel.hidden { display: none; }
+.cal-panel h4 {
+  margin: 0 0 8px;
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+.cal-panel p { margin: 0 0 10px; color: var(--muted); }
+.cal-panel code {
+  display: block;
+  padding: 9px 11px;
+  background: var(--ground);
+  font-size: 12px;
+  overflow-x: auto;
+  color: var(--ink);
+}
+.cal-panel .go {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 5px 12px;
+  border: 1px solid var(--ink);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.cal-panel .go:hover { background: var(--ink); color: var(--panel); }
 
 footer {
   margin-top: 56px;
@@ -289,24 +415,146 @@ footer {
 
   <p class='note'>Composite intensity 0.59 is below the 65% threshold of 0.85. Most sessions are noise, and this is one of them.</p>
 
+  <details class="archive">
+<summary>Browse sessions &mdash; 4 analysed</summary>
+<div class="cal">
+  <div class="cal-head">
+    <button type="button" id="cal-prev" aria-label="Previous month">&larr;</button>
+    <span class="cal-month" id="cal-month"></span>
+    <button type="button" id="cal-next" aria-label="Next month">&rarr;</button>
+  </div>
+  <div class="cal-grid" id="cal-grid"></div>
+  <div class="cal-key">
+    <span><i class="k-has"></i>brief available</span>
+    <span><i class="k-cls"></i>regime identified</span>
+    <span><i class="k-non"></i>market closed</span>
+  </div>
+  <div class="cal-panel hidden" id="cal-panel"></div>
+</div>
+</details>
+<script type="application/json" id="cal-data">{"available": {"2026-07-31": {"regime": null, "name": "No clean signal"}, "2026-07-29": {"regime": null, "name": "No clean signal (closest: Hawkish repricing)"}, "2025-10-10": {"regime": "growth_scare", "name": "Growth scare / flight to quality"}, "2025-04-01": {"regime": null, "name": "No clean signal"}}, "holidays": ["2019-01-01", "2019-01-21", "2019-02-18", "2019-04-19", "2019-05-27", "2019-07-04", "2019-09-02", "2019-11-28", "2019-12-25", "2020-01-01", "2020-01-20", "2020-02-17", "2020-04-10", "2020-05-25", "2020-07-03", "2020-09-07", "2020-11-26", "2020-12-25", "2021-01-01", "2021-01-18", "2021-02-15", "2021-04-02", "2021-05-31", "2021-07-05", "2021-09-06", "2021-11-25", "2021-12-24", "2022-01-17", "2022-02-21", "2022-04-15", "2022-05-30", "2022-06-20", "2022-07-04", "2022-09-05", "2022-11-24", "2022-12-26", "2023-01-02", "2023-01-16", "2023-02-20", "2023-04-07", "2023-05-29", "2023-06-19", "2023-07-04", "2023-09-04", "2023-11-23", "2023-12-25", "2024-01-01", "2024-01-15", "2024-02-19", "2024-03-29", "2024-05-27", "2024-06-19", "2024-07-04", "2024-09-02", "2024-11-28", "2024-12-25", "2025-01-01", "2025-01-09", "2025-01-20", "2025-02-17", "2025-04-18", "2025-05-26", "2025-06-19", "2025-07-04", "2025-09-01", "2025-11-27", "2025-12-25", "2026-01-01", "2026-01-19", "2026-02-16", "2026-04-03", "2026-05-25", "2026-06-19", "2026-07-03", "2026-09-07", "2026-11-26", "2026-12-25", "2027-01-01", "2027-01-18", "2027-02-15", "2027-03-26", "2027-05-31", "2027-06-18", "2027-07-05", "2027-09-06", "2027-11-25", "2027-12-24", "2028-01-17", "2028-02-21", "2028-04-14", "2028-05-29", "2028-06-19", "2028-07-04", "2028-09-04", "2028-11-23", "2028-12-25"], "current": "2025-04-01", "repo": null}</script>
+<script>
+(function () {
+  var D = JSON.parse(document.getElementById('cal-data').textContent);
+  var have = D.available, shut = new Set(D.holidays);
+  var dates = Object.keys(have).sort();
+  var lo = dates.length ? dates[0].slice(0, 7) : D.current.slice(0, 7);
+  var hi = D.current.slice(0, 7);
+  if (dates.length && dates[dates.length - 1].slice(0, 7) > hi) {
+    hi = dates[dates.length - 1].slice(0, 7);
+  }
+  var view = D.current.slice(0, 7);
+
+  var grid = document.getElementById('cal-grid');
+  var label = document.getElementById('cal-month');
+  var prev = document.getElementById('cal-prev');
+  var next = document.getElementById('cal-next');
+  var panel = document.getElementById('cal-panel');
+  var NAMES = ['January','February','March','April','May','June','July',
+               'August','September','October','November','December'];
+
+  function shift(ym, by) {
+    var y = +ym.slice(0, 4), m = +ym.slice(5, 7) - 1 + by;
+    y += Math.floor(m / 12); m = ((m % 12) + 12) % 12;
+    return y + '-' + String(m + 1).padStart(2, '0');
+  }
+
+  function draw() {
+    var y = +view.slice(0, 4), m = +view.slice(5, 7) - 1;
+    label.textContent = NAMES[m] + ' ' + y;
+    prev.disabled = view <= lo;
+    next.disabled = view >= hi;
+
+    grid.innerHTML = '';
+    ['M','T','W','T','F','S','S'].forEach(function (d) {
+      var e = document.createElement('div');
+      e.className = 'dow'; e.textContent = d; grid.appendChild(e);
+    });
+
+    var first = new Date(Date.UTC(y, m, 1));
+    var lead = (first.getUTCDay() + 6) % 7;          // Monday-first
+    for (var i = 0; i < lead; i++) {
+      var pad = document.createElement('div');
+      pad.className = 'pad'; grid.appendChild(pad);
+    }
+
+    var days = new Date(Date.UTC(y, m + 1, 0)).getUTCDate();
+    for (var d = 1; d <= days; d++) {
+      var iso = view + '-' + String(d).padStart(2, '0');
+      var wd = new Date(iso + 'T00:00:00Z').getUTCDay();
+      var closed = wd === 0 || wd === 6 || shut.has(iso);
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.textContent = d;
+      b.dataset.iso = iso;
+
+      if (iso in have) {
+        b.className = 'has' + (have[iso].regime ? ' classified' : '');
+        b.title = iso + ' - ' + (have[iso].name || 'brief available');
+      } else if (closed) {
+        b.className = 'closed';
+        b.disabled = true;
+        b.title = iso + ' - market closed';
+      } else {
+        b.className = 'missing';
+        b.title = iso + ' - not yet analysed';
+      }
+      if (iso === D.current) { b.className += ' current'; }
+      grid.appendChild(b);
+    }
+  }
+
+  grid.addEventListener('click', function (ev) {
+    var b = ev.target.closest('button');
+    if (!b || b.disabled) return;
+    var iso = b.dataset.iso;
+    if (iso === D.current) return;
+    if (iso in have) { location.href = iso + '.html'; return; }
+    showMissing(iso);
+  });
+
+  function showMissing(iso) {
+    var run = D.repo
+      ? '<a class="go" href="https://github.com/' + D.repo +
+        '/actions/workflows/daily.yml" target="_blank" rel="noopener">' +
+        'Open GitHub Actions &rarr;</a>'
+      : '';
+    panel.innerHTML =
+      '<h4>' + iso + ' &mdash; not yet analysed</h4>' +
+      '<p>No brief exists for this session. Generating one runs the pipeline, ' +
+      'which cannot happen from this page: publishing a token that could ' +
+      'trigger it would let anyone with the link run workflows on the ' +
+      'repository.</p>' +
+      '<p>Run it on GitHub with <strong>session</strong> set to ' + iso +
+      ' and <strong>force</strong> ticked, or locally:</p>' +
+      '<code>python -m mb.daily --session ' + iso + ' --force</code>' + run;
+    panel.classList.remove('hidden');
+    panel.scrollIntoView({ block: 'nearest' });
+  }
+
+  prev.addEventListener('click', function () { view = shift(view, -1); draw(); });
+  next.addEventListener('click', function () { view = shift(view, 1); draw(); });
+  draw();
+})();
+</script>
+
+  <p class="commentary-label">Commentary &mdash; not record</p>
+  <div class='commentary'><p>Largest moves by z-score:</p><p>5y Inflation Breakeven: -7.00bp  (z -2.69)</p><p>10y Inflation Breakeven: -5.00bp  (z -2.59)</p><p>Health Care Sector: -1.83%  (z -2.44)</p><p>US 30Y Treasury: -7.00bp  (z -1.30)</p><p>HY Credit Excess (duration-hedged): -0.41%  (z -1.29)</p><p>2s10s Curve Slope: -4.00bp  (z -1.26)</p><p>Blocs clearing their move threshold: rates, curve, inflation, credit.</p><p>No cross-asset signature was identified. Most sessions are noise.</p><p class='caveat'>Generated from the figures above without a language model.</p></div>
+
+  <div class="boundary">
+    <hr class="boundary-rule">
+    <div class="boundary-label"><span>Below: the record</span></div>
+  </div>
+
   <h2>Signals &mdash; one per bloc</h2>
   <table><thead><tr><th>Bloc</th><th class='hide-narrow'>Via</th><th>Change</th><th>Z</th><th>Pctile</th></tr></thead><tbody><tr><td class='name'>Equity index</td><td class='num flat hide-narrow'>spx</td><td class="num rise">+0.38%</td><td class="num">+0.44</td><td class='num flat'>40%</td></tr><tr><td class='name'>Nominal yields<span class="tag moved">moved</span></td><td class='num flat hide-narrow'>ust_30y</td><td class="num fall">-7.0bp</td><td class="num">-1.30</td><td class='num flat'>81%</td></tr><tr><td class='name'>T-bills<span class="tag">quiet vol</span></td><td class='num flat hide-narrow'>ust_3m</td><td class="num flat">+0.0bp</td><td class="num">+0.06</td><td class='num flat'>19%</td></tr><tr><td class='name'>Curve slope<span class="tag moved">moved</span></td><td class='num flat hide-narrow'>ust_2s10s</td><td class="num fall">-4.0bp</td><td class="num">-1.26</td><td class='num flat'>80%</td></tr><tr><td class='name'>Real yields</td><td class='num flat hide-narrow'>ust_real_10y</td><td class="num fall">-1.0bp</td><td class="num">-0.08</td><td class='num flat'>6%</td></tr><tr><td class='name'>Breakevens<span class="tag moved">moved</span></td><td class='num flat hide-narrow'>be_10y</td><td class="num fall">-5.0bp</td><td class="num">-2.59</td><td class='num flat'>98%</td></tr><tr><td class='name'>US dollar</td><td class='num flat hide-narrow'>dxy</td><td class="num rise">+0.15%</td><td class="num">+0.49</td><td class='num flat'>40%</td></tr><tr><td class='name'>Precious metals</td><td class='num flat hide-narrow'>gold</td><td class="num fall">-0.12%</td><td class="num">-0.47</td><td class='num flat'>43%</td></tr><tr><td class='name'>Crude oil</td><td class='num flat hide-narrow'>wti</td><td class="num fall">-0.39%</td><td class="num">-0.23</td><td class='num flat'>21%</td></tr><tr><td class='name'>Industrial metals</td><td class='num flat hide-narrow'>copper</td><td class="num fall">-0.02%</td><td class="num">-0.28</td><td class='num flat'>25%</td></tr><tr><td class='name'>Equity volatility</td><td class='num flat hide-narrow'>vix</td><td class="num fall">-0.51pt</td><td class="num">-0.39</td><td class='num flat'>42%</td></tr><tr><td class='name'>Credit risk<span class="tag moved">moved</span></td><td class='num flat hide-narrow'>credit_excess</td><td class="num fall">-0.41%</td><td class="num">-1.29</td><td class='num flat'>84%</td></tr></tbody></table>
   
 
   <h2>Rates</h2><table><thead><tr><th>Instrument</th><th>Level</th><th>Change</th><th>Z</th></tr></thead><tbody><tr><td class='name'><a href="https://www.tradingview.com/chart/?symbol=TVC%3AUS10Y" target="_blank" rel="noopener">US 10Y Treasury</a></td><td class='num flat'>4.17</td><td class="num fall">-6.0bp</td><td class="num">-1.00</td></tr><tr><td class='name'><a href="https://www.tradingview.com/chart/?symbol=TVC%3AUS02Y" target="_blank" rel="noopener">US 2Y Treasury</a></td><td class='num flat'>3.87</td><td class="num fall">-2.0bp</td><td class="num">-0.27</td></tr><tr><td class='name'><a href="https://www.tradingview.com/chart/?symbol=TVC%3AUS30Y" target="_blank" rel="noopener">US 30Y Treasury</a></td><td class='num flat'>4.52</td><td class="num fall">-7.0bp</td><td class="num">-1.30</td></tr><tr><td class='name'><a href="https://www.tradingview.com/chart/?symbol=TVC%3AUS03MY" target="_blank" rel="noopener">US 3M Treasury</a><span class="tag">quiet vol</span></td><td class='num flat'>4.32</td><td class="num flat">+0.0bp</td><td class="num">+0.06</td></tr><tr><td class='name'><a href="https://www.tradingview.com/chart/?symbol=TVC%3AUS05Y" target="_blank" rel="noopener">US 5Y Treasury</a></td><td class='num flat'>3.91</td><td class="num fall">-5.0bp</td><td class="num">-0.75</td></tr><tr><td class='name'><a href="https://www.tradingview.com/chart/?symbol=FRED%3ADFII10" target="_blank" rel="noopener">US 10Y TIPS Real Yield</a></td><td class='num flat'>1.84</td><td class="num fall">-1.0bp</td><td class="num">-0.08</td></tr><tr><td class='name'><a href="https://www.tradingview.com/chart/?symbol=FRED%3ADFII30" target="_blank" rel="noopener">US 30Y TIPS Real Yield</a></td><td class='num flat'>2.30</td><td class="num fall">-2.0bp</td><td class="num">-0.44</td></tr><tr><td class='name'><a href="https://www.tradingview.com/chart/?symbol=FRED%3ADFII5" target="_blank" rel="noopener">US 5Y TIPS Real Yield</a></td><td class='num flat'>1.37</td><td class="num rise">+2.0bp</td><td class="num">+0.64</td></tr><tr><td class='name'>10y Inflation Breakeven<span class="tag">derived</span></td><td class='num flat'>233.0</td><td class="num fall">-5.0bp</td><td class="num">-2.59</td></tr><tr><td class='name'>5y Inflation Breakeven<span class="tag">derived</span></td><td class='num flat'>254.0</td><td class="num fall">-7.0bp</td><td class="num">-2.69</td></tr><tr><td class='name'>2s10s Curve Slope<span class="tag">derived</span></td><td class='num flat'>30.0</td><td class="num fall">-4.0bp</td><td class="num">-1.26</td></tr><tr><td class='name'>3m10y Curve Slope<span class="tag">derived</span></td><td class='num flat'>-15.0</td><td class="num fall">-6.0bp</td><td class="num">-1.05</td></tr><tr><td class='name'>5s30s Curve Slope<span class="tag">derived</span></td><td class='num flat'>61.0</td><td class="num fall">-2.0bp</td><td class="num">-0.90</td></tr></tbody></table><h2>Credit</h2><table><thead><tr><th>Instrument</th><th>Level</th><th>Change</th><th>Z</th></tr></thead><tbody><tr><td class='name'><a href="https://www.tradingview.com/chart/?symbol=FRED%3ABAMLH0A0HYM2" target="_blank" rel="noopener">ICE BofA US High Yield OAS</a></td><td class='num flat'>3.50</td><td class="num fall">-5.0bp</td><td class="num">-0.91</td></tr><tr><td class='name'><a href="https://www.tradingview.com/chart/?symbol=AMEX%3AHYG" target="_blank" rel="noopener">iShares High Yield Corp Bond ETF</a></td><td class='num flat'>78.69</td><td class="num fall">-0.25%</td><td class="num">-0.89</td></tr><tr><td class='name'><a href="https://www.tradingview.com/chart/?symbol=FRED%3ABAMLC0A0CM" target="_blank" rel="noopener">ICE BofA US Corporate OAS</a></td><td class='num flat'>0.98</td><td class="num rise">+1.0bp</td><td class="num">+0.60</td></tr><tr><td class='name'><a href="https://www.tradingview.com/chart/?symbol=AMEX%3ALQD" target="_blank" rel="noopener">iShares Investment Grade Corp Bond ETF</a></td><td class='num flat'>108.66</td><td class="num fall">-0.03%</td><td class="num">-0.15</td></tr><tr><td class='name'>HY Credit Excess (duration-hedged)<span class="tag">derived</span></td><td class='num flat'>101.73</td><td class="num fall">-0.41%</td><td class="num">-1.29</td></tr><tr><td class='name'>HY minus IG Spread<span class="tag">derived</span></td><td class='num flat'>252.0</td><td class="num fall">-6.0bp</td><td class="num">-1.15</td></tr></tbody></table><h2>Equity</h2><table><thead><tr><th>Instrument</th><th>Level</th><th>Change</th><th>Z</th></tr></thead><tbody><tr><td class='name'><a href="https://www.tradingview.com/chart/?symbol=NASDAQ%3ANDX" target="_blank" rel="noopener">Nasdaq 100</a></td><td class='num flat'>19,436.42</td><td class="num rise">+0.82%</td><td class="num">+0.67</td></tr><tr><td class='name'><a href="https://www.tradingview.com/chart/?symbol=AMEX%3ARSP" target="_blank" rel="noopener">Invesco S&amp;P 500 Equal Weight ETF</a></td><td class='num flat'>173.41</td><td class="num rise">+0.10%</td><td class="num">+0.15</td></tr><tr><td class='name'><a href="https://www.tradingview.com/chart/?symbol=TVC%3ARUT" target="_blank" rel="noopener">Russell 2000</a></td><td class='num flat'>2,012.24</td><td class="num rise">+0.02%</td><td class="num">+0.15</td></tr><tr><td class='name'><a href="https://www.tradingview.com/chart/?symbol=SP%3ASPX" target="_blank" rel="noopener">S&amp;P 500</a></td><td class='num flat'>5,633.07</td><td class="num rise">+0.38%</td><td class="num">+0.44</td></tr><tr><td class='name'><a href="https://www.tradingview.com/chart/?symbol=AMEX%3ASPY" target="_blank" rel="noopener">SPDR S&amp;P 500 ETF</a></td><td class='num flat'>560.97</td><td class="num rise">+0.28%</td><td class="num">+0.34</td></tr><tr><td class='name'><a href="https://www.tradingview.com/chart/?symbol=AMEX%3AXLB" target="_blank" rel="noopener">Materials Sector</a></td><td class='num flat'>43.15</td><td class="num rise">+0.37%</td><td class="num">+0.33</td></tr><tr><td class='name'><a href="https://www.tradingview.com/chart/?symbol=AMEX%3AXLC" target="_blank" rel="noopener">Communication Services Sector</a></td><td class='num flat'>96.51</td><td class="num rise">+0.06%</td><td class="num">+0.06</td></tr><tr><td class='name'><a href="https://www.tradingview.com/chart/?symbol=AMEX%3AXLE" target="_blank" rel="noopener">Energy Sector</a></td><td class='num flat'>47.00</td><td class="num rise">+0.59%</td><td class="num">+0.34</td></tr><tr><td class='name'><a href="https://www.tradingview.com/chart/?symbol=AMEX%3AXLF" target="_blank" rel="noopener">Financials Sector</a></td><td class='num flat'>49.75</td><td class="num fall">-0.12%</td><td class="num">-0.16</td></tr><tr><td class='name'><a href="https://www.tradingview.com/chart/?symbol=AMEX%3AXLI" target="_blank" rel="noopener">Industrials Sector</a></td><td class='num flat'>131.81</td><td class="num rise">+0.56%</td><td class="num">+0.56</td></tr><tr><td class='name'><a href="https://www.tradingview.com/chart/?symbol=AMEX%3AXLK" target="_blank" rel="noopener">Technology Sector</a></td><td class='num flat'>104.00</td><td class="num rise">+0.73%</td><td class="num">+0.54</td></tr><tr><td class='name'><a href="https://www.tradingview.com/chart/?symbol=AMEX%3AXLP" target="_blank" rel="noopener">Consumer Staples Sector</a></td><td class='num flat'>81.79</td><td class="num rise">+0.15%</td><td class="num">+0.08</td></tr><tr><td class='name'><a href="https://www.tradingview.com/chart/?symbol=AMEX%3AXLRE" target="_blank" rel="noopener">Real Estate Sector</a></td><td class='num flat'>41.88</td><td class="num rise">+0.07%</td><td class="num">+0.02</td></tr><tr><td class='name'><a href="https://www.tradingview.com/chart/?symbol=AMEX%3AXLU" target="_blank" rel="noopener">Utilities Sector</a></td><td class='num flat'>39.53</td><td class="num rise">+0.25%</td><td class="num">+0.16</td></tr><tr><td class='name'><a href="https://www.tradingview.com/chart/?symbol=AMEX%3AXLV" target="_blank" rel="noopener">Health Care Sector</a></td><td class='num flat'>143.34</td><td class="num fall">-1.83%</td><td class="num">-2.44</td></tr><tr><td class='name'><a href="https://www.tradingview.com/chart/?symbol=AMEX%3AXLY" target="_blank" rel="noopener">Consumer Discretionary Sector</a></td><td class='num flat'>99.76</td><td class="num rise">+1.04%</td><td class="num">+0.89</td></tr><tr><td class='name'>Equal Weight / Cap Weight<span class="tag">derived</span></td><td class='num flat'>0.3091</td><td class="num fall">-0.18%</td><td class="num">-0.42</td></tr></tbody></table><h2>Volatility</h2><table><thead><tr><th>Instrument</th><th>Level</th><th>Change</th><th>Z</th></tr></thead><tbody><tr><td class='name'><a href="https://www.tradingview.com/chart/?symbol=CBOE%3AVIX" target="_blank" rel="noopener">CBOE Volatility Index</a></td><td class='num flat'>21.77</td><td class="num fall">-0.51pt</td><td class="num">-0.39</td></tr><tr><td class='name'><a href="https://www.tradingview.com/chart/?symbol=CBOE%3AVIX3M" target="_blank" rel="noopener">CBOE 3-Month Volatility Index</a></td><td class='num flat'>21.82</td><td class="num fall">-0.15pt</td><td class="num">-0.20</td></tr><tr><td class='name'>VIX / VIX3M Term Structure<span class="tag">derived</span></td><td class='num flat'>0.9977</td><td class="num fall">-1.62%</td><td class="num">-0.56</td></tr></tbody></table><h2>Commodities</h2><table><thead><tr><th>Instrument</th><th>Level</th><th>Change</th><th>Z</th></tr></thead><tbody><tr><td class='name'><a href="https://www.tradingview.com/chart/?symbol=ICEEUR%3ABRN1%21" target="_blank" rel="noopener">Brent Crude (front)</a></td><td class='num flat'>74.49</td><td class="num fall">-0.33%</td><td class="num">-0.23</td></tr><tr><td class='name'><a href="https://www.tradingview.com/chart/?symbol=COMEX%3AHG1%21" target="_blank" rel="noopener">Copper (front)</a></td><td class='num flat'>5.02</td><td class="num fall">-0.02%</td><td class="num">-0.28</td></tr><tr><td class='name'><a href="https://www.tradingview.com/chart/?symbol=COMEX%3AGC1%21" target="_blank" rel="noopener">Gold (front)</a></td><td class='num flat'>3,118.90</td><td class="num fall">-0.12%</td><td class="num">-0.47</td></tr><tr><td class='name'><a href="https://www.tradingview.com/chart/?symbol=NYMEX%3ANG1%21" target="_blank" rel="noopener">Henry Hub Natural Gas (front)</a></td><td class='num flat'>3.95</td><td class="num fall">-4.08%</td><td class="num">-1.03</td></tr><tr><td class='name'><a href="https://www.tradingview.com/chart/?symbol=COMEX%3ASI1%21" target="_blank" rel="noopener">Silver (front)</a></td><td class='num flat'>34.16</td><td class="num fall">-0.87%</td><td class="num">-0.74</td></tr><tr><td class='name'><a href="https://www.tradingview.com/chart/?symbol=NYMEX%3ACL1%21" target="_blank" rel="noopener">WTI Crude (front)</a></td><td class='num flat'>71.20</td><td class="num fall">-0.39%</td><td class="num">-0.23</td></tr><tr><td class='name'>Copper / Gold Ratio<span class="tag">derived</span></td><td class='num flat'>0.001609</td><td class="num rise">+0.11%</td><td class="num">-0.01</td></tr></tbody></table><h2>Foreign exchange</h2><table><thead><tr><th>Instrument</th><th>Level</th><th>Change</th><th>Z</th></tr></thead><tbody><tr><td class='name'><a href="https://www.tradingview.com/chart/?symbol=FX%3AAUDUSD" target="_blank" rel="noopener">AUD/USD</a></td><td class='num flat'>0.6242</td><td class="num fall">-0.65%</td><td class="num">-1.22</td></tr><tr><td class='name'><a href="https://www.tradingview.com/chart/?symbol=FX%3AEURUSD" target="_blank" rel="noopener">EUR/USD</a></td><td class='num flat'>1.08</td><td class="num fall">-0.05%</td><td class="num">-0.24</td></tr><tr><td class='name'><a href="https://www.tradingview.com/chart/?symbol=FX%3AGBPUSD" target="_blank" rel="noopener">GBP/USD</a></td><td class='num flat'>1.29</td><td class="num fall">-0.13%</td><td class="num">-0.41</td></tr><tr><td class='name'><a href="https://www.tradingview.com/chart/?symbol=FX%3AUSDCAD" target="_blank" rel="noopener">USD/CAD</a></td><td class='num flat'>1.44</td><td class="num rise">+0.57%</td><td class="num">+1.18</td></tr><tr><td class='name'><a href="https://www.tradingview.com/chart/?symbol=FX%3AUSDCHF" target="_blank" rel="noopener">USD/CHF</a></td><td class='num flat'>0.8838</td><td class="num rise">+0.34%</td><td class="num">+0.94</td></tr><tr><td class='name'><a href="https://www.tradingview.com/chart/?symbol=FX_IDC%3AUSDCNY" target="_blank" rel="noopener">USD/CNY (onshore, PBoC-managed)</a></td><td class='num flat'>7.26</td><td class="num fall">-0.08%</td><td class="num">-0.25</td></tr><tr><td class='name'><a href="https://www.tradingview.com/chart/?symbol=FX%3AUSDJPY" target="_blank" rel="noopener">USD/JPY</a></td><td class='num flat'>149.91</td><td class="num rise">+0.20%</td><td class="num">+0.51</td></tr><tr><td class='name'><a href="https://www.tradingview.com/chart/?symbol=FX_IDC%3AUSDMXN" target="_blank" rel="noopener">USD/MXN</a></td><td class='num flat'>20.47</td><td class="num rise">+0.46%</td><td class="num">+0.54</td></tr><tr><td class='name'><a href="https://www.tradingview.com/chart/?symbol=FX%3AUSDSEK" target="_blank" rel="noopener">USD/SEK</a></td><td class='num flat'>10.04</td><td class="num rise">+0.32%</td><td class="num">+0.70</td></tr><tr><td class='name'>US Dollar Index (reconstructed)<span class="tag">derived</span></td><td class='num flat'>104.17</td><td class="num rise">+0.15%</td><td class="num">+0.49</td></tr></tbody></table>
 
-  <div class="boundary">
-    <hr class="boundary-rule">
-    <div class="boundary-label"><span>Below: commentary, not record</span></div>
-  </div>
-
-  <div class='commentary'><p>Largest moves by z-score:</p><p>5y Inflation Breakeven: -7.00bp  (z -2.69)</p><p>10y Inflation Breakeven: -5.00bp  (z -2.59)</p><p>Health Care Sector: -1.83%  (z -2.44)</p><p>US 30Y Treasury: -7.00bp  (z -1.30)</p><p>HY Credit Excess (duration-hedged): -0.41%  (z -1.29)</p><p>2s10s Curve Slope: -4.00bp  (z -1.26)</p><p>Blocs clearing their move threshold: rates, curve, inflation, credit.</p><p>No cross-asset signature was identified. Most sessions are noise.</p><p class='caveat'>Generated from the figures above without a language model.</p></div>
-
-  <details class="archive"><summary>All 5 analysed sessions</summary><div class="months"><section><h3>August 2026</h3><a class="" href="2026-08-02.html"><span>02</span><span class="label">no signal</span></a></section><section><h3>July 2026</h3><a class="" href="2026-07-31.html"><span>31</span><span class="label">no signal</span></a><a class="" href="2026-07-29.html"><span>29</span><span class="label">no signal</span></a></section><section><h3>October 2025</h3><a class="classified" href="2025-10-10.html"><span>10</span><span class="label">Growth scare / flight to quality</span></a></section><section><h3>April 2025</h3><span class="current"><span>01</span><span class="label">viewing</span></span></section></div></details>
-
   <footer>
     <span>Instrument names link to TradingView.</span>
-    <span>Generated 2026-08-02 19:10 UTC</span>
+    <span>Generated 2026-08-02 19:33 UTC</span>
   </footer>
 
 </main>
