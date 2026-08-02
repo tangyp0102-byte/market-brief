@@ -38,10 +38,16 @@ def pieces(history):
 # ------------------------------------------------------------------- the page
 
 def test_page_renders_valid_standalone_html(pieces):
+    """One self-contained file: no build step, no external assets to fetch.
+
+    The page does carry script now - the calendar picker needs it - but every
+    byte is inline, so the file works when opened straight from disk.
+    """
     html = page.render_page(*pieces)
     assert html.startswith("<!doctype html>")
     assert html.rstrip().endswith("</html>")
-    assert "<script" not in html          # no JavaScript by design
+    assert "<script src=" not in html
+    assert "<link rel=\"stylesheet\" href=\"style" not in html
 
 
 def test_tape_appears_before_the_commentary(pieces):
@@ -317,73 +323,103 @@ ARCHIVE = [
      "regime_name": "Growth scare", "intensity": 0.98},
 ]
 
+HOLIDAYS = ("2026-07-03", "2026-09-07")
 
-def _with_archive(pieces, session="2026-07-31"):
+
+def _with_calendar(pieces, session="2026-07-31", repo="owner/repo"):
     built, result, written = pieces
     built.session = dt.date.fromisoformat(session)
-    return page.render_page(built, result, written, archive=ARCHIVE)
+    return page.render_page(built, result, written, archive=ARCHIVE,
+                            holiday_dates=HOLIDAYS, repo=repo)
 
 
-def test_archive_uses_no_javascript(pieces):
-    """A select needs JS to navigate; fetch fails on file:// URLs. Neither works."""
-    html = _with_archive(pieces)
-    assert "<script" not in html
-    assert "details class=\"archive\"" in html
+def _cal_data(html):
+    import json
+    raw = html.split('id="cal-data">')[1].split("</script>")[0]
+    for a, b in [("&quot;", '"'), ("&#x27;", "'"), ("&lt;", "<"),
+                 ("&gt;", ">"), ("&amp;", "&")]:
+        raw = raw.replace(a, b)
+    return json.loads(raw)
 
 
-def test_archive_lists_every_analysed_session(pieces):
-    html = _with_archive(pieces)
-    assert "All 4 analysed sessions" in html
-    for entry in ARCHIVE:
-        if entry["date"] != "2026-07-31":
-            assert f'href="{entry["date"]}.html"' in html
+def test_calendar_data_is_inline_not_fetched(pieces):
+    """fetch() fails on file:// URLs, so a page opened from disk would break.
+
+    The picker needs script - month navigation and the 'not yet analysed'
+    panel cannot be expressed in static markup - but the data it needs is
+    embedded at generation time rather than requested at load time.
+    """
+    import re
+    html = _with_calendar(pieces)
+    assert 'id="cal-data"' in html
+
+    # Check the executable script only: prose elsewhere on the page mentions
+    # fetch by name while explaining precisely why it is not used.
+    scripts = "".join(
+        m.group(1) for m in re.finditer(r"<script>(.*?)</script>", html, re.S)
+    )
+    assert scripts.strip()
+    assert "fetch(" not in scripts
+    assert "XMLHttpRequest" not in scripts
+    assert "import(" not in scripts
 
 
-def test_archive_groups_by_month(pieces):
-    html = _with_archive(pieces)
-    assert "August 2026" in html
-    assert "July 2026" in html
-    assert "June 2026" in html
+def test_calendar_data_carries_every_analysed_session(pieces):
+    data = _cal_data(_with_calendar(pieces))
+    assert set(data["available"]) == {e["date"] for e in ARCHIVE}
+    assert data["available"]["2026-08-03"]["regime"] == "hawkish_repricing"
+    assert data["available"]["2026-07-30"]["regime"] is None
+    assert data["current"] == "2026-07-31"
 
 
-def test_archive_shows_the_regime_for_each_session(pieces):
-    """A wall of dates is unscannable; the label is what makes it browsable."""
-    html = _with_archive(pieces)
-    assert "Hawkish repricing" in html
-    assert "Growth scare" in html
-    assert "no signal" in html
+def test_calendar_knows_which_days_the_market_was_shut(pieces):
+    """Without holidays every weekday would offer to generate a blocked page."""
+    data = _cal_data(_with_calendar(pieces))
+    assert set(HOLIDAYS) <= set(data["holidays"])
 
 
-def test_current_session_is_marked_not_linked(pieces):
-    html = _with_archive(pieces)
-    assert 'href="2026-07-31.html"' not in html
-    assert "viewing" in html
+def test_calendar_offers_the_actions_link_when_the_repo_is_known(pieces):
+    html = _with_calendar(pieces)
+    assert "actions/workflows/daily.yml" in html
+    assert _cal_data(html)["repo"] == "owner/repo"
+
+
+def test_calendar_omits_the_actions_link_when_the_repo_is_unknown(pieces):
+    """Locally there is no GITHUB_REPOSITORY, so only the command is offered."""
+    html = _with_calendar(pieces, repo=None)
+    assert _cal_data(html)["repo"] is None
+    assert "mb.daily --session" in html
+
+
+def test_calendar_explains_why_it_cannot_run_the_pipeline(pieces):
+    """A page that silently failed to act would be worse than one that says why."""
+    html = _with_calendar(pieces)
+    assert "cannot happen from this page" in html
+    assert "token" in html
 
 
 def test_prev_next_navigation_points_at_neighbours(pieces):
-    html = _with_archive(pieces)
+    html = _with_calendar(pieces)
     nav = html[html.index('class="sessions"'):html.index('class="eyebrow"')]
-    assert "2026-07-30" in nav      # older
-    assert "2026-08-03" in nav      # newer
+    assert "2026-07-30" in nav
+    assert "2026-08-03" in nav
 
 
 def test_newest_session_links_forward_to_index(pieces):
-    html = _with_archive(pieces, session="2026-08-03")
+    html = _with_calendar(pieces, session="2026-08-03")
     nav = html[html.index('class="sessions"'):html.index('class="eyebrow"')]
     assert 'href="index.html"' in nav
 
 
 def test_page_records_when_it_was_generated(pieces):
-    html = _with_archive(pieces)
-    assert "Generated" in html and "UTC" in html
+    assert "Generated" in _with_calendar(pieces)
 
 
-def test_archive_accepts_bare_date_strings(pieces):
-    """Callers holding only filenames should still get working navigation."""
+def test_calendar_accepts_bare_date_strings(pieces):
     built, result, written = pieces
     html = page.render_page(built, result, written,
                             archive=["2026-07-30", "2026-07-29"])
-    assert 'href="2026-07-30.html"' in html
+    assert "2026-07-30" in html
 
 
 def test_build_archive_reads_regime_from_stored_briefs(tmp_path):
@@ -392,16 +428,131 @@ def test_build_archive_reads_regime_from_stored_briefs(tmp_path):
                             ("2026-07-31", "hawkish_repricing", "Hawkish repricing")]:
         (tmp_path / f"{date}.json").write_text(json.dumps(
             {"factsheet": {"regime": {"id": rid, "name": name, "intensity": 1.5}}}))
-
     entries = daily.build_archive(tmp_path)
     assert [e["date"] for e in entries] == ["2026-07-31", "2026-07-30"]
     assert entries[0]["regime"] == "hawkish_repricing"
 
 
 def test_build_archive_skips_unreadable_briefs(tmp_path):
-    """A half-written file must not become a dead link."""
+    """A half-written file must not become a dead calendar cell."""
     (tmp_path / "2026-07-31.json").write_text("{not json")
     (tmp_path / "2026-07-30.json").write_text(
         '{"factsheet": {"regime": {"id": null, "name": "No clean signal"}}}')
-    entries = daily.build_archive(tmp_path)
-    assert [e["date"] for e in entries] == ["2026-07-30"]
+    assert [e["date"] for e in daily.build_archive(tmp_path)] == ["2026-07-30"]
+
+
+def test_holidays_are_weekdays_the_market_was_closed():
+    from mb import calendars
+    hols = calendars.holidays("2024-01-01", "2024-12-31")
+    assert "2024-12-25" in hols
+    assert "2024-07-04" in hols
+    assert "2024-12-28" not in hols      # a Saturday, not a holiday
+    assert 8 <= len(hols) <= 12
+
+
+# ------------------------------------------------------------------- rebuild
+
+def test_blocked_sessions_are_kept_out_of_the_archive(tmp_path):
+    """A blocked session has no tape, so a calendar cell for it leads nowhere."""
+    import json
+    (tmp_path / "2026-08-02.json").write_text(json.dumps(
+        {"factsheet": {"gate": {"verdict": "blocked"},
+                       "regime": {"id": None, "name": "No clean signal"}}}))
+    (tmp_path / "2026-07-31.json").write_text(json.dumps(
+        {"factsheet": {"gate": {"verdict": "pass"},
+                       "regime": {"id": None, "name": "No clean signal"}}}))
+
+    assert [e["date"] for e in daily.build_archive(tmp_path)] == ["2026-07-31"]
+
+
+def test_rebuild_refreshes_pages_written_by_an_older_template(tmp_path, history):
+    """Pages are written once; a template change would otherwise never reach them."""
+    store_path = tmp_path / "history.parquet"
+    store.upsert(store_path, history)
+    site, briefs = tmp_path / "site", tmp_path / "briefs"
+
+    sessions = sorted(history["date"].unique())[-3:]
+    for session in sessions:
+        daily.run(
+            store_path=store_path, site_dir=site, briefs_dir=briefs,
+            session=pd.Timestamp(session).date(), force=True, skip_fetch=True,
+            call_model=lambda p: "WHAT MOVED\nQuiet.\n",
+        )
+
+    # Simulate a stale page from an earlier template.
+    stale = site / f"{pd.Timestamp(sessions[0]).date()}.html"
+    stale.write_text("<html>old template, no navigation</html>", encoding="utf-8")
+
+    paths = daily.rebuild(store_path, site, briefs)
+    assert len(paths) >= 3
+    refreshed = stale.read_text(encoding="utf-8")
+    assert refreshed.startswith("<!doctype html>")
+    assert 'id="cal-data"' in refreshed
+
+
+def test_rebuild_gives_every_page_the_complete_archive(tmp_path, history):
+    """The oldest page must know about sessions generated after it."""
+    store_path = tmp_path / "history.parquet"
+    store.upsert(store_path, history)
+    site, briefs = tmp_path / "site", tmp_path / "briefs"
+
+    sessions = [pd.Timestamp(s).date() for s in sorted(history["date"].unique())[-3:]]
+    for session in sessions:
+        daily.run(
+            store_path=store_path, site_dir=site, briefs_dir=briefs,
+            session=session, force=True, skip_fetch=True,
+            call_model=lambda p: "WHAT MOVED\nQuiet.\n",
+        )
+
+    daily.rebuild(store_path, site, briefs)
+    oldest = (site / f"{sessions[0]}.html").read_text(encoding="utf-8")
+    data = _cal_data(oldest)
+    for session in sessions:
+        assert str(session) in data["available"]
+
+
+def test_rebuild_reuses_the_stored_narrative_and_calls_no_model(
+    tmp_path, history, monkeypatch
+):
+    """Rebuilding must be free, and must not change a published word.
+
+    The narrative already sits in the brief JSON, so a rebuild reads it back
+    rather than regenerating it. Any model call here would both cost money and
+    silently rewrite text that was already published.
+    """
+    import json
+
+    store_path = tmp_path / "history.parquet"
+    store.upsert(store_path, history)
+    site, briefs = tmp_path / "site", tmp_path / "briefs"
+
+    session = pd.Timestamp(history["date"].max()).date()
+    daily.run(
+        store_path=store_path, site_dir=site, briefs_dir=briefs, session=session,
+        force=True, skip_fetch=True, call_model=lambda p: "WHAT MOVED\nQuiet.\n",
+    )
+
+    # Stand in for a narrative written on an earlier day.
+    brief_path = briefs / f"{session}.json"
+    payload = json.loads(brief_path.read_text())
+    payload["body"] = "WHAT MOVED\nA distinctive stored sentence."
+    payload["generated"] = True
+    brief_path.write_text(json.dumps(payload))
+
+    def explode(prompt):
+        raise AssertionError("rebuild must not call a model")
+
+    monkeypatch.setattr(brief, "call_anthropic", explode)
+    daily.rebuild(store_path, site, briefs)
+
+    html = (site / f"{session}.html").read_text(encoding="utf-8")
+    assert "A distinctive stored sentence" in html
+
+
+def test_workflow_refreshes_older_pages_after_each_run():
+    """Without this, a template change never reaches previously built pages."""
+    from pathlib import Path
+    wf = Path(__file__).resolve().parent.parent / ".github" / "workflows" / "daily.yml"
+    text = wf.read_text()
+    assert "--rebuild" in text
+    assert text.index("python -m mb.daily $ARGS") < text.index("--rebuild")

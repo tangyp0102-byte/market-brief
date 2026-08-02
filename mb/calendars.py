@@ -129,6 +129,20 @@ def expected_instruments(registry, session: pd.Timestamp) -> tuple[Instrument, .
     return tuple(i for i in registry if expected_on(i, session))
 
 
+def holidays(start: str, end: str, name: str = SPINE) -> tuple[str, ...]:
+    """Weekdays on which `name` is closed, as ISO date strings.
+
+    Only the holidays are returned, not the full session list: weekends are
+    trivially derivable, so a browser needs roughly ninety dates rather than
+    two thousand to render an accurate calendar.
+    """
+    open_days = {d.date() for d in sessions(name, start, end)}
+    weekdays = pd.bdate_range(start, end)
+    return tuple(
+        d.date().isoformat() for d in weekdays if d.date() not in open_days
+    )
+
+
 def previous_session(
     session: pd.Timestamp, name: str = SPINE, lookback_days: int = 14
 ) -> pd.Timestamp | None:

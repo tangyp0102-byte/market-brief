@@ -72,6 +72,12 @@ jobs:
           echo "Running: python -m mb.daily $ARGS"
           python -m mb.daily $ARGS
 
+      # Pages are written once, so a template change would otherwise only reach
+      # sessions generated afterwards. Replays the tape from the stored history
+      # and reuses the stored narratives, so it calls no model and costs nothing.
+      - name: Refresh existing pages
+        run: python -m mb.daily --rebuild
+
       - name: Publish
         run: |
           git config user.name "market-brief"

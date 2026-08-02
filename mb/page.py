@@ -20,6 +20,7 @@ from __future__ import annotations
 
 import datetime as dt
 import html
+import json
 from pathlib import Path
 
 import pandas as pd
@@ -273,6 +274,125 @@ details.archive summary:focus-visible { outline: 2px solid var(--ink); outline-o
 .months .label { color: var(--muted); font-size: 11px; text-align: right; }
 .months a.classified .label { color: var(--ink); }
 
+
+/* Calendar picker. Needs script, unlike everything else on this page: month
+   navigation and the "not yet generated" panel cannot be expressed in static
+   markup. The data is inlined rather than fetched, so it still works when the
+   file is opened straight from disk - fetch() fails on file:// URLs. */
+.cal { padding: 20px 0 4px; }
+.cal-head {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 12px;
+}
+.cal-head button {
+  font: inherit;
+  font-size: 13px;
+  background: none;
+  border: 1px solid var(--hair);
+  color: var(--muted);
+  padding: 2px 9px;
+  cursor: pointer;
+}
+.cal-head button:hover:not(:disabled) { border-color: var(--ink); color: var(--ink); }
+.cal-head button:disabled { opacity: 0.3; cursor: default; }
+.cal-head button:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+.cal-month {
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  min-width: 150px;
+}
+.cal-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 2px;
+  max-width: 420px;
+}
+.cal-grid .dow {
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  text-align: center;
+  padding-bottom: 4px;
+}
+.cal-grid button, .cal-grid .pad {
+  font: inherit;
+  font-size: 12px;
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid transparent;
+  background: none;
+  color: var(--muted);
+  cursor: default;
+  padding: 0;
+}
+.cal-grid button.closed { color: var(--hair); }
+.cal-grid button.missing { color: var(--muted); cursor: pointer; }
+.cal-grid button.missing:hover { border-color: var(--hair); }
+.cal-grid button.has {
+  color: var(--ink);
+  background: #dfe1e5;
+  cursor: pointer;
+  font-weight: 500;
+}
+.cal-grid button.has:hover { background: var(--ink); color: var(--panel); }
+.cal-grid button.classified { box-shadow: inset 0 -2px 0 var(--ink); }
+.cal-grid button.current { outline: 1px solid var(--ink); outline-offset: -1px; }
+.cal-grid button:focus-visible { outline: 2px solid var(--ink); outline-offset: 1px; }
+.cal-key {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 16px;
+  margin-top: 14px;
+  font-size: 10px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.cal-key i { display: inline-block; width: 9px; height: 9px; margin-right: 5px; vertical-align: -1px; }
+.cal-key .k-has { background: #dfe1e5; }
+.cal-key .k-cls { background: #dfe1e5; box-shadow: inset 0 -2px 0 var(--ink); }
+.cal-key .k-non { border: 1px solid var(--hair); }
+.cal-panel {
+  margin-top: 16px;
+  padding: 16px 18px;
+  border: 1px solid var(--hair);
+  font-size: 13px;
+  max-width: 560px;
+}
+.cal-panel.hidden { display: none; }
+.cal-panel h4 {
+  margin: 0 0 8px;
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+.cal-panel p { margin: 0 0 10px; color: var(--muted); }
+.cal-panel code {
+  display: block;
+  padding: 9px 11px;
+  background: var(--ground);
+  font-size: 12px;
+  overflow-x: auto;
+  color: var(--ink);
+}
+.cal-panel .go {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 5px 12px;
+  border: 1px solid var(--ink);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.cal-panel .go:hover { background: var(--ink); color: var(--panel); }
+
 footer {
   margin-top: 56px;
   padding-top: 16px;
@@ -434,8 +554,150 @@ def _commentary(result_brief: brief_mod.Brief) -> str:
     )
 
 
-MONTHS = ["January", "February", "March", "April", "May", "June", "July",
-          "August", "September", "October", "November", "December"]
+
+CALENDAR_SCRIPT = """
+(function () {
+  var D = JSON.parse(document.getElementById('cal-data').textContent);
+  var have = D.available, shut = new Set(D.holidays);
+  var dates = Object.keys(have).sort();
+  var lo = dates.length ? dates[0].slice(0, 7) : D.current.slice(0, 7);
+  var hi = D.current.slice(0, 7);
+  if (dates.length && dates[dates.length - 1].slice(0, 7) > hi) {
+    hi = dates[dates.length - 1].slice(0, 7);
+  }
+  var view = D.current.slice(0, 7);
+
+  var grid = document.getElementById('cal-grid');
+  var label = document.getElementById('cal-month');
+  var prev = document.getElementById('cal-prev');
+  var next = document.getElementById('cal-next');
+  var panel = document.getElementById('cal-panel');
+  var NAMES = ['January','February','March','April','May','June','July',
+               'August','September','October','November','December'];
+
+  function shift(ym, by) {
+    var y = +ym.slice(0, 4), m = +ym.slice(5, 7) - 1 + by;
+    y += Math.floor(m / 12); m = ((m % 12) + 12) % 12;
+    return y + '-' + String(m + 1).padStart(2, '0');
+  }
+
+  function draw() {
+    var y = +view.slice(0, 4), m = +view.slice(5, 7) - 1;
+    label.textContent = NAMES[m] + ' ' + y;
+    prev.disabled = view <= lo;
+    next.disabled = view >= hi;
+
+    grid.innerHTML = '';
+    ['M','T','W','T','F','S','S'].forEach(function (d) {
+      var e = document.createElement('div');
+      e.className = 'dow'; e.textContent = d; grid.appendChild(e);
+    });
+
+    var first = new Date(Date.UTC(y, m, 1));
+    var lead = (first.getUTCDay() + 6) % 7;          // Monday-first
+    for (var i = 0; i < lead; i++) {
+      var pad = document.createElement('div');
+      pad.className = 'pad'; grid.appendChild(pad);
+    }
+
+    var days = new Date(Date.UTC(y, m + 1, 0)).getUTCDate();
+    for (var d = 1; d <= days; d++) {
+      var iso = view + '-' + String(d).padStart(2, '0');
+      var wd = new Date(iso + 'T00:00:00Z').getUTCDay();
+      var closed = wd === 0 || wd === 6 || shut.has(iso);
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.textContent = d;
+      b.dataset.iso = iso;
+
+      if (iso in have) {
+        b.className = 'has' + (have[iso].regime ? ' classified' : '');
+        b.title = iso + ' - ' + (have[iso].name || 'brief available');
+      } else if (closed) {
+        b.className = 'closed';
+        b.disabled = true;
+        b.title = iso + ' - market closed';
+      } else {
+        b.className = 'missing';
+        b.title = iso + ' - not yet analysed';
+      }
+      if (iso === D.current) { b.className += ' current'; }
+      grid.appendChild(b);
+    }
+  }
+
+  grid.addEventListener('click', function (ev) {
+    var b = ev.target.closest('button');
+    if (!b || b.disabled) return;
+    var iso = b.dataset.iso;
+    if (iso === D.current) return;
+    if (iso in have) { location.href = iso + '.html'; return; }
+    showMissing(iso);
+  });
+
+  function showMissing(iso) {
+    var run = D.repo
+      ? '<a class="go" href="https://github.com/' + D.repo +
+        '/actions/workflows/daily.yml" target="_blank" rel="noopener">' +
+        'Open GitHub Actions &rarr;</a>'
+      : '';
+    panel.innerHTML =
+      '<h4>' + iso + ' &mdash; not yet analysed</h4>' +
+      '<p>No brief exists for this session. Generating one runs the pipeline, ' +
+      'which cannot happen from this page: publishing a token that could ' +
+      'trigger it would let anyone with the link run workflows on the ' +
+      'repository.</p>' +
+      '<p>Run it on GitHub with <strong>session</strong> set to ' + iso +
+      ' and <strong>force</strong> ticked, or locally:</p>' +
+      '<code>python -m mb.daily --session ' + iso + ' --force</code>' + run;
+    panel.classList.remove('hidden');
+    panel.scrollIntoView({ block: 'nearest' });
+  }
+
+  prev.addEventListener('click', function () { view = shift(view, -1); draw(); });
+  next.addEventListener('click', function () { view = shift(view, 1); draw(); });
+  draw();
+})();
+"""
+
+
+def _calendar(archive, session, holiday_dates, repo) -> str:
+    """Month grid for picking a session.
+
+    Available briefs are linked, non-trading days are disabled, and a trading
+    day with no brief opens a panel explaining how to generate it. That last
+    step cannot be automated from here - see CALENDAR_SCRIPT.
+    """
+    available = {
+        e["date"]: {"regime": e.get("regime"), "name": e.get("regime_name", "")}
+        for e in archive
+    }
+    data = json.dumps({
+        "available": available,
+        "holidays": list(holiday_dates or ()),
+        "current": str(session),
+        "repo": repo,
+    })
+    count = len(available)
+    return f"""<details class="archive">
+<summary>Browse sessions &mdash; {count} analysed</summary>
+<div class="cal">
+  <div class="cal-head">
+    <button type="button" id="cal-prev" aria-label="Previous month">&larr;</button>
+    <span class="cal-month" id="cal-month"></span>
+    <button type="button" id="cal-next" aria-label="Next month">&rarr;</button>
+  </div>
+  <div class="cal-grid" id="cal-grid"></div>
+  <div class="cal-key">
+    <span><i class="k-has"></i>brief available</span>
+    <span><i class="k-cls"></i>regime identified</span>
+    <span><i class="k-non"></i>market closed</span>
+  </div>
+  <div class="cal-panel hidden" id="cal-panel"></div>
+</div>
+</details>
+<script type="application/json" id="cal-data">{_esc(data)}</script>
+<script>{CALENDAR_SCRIPT}</script>"""
 
 
 def _session_nav(archive: list[dict], session) -> str:
@@ -456,63 +718,14 @@ def _session_nav(archive: list[dict], session) -> str:
     return f'<nav class="sessions">{left}<span class="spacer"></span>{right}</nav>'
 
 
-def _archive_block(archive: list[dict], session) -> str:
-    """Every analysed session, grouped by month behind a disclosure.
-
-    Native <details> rather than a select element or a fetched index: a select
-    needs JavaScript to navigate on change, and fetch fails outright on file://
-    URLs, which would break opening a page straight from disk. This works in
-    both places with no script at all.
-    """
-    if not archive:
-        return ""
-
-    by_month: dict[tuple[int, int], list[dict]] = {}
-    for entry in archive:
-        try:
-            y, m, _ = (int(x) for x in entry["date"].split("-"))
-        except ValueError:
-            continue
-        by_month.setdefault((y, m), []).append(entry)
-
-    blocks = []
-    for (year, month), entries in sorted(by_month.items(), reverse=True):
-        rows = []
-        for entry in entries:
-            day = entry["date"].split("-")[-1]
-            label = entry.get("regime_name") or ""
-            if entry.get("regime") is None and label:
-                label = "no signal"
-            classified = " classified" if entry.get("regime") else ""
-            if entry["date"] == str(session):
-                rows.append(
-                    f'<span class="current"><span>{_esc(day)}</span>'
-                    f'<span class="label">viewing</span></span>'
-                )
-            else:
-                rows.append(
-                    f'<a class="{classified.strip()}" href="{_esc(entry["date"])}.html">'
-                    f'<span>{_esc(day)}</span>'
-                    f'<span class="label">{_esc(label)}</span></a>'
-                )
-        blocks.append(
-            f"<section><h3>{MONTHS[month - 1]} {year}</h3>{''.join(rows)}</section>"
-        )
-
-    count = len(archive)
-    return (
-        f'<details class="archive"><summary>All {count} analysed '
-        f'session{"s" if count != 1 else ""}</summary>'
-        f'<div class="months">{"".join(blocks)}</div></details>'
-    )
-
-
 def render_page(
     built: tape_mod.Tape,
     result: classify_mod.Classification,
     result_brief: brief_mod.Brief,
     registry: Registry | None = None,
-    archive: list[str] | None = None,
+    archive: list | None = None,
+    holiday_dates: tuple[str, ...] | None = None,
+    repo: str | None = None,
 ) -> str:
     registry = registry or load_registry()
     session = built.session
@@ -549,7 +762,7 @@ def render_page(
     # that only has filenames still gets working navigation.
     archive = [{"date": e} if isinstance(e, str) else e for e in archive]
     nav = _session_nav(archive, session)
-    archive_block = _archive_block(archive, session)
+    archive_block = _calendar(archive, session, holiday_dates, repo)
     generated = dt.datetime.now(dt.timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
 
     return f"""<!doctype html>
@@ -619,12 +832,15 @@ def write_page(
     result: classify_mod.Classification,
     result_brief: brief_mod.Brief,
     registry: Registry | None = None,
-    archive: list[str] | None = None,
+    archive: list | None = None,
+    holiday_dates: tuple[str, ...] | None = None,
+    repo: str | None = None,
 ) -> Path:
     path = Path(path)
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(
-        render_page(built, result, result_brief, registry, archive),
+        render_page(built, result, result_brief, registry, archive,
+                    holiday_dates, repo),
         encoding="utf-8",
     )
     return path

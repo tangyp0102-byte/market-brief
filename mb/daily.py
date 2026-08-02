@@ -107,7 +107,12 @@ def build_archive(briefs_dir: Path) -> list[dict]:
             payload = json.loads(path.read_text())
         except (json.JSONDecodeError, OSError):
             continue
-        regime = payload.get("factsheet", {}).get("regime", {})
+        sheet = payload.get("factsheet", {})
+        if sheet.get("gate", {}).get("verdict") == "blocked":
+            # No tape was produced, so the page is empty. Listing it would give
+            # the calendar a cell that leads nowhere.
+            continue
+        regime = sheet.get("regime", {})
         entries.append({
             "date": path.stem,
             "regime": regime.get("id"),
@@ -255,8 +260,16 @@ def run(
     archive = build_archive(briefs_dir)
 
     site_dir = Path(site_dir)
+    # Two extra years ahead so the calendar can be paged into the near future
+    # without every cell wrongly reading as a trading day.
+    holiday_dates = calendars.holidays(
+        "2019-01-01", f"{dt.date.today().year + 2}-12-31"
+    )
+    repo = os.environ.get("GITHUB_REPOSITORY")
+
     dated = page.write_page(
-        site_dir / f"{built.session}.html", built, result, written, registry, archive
+        site_dir / f"{built.session}.html", built, result, written, registry,
+        archive, holiday_dates, repo,
     )
 
     # index.html is the most recent PUBLISHABLE brief, not the most recent
@@ -264,7 +277,8 @@ def run(
     # failure - must not overwrite the last good page with an empty one.
     if built.rows:
         page.write_page(
-            site_dir / "index.html", built, result, written, registry, archive
+            site_dir / "index.html", built, result, written, registry,
+            archive, holiday_dates, repo,
         )
     else:
         messages.append(
@@ -279,6 +293,80 @@ def run(
     )
 
 
+def rebuild(
+    store_path: Path = DEFAULT_STORE,
+    site_dir: Path = DEFAULT_SITE,
+    briefs_dir: Path = DEFAULT_BRIEFS,
+) -> list[Path]:
+    """Regenerate every page from the stored history and stored narratives.
+
+    Pages are written once and never revisited, so a change to the template -
+    the session navigation, the calendar - only reaches sessions generated
+    afterwards. Older pages keep whatever markup existed on the day they were
+    built, and their archive is frozen at that moment too.
+
+    This replays the tape and the classifier from the history store, which is
+    cheap and deterministic, and reuses the narrative already stored in each
+    brief JSON. No model is called, so rebuilding costs nothing and cannot
+    change a single published word.
+    """
+    registry = load_registry()
+    flags = rolls.load_flags()
+    history = store.read(Path(store_path))
+    if history.empty:
+        return []
+
+    archive = build_archive(Path(briefs_dir))
+    holiday_dates = calendars.holidays(
+        "2019-01-01", f"{dt.date.today().year + 2}-12-31"
+    )
+    repo = os.environ.get("GITHUB_REPOSITORY")
+
+    # The intensity threshold is a whole-history quantile; computing it once
+    # rather than per session turns an O(n^2) rebuild into a linear one.
+    series = classify.intensity_history(history, registry, flags)
+    threshold = (
+        float(series.quantile(classify.INTENSITY_PERCENTILE))
+        if len(series) > 100 else None
+    )
+
+    written_paths: list[Path] = []
+    newest = None
+
+    for entry in sorted(archive, key=lambda e: e["date"]):
+        session = pd.Timestamp(entry["date"])
+        built = tape.build_tape(history, registry, session, flags)
+        if not built.rows:
+            continue
+        result = classify.classify(
+            history, registry, session, flags, intensity_threshold=threshold
+        )
+
+        payload = json.loads((Path(briefs_dir) / f"{entry['date']}.json").read_text())
+        stored = brief.Brief(
+            session=dt.date.fromisoformat(entry["date"]),
+            headline=payload.get("headline", ""),
+            body=payload.get("body", ""),
+            generated=payload.get("generated", False),
+            factsheet=payload.get("factsheet", {}),
+            unverified_numbers=payload.get("unverified_numbers", []),
+        )
+
+        written_paths.append(page.write_page(
+            Path(site_dir) / f"{entry['date']}.html", built, result, stored,
+            registry, archive, holiday_dates, repo,
+        ))
+        newest = (built, result, stored)
+
+    if newest is not None:
+        page.write_page(
+            Path(site_dir) / "index.html", *newest,
+            registry, archive, holiday_dates, repo,
+        )
+
+    return written_paths
+
+
 def main(argv: list[str] | None = None) -> int:
     import argparse
 
@@ -291,6 +379,8 @@ def main(argv: list[str] | None = None) -> int:
                         help="use the stored history without refetching")
     parser.add_argument("--force", action="store_true",
                         help="run even on a non-trading day")
+    parser.add_argument("--rebuild", action="store_true",
+                        help="regenerate every page from stored data, no model calls")
     parser.add_argument("--verbose", "-v", action="store_true")
     args = parser.parse_args(argv)
 
@@ -299,6 +389,13 @@ def main(argv: list[str] | None = None) -> int:
         format="%(levelname)-7s %(name)s: %(message)s",
         stream=sys.stderr,
     )
+
+    if args.rebuild:
+        paths = rebuild(Path(args.store), Path(args.site), Path(args.briefs))
+        print(f"Rebuilt {len(paths)} page(s) plus index.html")
+        for p in paths[-5:]:
+            print(f"  {p}")
+        return 0
 
     session = dt.date.fromisoformat(args.session) if args.session else None
     result = run(
