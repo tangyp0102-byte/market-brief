@@ -1,0 +1,216 @@
+{
+  "factsheet": {
+    "session": "2026-07-29",
+    "gate": {
+      "verdict": "pass",
+      "half_session": false,
+      "missing": [],
+      "stale": [],
+      "undefined": [],
+      "review": []
+    },
+    "regime": {
+      "id": null,
+      "name": "No clean signal (closest: Hawkish repricing)",
+      "confidence": "none",
+      "intensity": 1.53,
+      "intensity_percentile": 0.95
+    },
+    "signals": [
+      {
+        "bloc": "equity",
+        "instrument": "spx",
+        "change": -1.52,
+        "unit": "%",
+        "z": -1.93,
+        "percentile": 0.93,
+        "moved": true,
+        "quiet_vol": false
+      },
+      {
+        "bloc": "rates",
+        "instrument": "ust_30y",
+        "change": 11.0,
+        "unit": "bp",
+        "z": 3.07,
+        "percentile": 0.99,
+        "moved": true,
+        "quiet_vol": false
+      },
+      {
+        "bloc": "bills",
+        "instrument": "ust_3m",
+        "change": -7.0,
+        "unit": "bp",
+        "z": -3.13,
+        "percentile": 0.98,
+        "moved": true,
+        "quiet_vol": false
+      },
+      {
+        "bloc": "curve",
+        "instrument": "ust_2s10s",
+        "change": 10.0,
+        "unit": "bp",
+        "z": 3.71,
+        "percentile": 1.0,
+        "moved": true,
+        "quiet_vol": false
+      },
+      {
+        "bloc": "real_rates",
+        "instrument": "ust_real_10y",
+        "change": 0.0,
+        "unit": "bp",
+        "z": -0.22,
+        "percentile": 0.18,
+        "moved": false,
+        "quiet_vol": false
+      },
+      {
+        "bloc": "inflation",
+        "instrument": "be_10y",
+        "change": 6.0,
+        "unit": "bp",
+        "z": 3.06,
+        "percentile": 0.99,
+        "moved": true,
+        "quiet_vol": false
+      },
+      {
+        "bloc": "dollar",
+        "instrument": "dxy",
+        "change": -0.1,
+        "unit": "%",
+        "z": -0.58,
+        "percentile": 0.47,
+        "moved": false,
+        "quiet_vol": false
+      },
+      {
+        "bloc": "gold",
+        "instrument": "gold",
+        "change": -0.04,
+        "unit": "%",
+        "z": 0.11,
+        "percentile": 0.12,
+        "moved": false,
+        "quiet_vol": false
+      },
+      {
+        "bloc": "energy",
+        "instrument": "wti",
+        "change": 6.56,
+        "unit": "%",
+        "z": 1.97,
+        "percentile": 0.93,
+        "moved": true,
+        "quiet_vol": false
+      },
+      {
+        "bloc": "industrial",
+        "instrument": "copper",
+        "change": -0.77,
+        "unit": "%",
+        "z": -0.5,
+        "percentile": 0.42,
+        "moved": false,
+        "quiet_vol": false
+      },
+      {
+        "bloc": "vol",
+        "instrument": "vix",
+        "change": 2.45,
+        "unit": "pt",
+        "z": 1.77,
+        "percentile": 0.92,
+        "moved": true,
+        "quiet_vol": false
+      },
+      {
+        "bloc": "credit",
+        "instrument": "credit_excess",
+        "change": -0.16,
+        "unit": "%",
+        "z": -1.0,
+        "percentile": 0.76,
+        "moved": true,
+        "quiet_vol": false
+      }
+    ],
+    "confirmations": [
+      {
+        "id": "front_end_leads",
+        "holds": false,
+        "detail": "2y -4bp vs 10y +6bp"
+      },
+      {
+        "id": "curve_flattens",
+        "holds": false,
+        "detail": "2s10s +10.0bp"
+      },
+      {
+        "id": "dollar_up",
+        "holds": false,
+        "detail": "dxy -0.10%"
+      },
+      {
+        "id": "growth_underperforms",
+        "holds": true,
+        "detail": "tech -2.64% vs financials -1.60%"
+      }
+    ],
+    "largest_moves": [
+      {
+        "name": "2s10s Curve Slope",
+        "change": 10.0,
+        "unit": "bp",
+        "z": 3.71,
+        "quiet_vol": false
+      },
+      {
+        "name": "5s30s Curve Slope",
+        "change": 9.0,
+        "unit": "bp",
+        "z": 3.17,
+        "quiet_vol": false
+      },
+      {
+        "name": "US 3M Treasury",
+        "change": -7.0,
+        "unit": "bp",
+        "z": -3.13,
+        "quiet_vol": false
+      },
+      {
+        "name": "US 30Y Treasury",
+        "change": 11.0,
+        "unit": "bp",
+        "z": 3.07,
+        "quiet_vol": false
+      },
+      {
+        "name": "10y Inflation Breakeven",
+        "change": 6.0,
+        "unit": "bp",
+        "z": 3.06,
+        "quiet_vol": false
+      },
+      {
+        "name": "3m10y Curve Slope",
+        "change": 13.0,
+        "unit": "bp",
+        "z": 3.03,
+        "quiet_vol": false
+      }
+    ],
+    "notes": [
+      "rates doing the damage: yields up and equities down together",
+      "WITHDRAWN: the legs fit hawkish repricing, but front_end_leads, curve_flattens, dollar_up contradicted it. Reporting no regime rather than one the evidence argues against."
+    ]
+  },
+  "headline": "No clean signal (closest: Hawkish repricing). Composite intensity 1.53, above 95% of sessions.",
+  "body": "Largest moves by z-score:\n  2s10s Curve Slope: +10.00bp  (z +3.71)\n  5s30s Curve Slope: +9.00bp  (z +3.17)\n  US 3M Treasury: -7.00bp  (z -3.13)\n  US 30Y Treasury: +11.00bp  (z +3.07)\n  10y Inflation Breakeven: +6.00bp  (z +3.06)\n  3m10y Curve Slope: +13.00bp  (z +3.03)\n\nBlocs clearing their move threshold: equity, rates, bills, curve, inflation, energy, vol, credit.\n\nNo cross-asset signature was identified. Most sessions are noise.",
+  "generated": false,
+  "unverified_numbers": []
+}
