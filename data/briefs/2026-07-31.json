@@ -1,0 +1,194 @@
+{
+  "factsheet": {
+    "session": "2026-07-31",
+    "gate": {
+      "verdict": "pass",
+      "half_session": false,
+      "missing": [],
+      "stale": [],
+      "undefined": [],
+      "review": []
+    },
+    "regime": {
+      "id": null,
+      "name": "No clean signal",
+      "confidence": "none",
+      "intensity": 1.28,
+      "intensity_percentile": 0.9
+    },
+    "signals": [
+      {
+        "bloc": "equity",
+        "instrument": "spx",
+        "change": 0.7,
+        "unit": "%",
+        "z": 0.75,
+        "percentile": 0.6,
+        "moved": false,
+        "quiet_vol": false
+      },
+      {
+        "bloc": "rates",
+        "instrument": "ust_30y",
+        "change": 6.0,
+        "unit": "bp",
+        "z": 1.52,
+        "percentile": 0.88,
+        "moved": true,
+        "quiet_vol": false
+      },
+      {
+        "bloc": "bills",
+        "instrument": "ust_3m",
+        "change": 1.0,
+        "unit": "bp",
+        "z": 0.32,
+        "percentile": 0.4,
+        "moved": false,
+        "quiet_vol": false
+      },
+      {
+        "bloc": "curve",
+        "instrument": "ust_2s10s",
+        "change": 2.0,
+        "unit": "bp",
+        "z": 0.68,
+        "percentile": 0.52,
+        "moved": false,
+        "quiet_vol": false
+      },
+      {
+        "bloc": "real_rates",
+        "instrument": "ust_real_10y",
+        "change": 6.0,
+        "unit": "bp",
+        "z": 1.49,
+        "percentile": 0.86,
+        "moved": true,
+        "quiet_vol": false
+      },
+      {
+        "bloc": "inflation",
+        "instrument": "be_10y",
+        "change": 1.0,
+        "unit": "bp",
+        "z": 0.62,
+        "percentile": 0.51,
+        "moved": false,
+        "quiet_vol": false
+      },
+      {
+        "bloc": "dollar",
+        "instrument": "dxy",
+        "change": -0.74,
+        "unit": "%",
+        "z": -2.93,
+        "percentile": 0.99,
+        "moved": true,
+        "quiet_vol": false
+      },
+      {
+        "bloc": "gold",
+        "instrument": "gold",
+        "change": -1.24,
+        "unit": "%",
+        "z": -0.72,
+        "percentile": 0.6,
+        "moved": false,
+        "quiet_vol": false
+      },
+      {
+        "bloc": "energy",
+        "instrument": "wti",
+        "change": 1.29,
+        "unit": "%",
+        "z": 0.46,
+        "percentile": 0.38,
+        "moved": false,
+        "quiet_vol": false
+      },
+      {
+        "bloc": "industrial",
+        "instrument": "copper",
+        "change": -0.13,
+        "unit": "%",
+        "z": -0.18,
+        "percentile": 0.16,
+        "moved": false,
+        "quiet_vol": false
+      },
+      {
+        "bloc": "vol",
+        "instrument": "vix",
+        "change": -1.1,
+        "unit": "pt",
+        "z": -0.74,
+        "percentile": 0.67,
+        "moved": false,
+        "quiet_vol": false
+      },
+      {
+        "bloc": "credit",
+        "instrument": "credit_excess",
+        "change": 0.24,
+        "unit": "%",
+        "z": 1.44,
+        "percentile": 0.87,
+        "moved": true,
+        "quiet_vol": false
+      }
+    ],
+    "confirmations": [],
+    "largest_moves": [
+      {
+        "name": "USD/JPY",
+        "change": -1.91,
+        "unit": "%",
+        "z": -8.58,
+        "quiet_vol": true
+      },
+      {
+        "name": "US Dollar Index (reconstructed)",
+        "change": -0.74,
+        "unit": "%",
+        "z": -2.93,
+        "quiet_vol": false
+      },
+      {
+        "name": "USD/SEK",
+        "change": -1.36,
+        "unit": "%",
+        "z": -2.76,
+        "quiet_vol": false
+      },
+      {
+        "name": "Consumer Discretionary Sector",
+        "change": 3.29,
+        "unit": "%",
+        "z": 2.51,
+        "quiet_vol": false
+      },
+      {
+        "name": "AUD/USD",
+        "change": 0.95,
+        "unit": "%",
+        "z": 2.32,
+        "quiet_vol": false
+      },
+      {
+        "name": "USD/CHF",
+        "change": -0.74,
+        "unit": "%",
+        "z": -2.17,
+        "quiet_vol": false
+      }
+    ],
+    "notes": [
+      "Active session but no rule matched. Blocs that moved: rates, real_rates, dollar, credit. A day can be busy without having a coherent cross-asset signature."
+    ]
+  },
+  "headline": "No clean signal. Composite intensity 1.28, above 90% of sessions.",
+  "body": "Largest moves by z-score:\n  USD/JPY: -1.91%  (z -8.58)  [quiet vol period]\n  US Dollar Index (reconstructed): -0.74%  (z -2.93)\n  USD/SEK: -1.36%  (z -2.76)\n  Consumer Discretionary Sector: +3.29%  (z +2.51)\n  AUD/USD: +0.95%  (z +2.32)\n  USD/CHF: -0.74%  (z -2.17)\n\nBlocs clearing their move threshold: rates, real_rates, dollar, credit.\n\nNo cross-asset signature was identified. Most sessions are noise.",
+  "generated": false,
+  "unverified_numbers": []
+}
