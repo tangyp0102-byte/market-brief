@@ -376,7 +376,7 @@ def main(argv: list[str] | None = None) -> int:
         return 0
 
     if args.scan:
-        start = (latest - pd.Timedelta(days=args.scan * 2)).date().isoformat()
+        start = (latest - dt.timedelta(days=args.scan * 2)).date().isoformat()
         days = calendars.spine_sessions(start, latest.date().isoformat())[-args.scan:]
         frame = _scan(history, registry, days)
         print(f"\nGATE SCAN over {len(frame)} NYSE sessions:\n")

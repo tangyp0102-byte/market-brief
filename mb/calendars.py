@@ -134,7 +134,7 @@ def previous_session(
 ) -> pd.Timestamp | None:
     """The trading session immediately before `session` on the given calendar."""
     session = pd.Timestamp(session).normalize()
-    start = (session - pd.Timedelta(days=lookback_days)).date().isoformat()
+    start = (session - dt.timedelta(days=lookback_days)).date().isoformat()
     prior = sessions(name, start, session.date().isoformat())
     prior = prior[prior < session]
     return prior[-1] if len(prior) else None

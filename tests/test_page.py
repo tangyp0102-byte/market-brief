@@ -236,11 +236,41 @@ def test_daily_rebuilds_when_the_store_is_too_thin():
     assert "rebuilding the full" in source
 
 
-def test_lookback_stretches_to_cover_a_stale_store():
-    """A fixed window leaves a hole after a missed run or a cache eviction."""
-    source = open(daily.__file__).read()
-    assert "last_held - pd.Timedelta(days=3)" in source
-    assert "days behind; fetching from" in source
+def test_lookback_stretches_to_cover_a_stale_store(tmp_path, history, monkeypatch):
+    """A fixed window leaves a hole after a missed run or a cache eviction.
+
+    Asserted by capturing the start date actually handed to the backfill,
+    rather than by matching source text: the previous version of this test
+    checked for a literal `pd.Timedelta` call and broke the moment that was
+    swapped for the stdlib equivalent, without the behaviour changing at all.
+    """
+    from mb import backfill
+
+    store_path = tmp_path / "history.parquet"
+    store.upsert(store_path, history)
+    last_held = history["date"].max()
+
+    captured = {}
+
+    def spy(registry, start, end, *args, **kwargs):
+        captured["start"] = start
+        return backfill.BackfillReport()
+
+    monkeypatch.setattr(backfill, "backfill", spy)
+
+    # Pretend the run is happening well after the store was last updated.
+    stale_by = 40
+    session = (last_held + dt.timedelta(days=stale_by)).date()
+    daily.run(
+        store_path=store_path, site_dir=tmp_path / "site",
+        briefs_dir=tmp_path / "briefs", session=session, force=True,
+        call_model=lambda p: "WHAT MOVED\nQuiet.\n",
+    )
+
+    start = dt.date.fromisoformat(captured["start"])
+    # Must reach back past the last stored session, not just LOOKBACK_DAYS.
+    assert start < last_held.date()
+    assert start > (last_held - dt.timedelta(days=10)).date()
 
 
 def test_blocked_session_does_not_overwrite_the_index(tmp_path, history):

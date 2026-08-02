@@ -151,8 +151,8 @@ def run(
             # that is weeks behind.
             last_held = existing["date"].max()
             start_ts = min(
-                stamp - pd.Timedelta(days=LOOKBACK_DAYS),
-                last_held - pd.Timedelta(days=3),
+                stamp - dt.timedelta(days=LOOKBACK_DAYS),
+                last_held - dt.timedelta(days=3),
             )
             start = start_ts.date().isoformat()
             gap = (stamp - last_held).days

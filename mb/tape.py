@@ -446,7 +446,7 @@ def main(argv: list[str] | None = None) -> int:
 
     if args.last:
         latest = history["date"].max()
-        start = (latest - pd.Timedelta(days=args.last * 3)).date().isoformat()
+        start = (latest - dt.timedelta(days=args.last * 3)).date().isoformat()
         days = calendars.spine_sessions(start, latest.date().isoformat())[-args.last:]
         for day in days:
             print(render(build_tape(history, registry, day, flags, args.window)))

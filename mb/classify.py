@@ -728,7 +728,7 @@ def main(argv: list[str] | None = None) -> int:
         from . import calendars
 
         latest = history["date"].max()
-        start = (latest - pd.Timedelta(days=args.scan * 3)).date().isoformat()
+        start = (latest - dt.timedelta(days=args.scan * 3)).date().isoformat()
         days = calendars.spine_sessions(start, latest.date().isoformat())[-args.scan:]
         series = intensity_history(history, registry, flags, args.window)
         threshold = float(series.quantile(INTENSITY_PERCENTILE))
