@@ -13,8 +13,8 @@
       "id": null,
       "name": "No clean signal",
       "confidence": "none",
-      "intensity": 1.28,
-      "intensity_percentile": 0.9
+      "intensity": 1.26,
+      "intensity_percentile": 0.89
     },
     "signals": [
       {
@@ -80,10 +80,10 @@
       {
         "bloc": "dollar",
         "instrument": "dxy",
-        "change": -0.74,
+        "change": -0.72,
         "unit": "%",
-        "z": -2.93,
-        "percentile": 0.99,
+        "z": -2.84,
+        "percentile": 0.98,
         "moved": true,
         "quiet_vol": false
       },
@@ -149,16 +149,16 @@
       },
       {
         "name": "US Dollar Index (reconstructed)",
-        "change": -0.74,
+        "change": -0.72,
         "unit": "%",
-        "z": -2.93,
+        "z": -2.84,
         "quiet_vol": false
       },
       {
-        "name": "USD/SEK",
-        "change": -1.36,
+        "name": "USD/CHF",
+        "change": -0.94,
         "unit": "%",
-        "z": -2.76,
+        "z": -2.71,
         "quiet_vol": false
       },
       {
@@ -176,10 +176,10 @@
         "quiet_vol": false
       },
       {
-        "name": "USD/CHF",
-        "change": -0.74,
+        "name": "USD/SEK",
+        "change": -1.07,
         "unit": "%",
-        "z": -2.17,
+        "z": -2.19,
         "quiet_vol": false
       }
     ],
@@ -187,8 +187,8 @@
       "Active session but no rule matched. Blocs that moved: rates, real_rates, dollar, credit. A day can be busy without having a coherent cross-asset signature."
     ]
   },
-  "headline": "No clean signal. Composite intensity 1.28, above 90% of sessions.",
-  "body": "Largest moves by z-score:\n  USD/JPY: -1.91%  (z -8.58)  [quiet vol period]\n  US Dollar Index (reconstructed): -0.74%  (z -2.93)\n  USD/SEK: -1.36%  (z -2.76)\n  Consumer Discretionary Sector: +3.29%  (z +2.51)\n  AUD/USD: +0.95%  (z +2.32)\n  USD/CHF: -0.74%  (z -2.17)\n\nBlocs clearing their move threshold: rates, real_rates, dollar, credit.\n\nNo cross-asset signature was identified. Most sessions are noise.",
+  "headline": "No clean signal. Composite intensity 1.26, above 89% of sessions.",
+  "body": "Largest moves by z-score:\n  USD/JPY: -1.91%  (z -8.58)  [quiet vol period]\n  US Dollar Index (reconstructed): -0.72%  (z -2.84)\n  USD/CHF: -0.94%  (z -2.71)\n  Consumer Discretionary Sector: +3.29%  (z +2.51)\n  AUD/USD: +0.95%  (z +2.32)\n  USD/SEK: -1.07%  (z -2.19)\n\nBlocs clearing their move threshold: rates, real_rates, dollar, credit.\n\nNo cross-asset signature was identified. Most sessions are noise.",
   "generated": false,
   "unverified_numbers": []
 }
