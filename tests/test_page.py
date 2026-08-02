@@ -241,3 +241,34 @@ def test_lookback_stretches_to_cover_a_stale_store():
     source = open(daily.__file__).read()
     assert "last_held - pd.Timedelta(days=3)" in source
     assert "days behind; fetching from" in source
+
+
+def test_blocked_session_does_not_overwrite_the_index(tmp_path, history):
+    """A holiday or forced weekend run must not replace the last good page."""
+    store_path = tmp_path / "history.parquet"
+    store.upsert(store_path, history)
+    site = tmp_path / "site"
+    kwargs = dict(
+        store_path=store_path, site_dir=site, briefs_dir=tmp_path / "briefs",
+        force=True, skip_fetch=True, call_model=lambda p: "WHAT MOVED\nQuiet.\n",
+    )
+
+    good = daily.run(session=history["date"].max().date(), **kwargs)
+    assert good.ran
+    original = (site / "index.html").read_text(encoding="utf-8")
+
+    # Christmas: the gate blocks, so the index must be left alone.
+    blocked = daily.run(session=dt.date(2024, 12, 25), **kwargs)
+    assert (site / "index.html").read_text(encoding="utf-8") == original
+    assert any("left pointing at the previous" in m for m in blocked.messages)
+
+
+def test_workflow_allows_a_manual_session_and_force():
+    """Testing the full pipeline should not require waiting for a weekday."""
+    import yaml
+    from pathlib import Path
+    wf = Path(__file__).resolve().parent.parent / ".github" / "workflows" / "daily.yml"
+    doc = yaml.safe_load(wf.read_text())
+    inputs = doc[True]["workflow_dispatch"]["inputs"]
+    assert "session" in inputs
+    assert "force" in inputs
