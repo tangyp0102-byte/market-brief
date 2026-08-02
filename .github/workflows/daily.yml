@@ -9,7 +9,18 @@ on:
     # guarded by the NYSE calendar, so a delayed or repeated run is harmless.
     - cron: "0 18 * * 1-5"
       timezone: "America/New_York"
+
   workflow_dispatch:
+    inputs:
+      session:
+        description: "ISO date to build (blank = today)"
+        required: false
+        type: string
+      force:
+        description: "Run even if it is not an NYSE session"
+        required: false
+        type: boolean
+        default: false
 
 permissions:
   contents: write
@@ -52,7 +63,14 @@ jobs:
         env:
           FRED_API_KEY: ${{ secrets.FRED_API_KEY }}
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
-        run: python -m mb.daily
+          SESSION: ${{ inputs.session }}
+          FORCE: ${{ inputs.force }}
+        run: |
+          ARGS=""
+          if [ -n "$SESSION" ]; then ARGS="$ARGS --session $SESSION"; fi
+          if [ "$FORCE" = "true" ]; then ARGS="$ARGS --force"; fi
+          echo "Running: python -m mb.daily $ARGS"
+          python -m mb.daily $ARGS
 
       - name: Publish
         run: |
