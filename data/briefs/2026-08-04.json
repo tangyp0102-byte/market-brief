@@ -1,0 +1,58 @@
+{
+  "factsheet": {
+    "session": "2026-08-04",
+    "gate": {
+      "verdict": "blocked",
+      "half_session": false,
+      "missing": [],
+      "stale": [
+        "hy_oas: last observation 2026-07-30 (3 sessions behind, tolerance 2)",
+        "ig_oas: last observation 2026-07-30 (3 sessions behind, tolerance 2)",
+        "hyg: last observation 2026-07-31 (2 sessions behind, tolerance 1)",
+        "lqd: last observation 2026-07-31 (2 sessions behind, tolerance 1)",
+        "spx: last observation 2026-07-31 (2 sessions behind, tolerance 1)",
+        "ndx: last observation 2026-07-31 (2 sessions behind, tolerance 1)",
+        "rut: last observation 2026-07-31 (2 sessions behind, tolerance 1)",
+        "spy: last observation 2026-07-31 (2 sessions behind, tolerance 1)",
+        "rsp: last observation 2026-07-31 (2 sessions behind, tolerance 1)",
+        "xlk: last observation 2026-07-31 (2 sessions behind, tolerance 1)",
+        "xlf: last observation 2026-07-31 (2 sessions behind, tolerance 1)",
+        "xle: last observation 2026-07-31 (2 sessions behind, tolerance 1)",
+        "xlv: last observation 2026-07-31 (2 sessions behind, tolerance 1)",
+        "xli: last observation 2026-07-31 (2 sessions behind, tolerance 1)",
+        "xlp: last observation 2026-07-31 (2 sessions behind, tolerance 1)",
+        "xlu: last observation 2026-07-31 (2 sessions behind, tolerance 1)",
+        "xly: last observation 2026-07-31 (2 sessions behind, tolerance 1)",
+        "xlb: last observation 2026-07-31 (2 sessions behind, tolerance 1)",
+        "xlre: last observation 2026-07-31 (2 sessions behind, tolerance 1)",
+        "xlc: last observation 2026-07-31 (2 sessions behind, tolerance 1)",
+        "vix: last observation 2026-07-31 (2 sessions behind, tolerance 1)",
+        "wti: last observation 2026-07-31 (2 sessions behind, tolerance 1)",
+        "brent: last observation 2026-07-31 (2 sessions behind, tolerance 1)",
+        "natgas: last observation 2026-07-31 (2 sessions behind, tolerance 1)",
+        "gold: last observation 2026-07-31 (2 sessions behind, tolerance 1)",
+        "silver: last observation 2026-07-31 (2 sessions behind, tolerance 1)",
+        "copper: last observation 2026-07-31 (2 sessions behind, tolerance 1)"
+      ],
+      "undefined": [],
+      "review": []
+    },
+    "regime": {
+      "id": null,
+      "name": "No clean signal",
+      "confidence": "none",
+      "intensity": 0.0,
+      "intensity_percentile": 0.0
+    },
+    "signals": [],
+    "confirmations": [],
+    "largest_moves": [],
+    "notes": [
+      "Core blocs unavailable: equity, rates, dollar, gold, energy. Not classified."
+    ]
+  },
+  "headline": "No brief for this session.",
+  "body": "The validation gate blocked publication.",
+  "generated": false,
+  "unverified_numbers": []
+}
