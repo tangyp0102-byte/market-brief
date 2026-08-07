@@ -13,18 +13,122 @@
       "id": null,
       "name": "No clean signal",
       "confidence": "none",
-      "intensity": 0.0,
-      "intensity_percentile": 0.0
+      "intensity": 1.09,
+      "intensity_percentile": 0.81
     },
-    "signals": [],
+    "signals": [
+      {
+        "bloc": "rates",
+        "instrument": "ust_2y",
+        "change": -6.0,
+        "unit": "bp",
+        "z": -1.25,
+        "percentile": 0.81,
+        "moved": true,
+        "quiet_vol": false
+      },
+      {
+        "bloc": "bills",
+        "instrument": "ust_3m",
+        "change": -3.0,
+        "unit": "bp",
+        "z": -1.22,
+        "percentile": 0.83,
+        "moved": true,
+        "quiet_vol": false
+      },
+      {
+        "bloc": "curve",
+        "instrument": "ust_2s10s",
+        "change": 2.0,
+        "unit": "bp",
+        "z": 0.66,
+        "percentile": 0.51,
+        "moved": false,
+        "quiet_vol": false
+      },
+      {
+        "bloc": "real_rates",
+        "instrument": "ust_real_10y",
+        "change": -3.0,
+        "unit": "bp",
+        "z": -1.05,
+        "percentile": 0.74,
+        "moved": true,
+        "quiet_vol": false
+      },
+      {
+        "bloc": "inflation",
+        "instrument": "be_10y",
+        "change": -1.0,
+        "unit": "bp",
+        "z": -0.3,
+        "percentile": 0.24,
+        "moved": false,
+        "quiet_vol": false
+      },
+      {
+        "bloc": "dollar",
+        "instrument": "dxy",
+        "change": 0.29,
+        "unit": "%",
+        "z": 0.92,
+        "percentile": 0.66,
+        "moved": false,
+        "quiet_vol": false
+      }
+    ],
     "confirmations": [],
-    "largest_moves": [],
+    "largest_moves": [
+      {
+        "name": "USD/CHF",
+        "change": 0.71,
+        "unit": "%",
+        "z": 1.65,
+        "quiet_vol": false
+      },
+      {
+        "name": "USD/JPY",
+        "change": 0.51,
+        "unit": "%",
+        "z": 1.33,
+        "quiet_vol": false
+      },
+      {
+        "name": "US 2Y Treasury",
+        "change": -6.0,
+        "unit": "bp",
+        "z": -1.25,
+        "quiet_vol": false
+      },
+      {
+        "name": "US 5Y TIPS Real Yield",
+        "change": -4.0,
+        "unit": "bp",
+        "z": -1.23,
+        "quiet_vol": false
+      },
+      {
+        "name": "US 3M Treasury",
+        "change": -3.0,
+        "unit": "bp",
+        "z": -1.22,
+        "quiet_vol": false
+      },
+      {
+        "name": "US 5Y Treasury",
+        "change": -5.0,
+        "unit": "bp",
+        "z": -1.09,
+        "quiet_vol": false
+      }
+    ],
     "notes": [
-      "Core blocs unavailable: equity, rates, dollar, gold, energy. Not classified."
+      "Core blocs unavailable: equity, gold, energy. Not classified."
     ]
   },
-  "headline": "No clean signal. Composite intensity 0.00, above 0% of sessions.",
-  "body": "No instruments recorded a change this session.\n\nNo cross-asset signature was identified. Most sessions are noise.",
+  "headline": "No clean signal. Composite intensity 1.09, above 81% of sessions.",
+  "body": "Largest moves by z-score:\n  USD/CHF: +0.71%  (z +1.65)\n  USD/JPY: +0.51%  (z +1.33)\n  US 2Y Treasury: -6.00bp  (z -1.25)\n  US 5Y TIPS Real Yield: -4.00bp  (z -1.23)\n  US 3M Treasury: -3.00bp  (z -1.22)\n  US 5Y Treasury: -5.00bp  (z -1.09)\n\nBlocs clearing their move threshold: rates, bills, real_rates.\n\nNo cross-asset signature was identified. Most sessions are noise.",
   "generated": false,
   "unverified_numbers": []
 }

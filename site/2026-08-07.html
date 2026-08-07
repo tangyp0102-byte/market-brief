@@ -406,14 +406,14 @@ footer {
   <div class="confidence">not classified</div>
 
   <div class="meter">
-    <div class="meter-track"><div class="meter-fill" style="width:2%"></div></div>
+    <div class="meter-track"><div class="meter-fill" style="width:81%"></div></div>
     <div class="meter-label">
-      <span>Intensity 0.00</span>
-      <span>more active than 0% of sessions</span>
+      <span>Intensity 1.09</span>
+      <span>more active than 81% of sessions</span>
     </div>
   </div>
 
-  <p class='note'>Core blocs unavailable: equity, rates, dollar, gold, energy. Not classified.</p>
+  <p class='note'>Core blocs unavailable: equity, gold, energy. Not classified.</p>
 
   <details class="archive">
 <summary>Browse sessions &mdash; 7 analysed</summary>
@@ -539,7 +539,7 @@ footer {
 </script>
 
   <p class="commentary-label">Commentary &mdash; not record</p>
-  <div class='commentary'><p>No instruments recorded a change this session.</p><p>No cross-asset signature was identified. Most sessions are noise.</p><p class='caveat'>Generated from the figures above without a language model.</p></div>
+  <div class='commentary'><p>Largest moves by z-score:</p><p>USD/CHF: +0.71%  (z +1.65)</p><p>USD/JPY: +0.51%  (z +1.33)</p><p>US 2Y Treasury: -6.00bp  (z -1.25)</p><p>US 5Y TIPS Real Yield: -4.00bp  (z -1.23)</p><p>US 3M Treasury: -3.00bp  (z -1.22)</p><p>US 5Y Treasury: -5.00bp  (z -1.09)</p><p>Blocs clearing their move threshold: rates, bills, real_rates.</p><p>No cross-asset signature was identified. Most sessions are noise.</p><p class='caveat'>Generated from the figures above without a language model.</p></div>
 
   <div class="boundary">
     <hr class="boundary-rule">
@@ -547,14 +547,14 @@ footer {
   </div>
 
   <h2>Signals &mdash; one per bloc</h2>
-  <p class='note'>No signals available for this session.</p>
+  <table><thead><tr><th>Bloc</th><th class='hide-narrow'>Via</th><th>Change</th><th>Z</th><th>Pctile</th></tr></thead><tbody><tr><td class='name'>Nominal yields<span class="tag moved">moved</span></td><td class='num flat hide-narrow'>ust_2y</td><td class="num fall">-6.0bp</td><td class="num">-1.25</td><td class='num flat'>81%</td></tr><tr><td class='name'>T-bills<span class="tag moved">moved</span></td><td class='num flat hide-narrow'>ust_3m</td><td class="num fall">-3.0bp</td><td class="num">-1.22</td><td class='num flat'>83%</td></tr><tr><td class='name'>Curve slope</td><td class='num flat hide-narrow'>ust_2s10s</td><td class="num rise">+2.0bp</td><td class="num">+0.66</td><td class='num flat'>51%</td></tr><tr><td class='name'>Real yields<span class="tag moved">moved</span></td><td class='num flat hide-narrow'>ust_real_10y</td><td class="num fall">-3.0bp</td><td class="num">-1.05</td><td class='num flat'>74%</td></tr><tr><td class='name'>Breakevens</td><td class='num flat hide-narrow'>be_10y</td><td class="num fall">-1.0bp</td><td class="num">-0.30</td><td class='num flat'>24%</td></tr><tr><td class='name'>US dollar</td><td class='num flat hide-narrow'>dxy</td><td class="num rise">+0.29%</td><td class="num">+0.92</td><td class='num flat'>66%</td></tr></tbody></table>
   
 
-  
+  <h2>Rates</h2><table><thead><tr><th>Instrument</th><th>Level</th><th>Change</th><th>Z</th></tr></thead><tbody><tr><td class='name'><a href="https://www.tradingview.com/chart/?symbol=TVC%3AUS10Y" target="_blank" rel="noopener">US 10Y Treasury</a></td><td class='num flat'>4.65</td><td class="num fall">-4.0bp</td><td class="num">-0.99</td></tr><tr><td class='name'><a href="https://www.tradingview.com/chart/?symbol=TVC%3AUS02Y" target="_blank" rel="noopener">US 2Y Treasury</a></td><td class='num flat'>4.19</td><td class="num fall">-6.0bp</td><td class="num">-1.25</td></tr><tr><td class='name'><a href="https://www.tradingview.com/chart/?symbol=TVC%3AUS30Y" target="_blank" rel="noopener">US 30Y Treasury</a></td><td class='num flat'>5.19</td><td class="num fall">-3.0bp</td><td class="num">-0.89</td></tr><tr><td class='name'><a href="https://www.tradingview.com/chart/?symbol=TVC%3AUS03MY" target="_blank" rel="noopener">US 3M Treasury</a></td><td class='num flat'>3.87</td><td class="num fall">-3.0bp</td><td class="num">-1.22</td></tr><tr><td class='name'><a href="https://www.tradingview.com/chart/?symbol=TVC%3AUS05Y" target="_blank" rel="noopener">US 5Y Treasury</a></td><td class='num flat'>4.35</td><td class="num fall">-5.0bp</td><td class="num">-1.09</td></tr><tr><td class='name'><a href="https://www.tradingview.com/chart/?symbol=FRED%3ADFII10" target="_blank" rel="noopener">US 10Y TIPS Real Yield</a></td><td class='num flat'>2.40</td><td class="num fall">-3.0bp</td><td class="num">-1.05</td></tr><tr><td class='name'><a href="https://www.tradingview.com/chart/?symbol=FRED%3ADFII30" target="_blank" rel="noopener">US 30Y TIPS Real Yield</a></td><td class='num flat'>2.96</td><td class="num fall">-2.0bp</td><td class="num">-0.83</td></tr><tr><td class='name'><a href="https://www.tradingview.com/chart/?symbol=FRED%3ADFII5" target="_blank" rel="noopener">US 5Y TIPS Real Yield</a></td><td class='num flat'>2.13</td><td class="num fall">-4.0bp</td><td class="num">-1.23</td></tr><tr><td class='name'>10y Inflation Breakeven<span class="tag">derived</span></td><td class='num flat'>225.0</td><td class="num fall">-1.0bp</td><td class="num">-0.30</td></tr><tr><td class='name'>5y Inflation Breakeven<span class="tag">derived</span></td><td class='num flat'>222.0</td><td class="num fall">-1.0bp</td><td class="num">-0.09</td></tr><tr><td class='name'>2s10s Curve Slope<span class="tag">derived</span></td><td class='num flat'>46.0</td><td class="num rise">+2.0bp</td><td class="num">+0.66</td></tr><tr><td class='name'>3m10y Curve Slope<span class="tag">derived</span></td><td class='num flat'>78.0</td><td class="num fall">-1.0bp</td><td class="num">-0.23</td></tr><tr><td class='name'>5s30s Curve Slope<span class="tag">derived</span></td><td class='num flat'>84.0</td><td class="num rise">+2.0bp</td><td class="num">+0.70</td></tr></tbody></table><h2>Volatility</h2><table><thead><tr><th>Instrument</th><th>Level</th><th>Change</th><th>Z</th></tr></thead><tbody><tr><td class='name'><a href="https://www.tradingview.com/chart/?symbol=CBOE%3AVIX3M" target="_blank" rel="noopener">CBOE 3-Month Volatility Index</a></td><td class='num flat'>18.72</td><td class="num rise">+0.03pt</td><td class="num">+0.09</td></tr></tbody></table><h2>Foreign exchange</h2><table><thead><tr><th>Instrument</th><th>Level</th><th>Change</th><th>Z</th></tr></thead><tbody><tr><td class='name'><a href="https://www.tradingview.com/chart/?symbol=FX%3AAUDUSD" target="_blank" rel="noopener">AUD/USD</a></td><td class='num flat'>0.7033</td><td class="num fall">-0.34%</td><td class="num">-0.63</td></tr><tr><td class='name'><a href="https://www.tradingview.com/chart/?symbol=FX%3AEURUSD" target="_blank" rel="noopener">EUR/USD</a></td><td class='num flat'>1.15</td><td class="num fall">-0.28%</td><td class="num">-0.88</td></tr><tr><td class='name'><a href="https://www.tradingview.com/chart/?symbol=FX%3AGBPUSD" target="_blank" rel="noopener">GBP/USD</a></td><td class='num flat'>1.35</td><td class="num fall">-0.11%</td><td class="num">-0.25</td></tr><tr><td class='name'><a href="https://www.tradingview.com/chart/?symbol=FX%3AUSDCAD" target="_blank" rel="noopener">USD/CAD</a></td><td class='num flat'>1.40</td><td class="num rise">+0.02%</td><td class="num">-0.05</td></tr><tr><td class='name'><a href="https://www.tradingview.com/chart/?symbol=FX%3AUSDCHF" target="_blank" rel="noopener">USD/CHF</a></td><td class='num flat'>0.8124</td><td class="num rise">+0.71%</td><td class="num">+1.65</td></tr><tr><td class='name'><a href="https://www.tradingview.com/chart/?symbol=FX_IDC%3AUSDCNY" target="_blank" rel="noopener">USD/CNY (onshore, PBoC-managed)</a></td><td class='num flat'>6.75</td><td class="num fall">-0.01%</td><td class="num">-0.03</td></tr><tr><td class='name'><a href="https://www.tradingview.com/chart/?symbol=FX%3AUSDJPY" target="_blank" rel="noopener">USD/JPY</a></td><td class='num flat'>158.41</td><td class="num rise">+0.51%</td><td class="num">+1.33</td></tr><tr><td class='name'><a href="https://www.tradingview.com/chart/?symbol=FX_IDC%3AUSDMXN" target="_blank" rel="noopener">USD/MXN</a></td><td class='num flat'>17.20</td><td class="num fall">-0.16%</td><td class="num">-0.39</td></tr><tr><td class='name'><a href="https://www.tradingview.com/chart/?symbol=FX%3AUSDSEK" target="_blank" rel="noopener">USD/SEK</a></td><td class='num flat'>9.51</td><td class="num rise">+0.33%</td><td class="num">+0.56</td></tr><tr><td class='name'>US Dollar Index (reconstructed)<span class="tag">derived</span></td><td class='num flat'>99.94</td><td class="num rise">+0.29%</td><td class="num">+0.92</td></tr></tbody></table>
 
   <footer>
     <span>Instrument names link to TradingView.</span>
-    <span>Generated 2026-08-07 05:02 UTC</span>
+    <span>Generated 2026-08-07 23:51 UTC</span>
   </footer>
 
 </main>
