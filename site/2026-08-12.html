@@ -1,0 +1,562 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Market brief &middot; 2026-08-12</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Newsreader:opsz,wght@6..72,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ground: #e9eaec;
+  --panel: #fcfcfd;
+  --ink: #14161a;
+  --muted: #767c86;
+  --hair: #d2d5da;
+  --rise: #1b6b54;
+  --fall: #9e3524;
+  --provisional: #6e6480;
+  --provisional-bg: #edeaf1;
+}
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--ground);
+  color: var(--ink);
+  font-family: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  font-size: 14px;
+  line-height: 1.55;
+  font-variant-numeric: tabular-nums;
+}
+.sheet {
+  max-width: 940px;
+  margin: 0 auto;
+  padding: 40px 24px 80px;
+}
+.eyebrow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 18px;
+  align-items: baseline;
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+  border-bottom: 1px solid var(--hair);
+  padding-bottom: 12px;
+}
+.eyebrow .date { color: var(--ink); font-weight: 600; }
+.verdict {
+  margin: 34px 0 4px;
+  font-family: Newsreader, Georgia, "Times New Roman", serif;
+  font-size: clamp(28px, 5vw, 44px);
+  line-height: 1.12;
+  font-weight: 400;
+  letter-spacing: -0.015em;
+}
+.confidence {
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.meter { margin: 26px 0 8px; }
+.meter-track {
+  position: relative;
+  height: 3px;
+  background: var(--hair);
+}
+.meter-fill { position: absolute; inset: 0 auto 0 0; background: var(--ink); }
+.meter-label {
+  display: flex;
+  justify-content: space-between;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-top: 8px;
+}
+h2 {
+  margin: 46px 0 14px;
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: var(--muted);
+}
+table { width: 100%; border-collapse: collapse; }
+th {
+  text-align: right;
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-weight: 500;
+  color: var(--muted);
+  padding: 0 0 6px;
+  border-bottom: 1px solid var(--hair);
+}
+th:first-child, td:first-child { text-align: left; }
+td {
+  padding: 5px 0;
+  border-bottom: 1px solid rgba(210, 213, 218, 0.5);
+  white-space: nowrap;
+}
+td.name { white-space: normal; padding-right: 12px; }
+td.num { text-align: right; padding-left: 14px; }
+.rise { color: var(--rise); }
+.fall { color: var(--fall); }
+.flat { color: var(--muted); }
+.undef { color: var(--muted); font-style: italic; }
+a { color: inherit; text-decoration: none; border-bottom: 1px solid var(--hair); }
+a:hover { border-bottom-color: var(--ink); }
+a:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+.tag {
+  display: inline-block;
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 1px 5px;
+  margin-left: 6px;
+  border: 1px solid var(--hair);
+  color: var(--muted);
+}
+.moved { border-color: var(--ink); color: var(--ink); }
+.holds { color: var(--rise); }
+.breaks { color: var(--fall); }
+.note {
+  margin: 12px 0 0;
+  padding-left: 14px;
+  border-left: 2px solid var(--hair);
+  color: var(--muted);
+  font-size: 13px;
+}
+.note.conflict { border-left-color: var(--fall); color: var(--fall); }
+
+/* Signature: the boundary between record and commentary. */
+.boundary { margin: 52px 0 0; }
+.boundary-rule {
+  border: 0;
+  border-top: 1px solid var(--ink);
+  margin: 0;
+}
+.boundary-label {
+  margin-top: -0.72em;
+  text-align: center;
+}
+.boundary-label span {
+  background: var(--ground);
+  padding: 0 14px;
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ink);
+}
+.commentary-label {
+  margin: 34px 0 0;
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--provisional);
+}
+.commentary {
+  margin-top: 8px;
+  padding: 26px 28px;
+  background: var(--provisional-bg);
+  color: var(--provisional);
+}
+.commentary p { margin: 0 0 15px; }
+.commentary p:last-child { margin-bottom: 0; }
+.commentary .section {
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--provisional);
+  opacity: 0.75;
+  margin-bottom: 4px;
+}
+.commentary .caveat {
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 1px solid rgba(110, 100, 128, 0.28);
+  font-size: 12px;
+  opacity: 0.85;
+}
+.withheld {
+  margin-top: 34px;
+  padding: 20px 24px;
+  border: 1px solid var(--fall);
+  color: var(--fall);
+  font-size: 13px;
+}
+.sessions {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+  margin-top: 18px;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.sessions a { border-bottom: none; color: var(--muted); }
+.sessions a:hover { color: var(--ink); }
+.sessions .spacer { flex: 1; }
+
+details.archive { margin-top: 30px; }
+details.archive summary {
+  cursor: pointer;
+  list-style: none;
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+  padding: 10px 0;
+  border-top: 1px solid var(--hair);
+  border-bottom: 1px solid var(--hair);
+}
+details.archive summary::-webkit-details-marker { display: none; }
+details.archive summary::after { content: " +"; }
+details[open].archive summary::after { content: " −"; }
+details.archive summary:hover { color: var(--ink); }
+details.archive summary:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+.months {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 22px 30px;
+  padding: 22px 0 6px;
+}
+.months h3 {
+  margin: 0 0 8px;
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: var(--muted);
+}
+.months a, .months span.current {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 3px 0;
+  border-bottom: 1px solid rgba(210, 213, 218, 0.45);
+  font-size: 12px;
+}
+.months a { color: var(--ink); }
+.months a:hover { border-bottom-color: var(--ink); }
+.months span.current { color: var(--muted); font-style: italic; }
+.months .label { color: var(--muted); font-size: 11px; text-align: right; }
+.months a.classified .label { color: var(--ink); }
+
+
+/* Calendar picker. Needs script, unlike everything else on this page: month
+   navigation and the "not yet generated" panel cannot be expressed in static
+   markup. The data is inlined rather than fetched, so it still works when the
+   file is opened straight from disk - fetch() fails on file:// URLs. */
+.cal { padding: 20px 0 4px; }
+.cal-head {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 12px;
+}
+.cal-head button {
+  font: inherit;
+  font-size: 13px;
+  background: none;
+  border: 1px solid var(--hair);
+  color: var(--muted);
+  padding: 2px 9px;
+  cursor: pointer;
+}
+.cal-head button:hover:not(:disabled) { border-color: var(--ink); color: var(--ink); }
+.cal-head button:disabled { opacity: 0.3; cursor: default; }
+.cal-head button:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+.cal-month {
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  min-width: 150px;
+}
+.cal-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 2px;
+  max-width: 420px;
+}
+.cal-grid .dow {
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  text-align: center;
+  padding-bottom: 4px;
+}
+.cal-grid button, .cal-grid .pad {
+  font: inherit;
+  font-size: 12px;
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid transparent;
+  background: none;
+  color: var(--muted);
+  cursor: default;
+  padding: 0;
+}
+.cal-grid button.closed { color: var(--hair); }
+.cal-grid button.missing { color: var(--muted); cursor: pointer; }
+.cal-grid button.missing:hover { border-color: var(--hair); }
+.cal-grid button.has {
+  color: var(--ink);
+  background: #dfe1e5;
+  cursor: pointer;
+  font-weight: 500;
+}
+.cal-grid button.has:hover { background: var(--ink); color: var(--panel); }
+.cal-grid button.classified { box-shadow: inset 0 -2px 0 var(--ink); }
+.cal-grid button.current { outline: 1px solid var(--ink); outline-offset: -1px; }
+.cal-grid button:focus-visible { outline: 2px solid var(--ink); outline-offset: 1px; }
+.cal-key {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 16px;
+  margin-top: 14px;
+  font-size: 10px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.cal-key i { display: inline-block; width: 9px; height: 9px; margin-right: 5px; vertical-align: -1px; }
+.cal-key .k-has { background: #dfe1e5; }
+.cal-key .k-cls { background: #dfe1e5; box-shadow: inset 0 -2px 0 var(--ink); }
+.cal-key .k-non { border: 1px solid var(--hair); }
+.cal-panel {
+  margin-top: 16px;
+  padding: 16px 18px;
+  border: 1px solid var(--hair);
+  font-size: 13px;
+  max-width: 560px;
+}
+.cal-panel.hidden { display: none; }
+.cal-panel h4 {
+  margin: 0 0 8px;
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+.cal-panel p { margin: 0 0 10px; color: var(--muted); }
+.cal-panel code {
+  display: block;
+  padding: 9px 11px;
+  background: var(--ground);
+  font-size: 12px;
+  overflow-x: auto;
+  color: var(--ink);
+}
+.cal-panel .go {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 5px 12px;
+  border: 1px solid var(--ink);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.cal-panel .go:hover { background: var(--ink); color: var(--panel); }
+
+footer {
+  margin-top: 56px;
+  padding-top: 16px;
+  border-top: 1px solid var(--hair);
+  font-size: 11px;
+  color: var(--muted);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 20px;
+  justify-content: space-between;
+}
+@media (max-width: 620px) {
+  .sheet { padding: 26px 16px 56px; }
+  body { font-size: 13px; }
+  td.num { padding-left: 8px; }
+  .hide-narrow { display: none; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .sheet > * { animation: rise 0.4s ease-out both; }
+  @keyframes rise { from { opacity: 0; transform: translateY(4px); } }
+}
+</style>
+</head>
+<body>
+<main class="sheet">
+
+  <nav class="sessions"><a href="2026-08-10.html">&larr; 2026-08-10</a><span class="spacer"></span><a href="index.html">Latest &rarr;</a></nav>
+
+  <div class="eyebrow">
+    <span class="date">2026-08-12</span>
+    <span>gate pass</span>
+    <span>z-window 60 sessions</span>
+  </div>
+
+  <h1 class="verdict">No clean signal</h1>
+  <div class="confidence">not classified</div>
+
+  <div class="meter">
+    <div class="meter-track"><div class="meter-fill" style="width:2%"></div></div>
+    <div class="meter-label">
+      <span>Intensity 0.00</span>
+      <span>more active than 0% of sessions</span>
+    </div>
+  </div>
+
+  <p class='note'>Core blocs unavailable: equity, rates, dollar, gold, energy. Not classified.</p>
+
+  <details class="archive">
+<summary>Browse sessions &mdash; 9 analysed</summary>
+<div class="cal">
+  <div class="cal-head">
+    <button type="button" id="cal-prev" aria-label="Previous month">&larr;</button>
+    <span class="cal-month" id="cal-month"></span>
+    <button type="button" id="cal-next" aria-label="Next month">&rarr;</button>
+  </div>
+  <div class="cal-grid" id="cal-grid"></div>
+  <div class="cal-key">
+    <span><i class="k-has"></i>brief available</span>
+    <span><i class="k-cls"></i>regime identified</span>
+    <span><i class="k-non"></i>market closed</span>
+  </div>
+  <div class="cal-panel hidden" id="cal-panel"></div>
+</div>
+</details>
+<script type="application/json" id="cal-data">{"available": {"2026-08-12": {"regime": null, "name": "No clean signal"}, "2026-08-10": {"regime": null, "name": "No clean signal"}, "2026-08-07": {"regime": null, "name": "No clean signal"}, "2026-08-06": {"regime": null, "name": "No clean signal"}, "2026-08-05": {"regime": null, "name": "No clean signal"}, "2026-07-31": {"regime": null, "name": "No clean signal"}, "2026-07-29": {"regime": null, "name": "No clean signal (closest: Hawkish repricing)"}, "2025-10-10": {"regime": "growth_scare", "name": "Growth scare / flight to quality"}, "2025-04-01": {"regime": null, "name": "No clean signal"}}, "holidays": ["2019-01-01", "2019-01-21", "2019-02-18", "2019-04-19", "2019-05-27", "2019-07-04", "2019-09-02", "2019-11-28", "2019-12-25", "2020-01-01", "2020-01-20", "2020-02-17", "2020-04-10", "2020-05-25", "2020-07-03", "2020-09-07", "2020-11-26", "2020-12-25", "2021-01-01", "2021-01-18", "2021-02-15", "2021-04-02", "2021-05-31", "2021-07-05", "2021-09-06", "2021-11-25", "2021-12-24", "2022-01-17", "2022-02-21", "2022-04-15", "2022-05-30", "2022-06-20", "2022-07-04", "2022-09-05", "2022-11-24", "2022-12-26", "2023-01-02", "2023-01-16", "2023-02-20", "2023-04-07", "2023-05-29", "2023-06-19", "2023-07-04", "2023-09-04", "2023-11-23", "2023-12-25", "2024-01-01", "2024-01-15", "2024-02-19", "2024-03-29", "2024-05-27", "2024-06-19", "2024-07-04", "2024-09-02", "2024-11-28", "2024-12-25", "2025-01-01", "2025-01-09", "2025-01-20", "2025-02-17", "2025-04-18", "2025-05-26", "2025-06-19", "2025-07-04", "2025-09-01", "2025-11-27", "2025-12-25", "2026-01-01", "2026-01-19", "2026-02-16", "2026-04-03", "2026-05-25", "2026-06-19", "2026-07-03", "2026-09-07", "2026-11-26", "2026-12-25", "2027-01-01", "2027-01-18", "2027-02-15", "2027-03-26", "2027-05-31", "2027-06-18", "2027-07-05", "2027-09-06", "2027-11-25", "2027-12-24", "2028-01-17", "2028-02-21", "2028-04-14", "2028-05-29", "2028-06-19", "2028-07-04", "2028-09-04", "2028-11-23", "2028-12-25"], "current": "2026-08-12", "repo": "tangyp0102-byte/market-brief"}</script>
+<script>
+(function () {
+  var D = JSON.parse(document.getElementById('cal-data').textContent);
+  var have = D.available, shut = new Set(D.holidays);
+  var dates = Object.keys(have).sort();
+  var lo = dates.length ? dates[0].slice(0, 7) : D.current.slice(0, 7);
+  var hi = D.current.slice(0, 7);
+  if (dates.length && dates[dates.length - 1].slice(0, 7) > hi) {
+    hi = dates[dates.length - 1].slice(0, 7);
+  }
+  var view = D.current.slice(0, 7);
+
+  var grid = document.getElementById('cal-grid');
+  var label = document.getElementById('cal-month');
+  var prev = document.getElementById('cal-prev');
+  var next = document.getElementById('cal-next');
+  var panel = document.getElementById('cal-panel');
+  var NAMES = ['January','February','March','April','May','June','July',
+               'August','September','October','November','December'];
+
+  function shift(ym, by) {
+    var y = +ym.slice(0, 4), m = +ym.slice(5, 7) - 1 + by;
+    y += Math.floor(m / 12); m = ((m % 12) + 12) % 12;
+    return y + '-' + String(m + 1).padStart(2, '0');
+  }
+
+  function draw() {
+    var y = +view.slice(0, 4), m = +view.slice(5, 7) - 1;
+    label.textContent = NAMES[m] + ' ' + y;
+    prev.disabled = view <= lo;
+    next.disabled = view >= hi;
+
+    grid.innerHTML = '';
+    ['M','T','W','T','F','S','S'].forEach(function (d) {
+      var e = document.createElement('div');
+      e.className = 'dow'; e.textContent = d; grid.appendChild(e);
+    });
+
+    var first = new Date(Date.UTC(y, m, 1));
+    var lead = (first.getUTCDay() + 6) % 7;          // Monday-first
+    for (var i = 0; i < lead; i++) {
+      var pad = document.createElement('div');
+      pad.className = 'pad'; grid.appendChild(pad);
+    }
+
+    var days = new Date(Date.UTC(y, m + 1, 0)).getUTCDate();
+    for (var d = 1; d <= days; d++) {
+      var iso = view + '-' + String(d).padStart(2, '0');
+      var wd = new Date(iso + 'T00:00:00Z').getUTCDay();
+      var closed = wd === 0 || wd === 6 || shut.has(iso);
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.textContent = d;
+      b.dataset.iso = iso;
+
+      if (iso in have) {
+        b.className = 'has' + (have[iso].regime ? ' classified' : '');
+        b.title = iso + ' - ' + (have[iso].name || 'brief available');
+      } else if (closed) {
+        b.className = 'closed';
+        b.disabled = true;
+        b.title = iso + ' - market closed';
+      } else {
+        b.className = 'missing';
+        b.title = iso + ' - not yet analysed';
+      }
+      if (iso === D.current) { b.className += ' current'; }
+      grid.appendChild(b);
+    }
+  }
+
+  grid.addEventListener('click', function (ev) {
+    var b = ev.target.closest('button');
+    if (!b || b.disabled) return;
+    var iso = b.dataset.iso;
+    if (iso === D.current) return;
+    if (iso in have) { location.href = iso + '.html'; return; }
+    showMissing(iso);
+  });
+
+  function showMissing(iso) {
+    var run = D.repo
+      ? '<a class="go" href="https://github.com/' + D.repo +
+        '/actions/workflows/daily.yml" target="_blank" rel="noopener">' +
+        'Open GitHub Actions &rarr;</a>'
+      : '';
+    panel.innerHTML =
+      '<h4>' + iso + ' &mdash; not yet analysed</h4>' +
+      '<p>No brief exists for this session. Generating one runs the pipeline, ' +
+      'which cannot happen from this page: publishing a token that could ' +
+      'trigger it would let anyone with the link run workflows on the ' +
+      'repository.</p>' +
+      '<p>Run it on GitHub with <strong>session</strong> set to ' + iso +
+      ' and <strong>force</strong> ticked, or locally:</p>' +
+      '<code>python -m mb.daily --session ' + iso + ' --force</code>' + run;
+    panel.classList.remove('hidden');
+    panel.scrollIntoView({ block: 'nearest' });
+  }
+
+  prev.addEventListener('click', function () { view = shift(view, -1); draw(); });
+  next.addEventListener('click', function () { view = shift(view, 1); draw(); });
+  draw();
+})();
+</script>
+
+  <p class="commentary-label">Commentary &mdash; not record</p>
+  <div class='commentary'><p>No instruments recorded a change this session.</p><p>No cross-asset signature was identified. Most sessions are noise.</p><p class='caveat'>Generated from the figures above without a language model.</p></div>
+
+  <div class="boundary">
+    <hr class="boundary-rule">
+    <div class="boundary-label"><span>Below: the record</span></div>
+  </div>
+
+  <h2>Signals &mdash; one per bloc</h2>
+  <p class='note'>No signals available for this session.</p>
+  
+
+  
+
+  <footer>
+    <span>Instrument names link to TradingView.</span>
+    <span>Generated 2026-08-12 00:09 UTC</span>
+  </footer>
+
+</main>
+</body>
+</html>

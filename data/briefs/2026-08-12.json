@@ -1,0 +1,30 @@
+{
+  "factsheet": {
+    "session": "2026-08-12",
+    "gate": {
+      "verdict": "pass",
+      "half_session": false,
+      "missing": [],
+      "stale": [],
+      "undefined": [],
+      "review": []
+    },
+    "regime": {
+      "id": null,
+      "name": "No clean signal",
+      "confidence": "none",
+      "intensity": 0.0,
+      "intensity_percentile": 0.0
+    },
+    "signals": [],
+    "confirmations": [],
+    "largest_moves": [],
+    "notes": [
+      "Core blocs unavailable: equity, rates, dollar, gold, energy. Not classified."
+    ]
+  },
+  "headline": "No clean signal. Composite intensity 0.00, above 0% of sessions.",
+  "body": "No instruments recorded a change this session.\n\nNo cross-asset signature was identified. Most sessions are noise.",
+  "generated": false,
+  "unverified_numbers": []
+}
