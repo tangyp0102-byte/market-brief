@@ -1,0 +1,134 @@
+{
+  "factsheet": {
+    "session": "2026-08-17",
+    "gate": {
+      "verdict": "pass",
+      "half_session": false,
+      "missing": [],
+      "stale": [],
+      "undefined": [],
+      "review": []
+    },
+    "regime": {
+      "id": null,
+      "name": "No clean signal",
+      "confidence": "none",
+      "intensity": 1.4,
+      "intensity_percentile": 0.93
+    },
+    "signals": [
+      {
+        "bloc": "rates",
+        "instrument": "ust_30y",
+        "change": 6.0,
+        "unit": "bp",
+        "z": 1.59,
+        "percentile": 0.89,
+        "moved": true,
+        "quiet_vol": false
+      },
+      {
+        "bloc": "bills",
+        "instrument": "ust_3m",
+        "change": 1.0,
+        "unit": "bp",
+        "z": 0.25,
+        "percentile": 0.36,
+        "moved": false,
+        "quiet_vol": false
+      },
+      {
+        "bloc": "curve",
+        "instrument": "ust_2s10s",
+        "change": 2.0,
+        "unit": "bp",
+        "z": 0.67,
+        "percentile": 0.52,
+        "moved": false,
+        "quiet_vol": false
+      },
+      {
+        "bloc": "real_rates",
+        "instrument": "ust_real_10y",
+        "change": 3.0,
+        "unit": "bp",
+        "z": 0.77,
+        "percentile": 0.59,
+        "moved": false,
+        "quiet_vol": false
+      },
+      {
+        "bloc": "inflation",
+        "instrument": "be_10y",
+        "change": 1.0,
+        "unit": "bp",
+        "z": 0.6,
+        "percentile": 0.49,
+        "moved": false,
+        "quiet_vol": false
+      },
+      {
+        "bloc": "dollar",
+        "instrument": "dxy",
+        "change": -0.32,
+        "unit": "%",
+        "z": -1.2,
+        "percentile": 0.78,
+        "moved": true,
+        "quiet_vol": false
+      }
+    ],
+    "confirmations": [],
+    "largest_moves": [
+      {
+        "name": "US 30Y TIPS Real Yield",
+        "change": 6.0,
+        "unit": "bp",
+        "z": 2.02,
+        "quiet_vol": false
+      },
+      {
+        "name": "USD/CAD",
+        "change": -0.4,
+        "unit": "%",
+        "z": -1.74,
+        "quiet_vol": false
+      },
+      {
+        "name": "US 30Y Treasury",
+        "change": 6.0,
+        "unit": "bp",
+        "z": 1.59,
+        "quiet_vol": false
+      },
+      {
+        "name": "5s30s Curve Slope",
+        "change": 4.0,
+        "unit": "bp",
+        "z": 1.28,
+        "quiet_vol": false
+      },
+      {
+        "name": "EUR/USD",
+        "change": 0.33,
+        "unit": "%",
+        "z": 1.23,
+        "quiet_vol": false
+      },
+      {
+        "name": "US Dollar Index (reconstructed)",
+        "change": -0.32,
+        "unit": "%",
+        "z": -1.2,
+        "quiet_vol": false
+      }
+    ],
+    "notes": [
+      "Core blocs unavailable: equity, gold, energy. Not classified."
+    ]
+  },
+  "headline": "No clean signal. Composite intensity 1.40, above 93% of sessions.",
+  "body": "Largest moves by z-score:\n  US 30Y TIPS Real Yield: +6.00bp  (z +2.02)\n  USD/CAD: -0.40%  (z -1.74)\n  US 30Y Treasury: +6.00bp  (z +1.59)\n  5s30s Curve Slope: +4.00bp  (z +1.28)\n  EUR/USD: +0.33%  (z +1.23)\n  US Dollar Index (reconstructed): -0.32%  (z -1.20)\n\nBlocs clearing their move threshold: rates, dollar.\n\nNo cross-asset signature was identified. Most sessions are noise.",
+  "generated": false,
+  "unverified_numbers": []
+}
