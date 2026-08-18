@@ -1,0 +1,94 @@
+{
+  "factsheet": {
+    "session": "2026-08-18",
+    "gate": {
+      "verdict": "pass",
+      "half_session": false,
+      "missing": [],
+      "stale": [],
+      "undefined": [],
+      "review": []
+    },
+    "regime": {
+      "id": null,
+      "name": "No clean signal",
+      "confidence": "none",
+      "intensity": 0.22,
+      "intensity_percentile": 0.02
+    },
+    "signals": [
+      {
+        "bloc": "real_rates",
+        "instrument": "ust_real_10y",
+        "change": -3.0,
+        "unit": "bp",
+        "z": -1.05,
+        "percentile": 0.74,
+        "moved": true,
+        "quiet_vol": false
+      },
+      {
+        "bloc": "dollar",
+        "instrument": "dxy",
+        "change": -0.05,
+        "unit": "%",
+        "z": -0.22,
+        "percentile": 0.2,
+        "moved": false,
+        "quiet_vol": false
+      }
+    ],
+    "confirmations": [],
+    "largest_moves": [
+      {
+        "name": "US 30Y TIPS Real Yield",
+        "change": -3.0,
+        "unit": "bp",
+        "z": -1.18,
+        "quiet_vol": false
+      },
+      {
+        "name": "US 10Y TIPS Real Yield",
+        "change": -3.0,
+        "unit": "bp",
+        "z": -1.05,
+        "quiet_vol": false
+      },
+      {
+        "name": "US 5Y TIPS Real Yield",
+        "change": -3.0,
+        "unit": "bp",
+        "z": -0.94,
+        "quiet_vol": false
+      },
+      {
+        "name": "AUD/USD",
+        "change": 0.32,
+        "unit": "%",
+        "z": 0.82,
+        "quiet_vol": false
+      },
+      {
+        "name": "USD/CHF",
+        "change": -0.25,
+        "unit": "%",
+        "z": -0.81,
+        "quiet_vol": false
+      },
+      {
+        "name": "USD/CNY (onshore, PBoC-managed)",
+        "change": -0.04,
+        "unit": "%",
+        "z": -0.34,
+        "quiet_vol": true
+      }
+    ],
+    "notes": [
+      "Core blocs unavailable: equity, rates, gold, energy. Not classified."
+    ]
+  },
+  "headline": "No clean signal. Composite intensity 0.22, above 2% of sessions.",
+  "body": "Largest moves by z-score:\n  US 30Y TIPS Real Yield: -3.00bp  (z -1.18)\n  US 10Y TIPS Real Yield: -3.00bp  (z -1.05)\n  US 5Y TIPS Real Yield: -3.00bp  (z -0.94)\n  AUD/USD: +0.32%  (z +0.82)\n  USD/CHF: -0.25%  (z -0.81)\n  USD/CNY (onshore, PBoC-managed): -0.04%  (z -0.34)  [quiet vol period]\n\nBlocs clearing their move threshold: real_rates.\n\nNo cross-asset signature was identified. Most sessions are noise.",
+  "generated": false,
+  "unverified_numbers": []
+}
