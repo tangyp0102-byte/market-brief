@@ -1,0 +1,94 @@
+{
+  "factsheet": {
+    "session": "2026-08-19",
+    "gate": {
+      "verdict": "pass",
+      "half_session": false,
+      "missing": [],
+      "stale": [],
+      "undefined": [],
+      "review": []
+    },
+    "regime": {
+      "id": null,
+      "name": "No clean signal",
+      "confidence": "none",
+      "intensity": 0.27,
+      "intensity_percentile": 0.04
+    },
+    "signals": [
+      {
+        "bloc": "real_rates",
+        "instrument": "ust_real_10y",
+        "change": -6.0,
+        "unit": "bp",
+        "z": -1.92,
+        "percentile": 0.94,
+        "moved": true,
+        "quiet_vol": false
+      },
+      {
+        "bloc": "dollar",
+        "instrument": "dxy",
+        "change": 0.08,
+        "unit": "%",
+        "z": 0.27,
+        "percentile": 0.24,
+        "moved": false,
+        "quiet_vol": false
+      }
+    ],
+    "confirmations": [],
+    "largest_moves": [
+      {
+        "name": "US 30Y TIPS Real Yield",
+        "change": -9.0,
+        "unit": "bp",
+        "z": -3.21,
+        "quiet_vol": false
+      },
+      {
+        "name": "US 10Y TIPS Real Yield",
+        "change": -6.0,
+        "unit": "bp",
+        "z": -1.92,
+        "quiet_vol": false
+      },
+      {
+        "name": "US 5Y TIPS Real Yield",
+        "change": -3.0,
+        "unit": "bp",
+        "z": -0.91,
+        "quiet_vol": false
+      },
+      {
+        "name": "CBOE 3-Month Volatility Index",
+        "change": -0.7,
+        "unit": "pt",
+        "z": -0.89,
+        "quiet_vol": false
+      },
+      {
+        "name": "AUD/USD",
+        "change": -0.38,
+        "unit": "%",
+        "z": -0.87,
+        "quiet_vol": false
+      },
+      {
+        "name": "USD/CAD",
+        "change": 0.2,
+        "unit": "%",
+        "z": 0.8,
+        "quiet_vol": false
+      }
+    ],
+    "notes": [
+      "Core blocs unavailable: equity, rates, gold, energy. Not classified."
+    ]
+  },
+  "headline": "No clean signal. Composite intensity 0.27, above 4% of sessions.",
+  "body": "Largest moves by z-score:\n  US 30Y TIPS Real Yield: -9.00bp  (z -3.21)\n  US 10Y TIPS Real Yield: -6.00bp  (z -1.92)\n  US 5Y TIPS Real Yield: -3.00bp  (z -0.91)\n  CBOE 3-Month Volatility Index: -0.70pt  (z -0.89)\n  AUD/USD: -0.38%  (z -0.87)\n  USD/CAD: +0.20%  (z +0.80)\n\nBlocs clearing their move threshold: real_rates.\n\nNo cross-asset signature was identified. Most sessions are noise.",
+  "generated": false,
+  "unverified_numbers": []
+}
