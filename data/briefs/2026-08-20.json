@@ -1,0 +1,124 @@
+{
+  "factsheet": {
+    "session": "2026-08-20",
+    "gate": {
+      "verdict": "pass",
+      "half_session": false,
+      "missing": [],
+      "stale": [],
+      "undefined": [],
+      "review": []
+    },
+    "regime": {
+      "id": null,
+      "name": "No clean signal",
+      "confidence": "none",
+      "intensity": 0.99,
+      "intensity_percentile": 0.76
+    },
+    "signals": [
+      {
+        "bloc": "rates",
+        "instrument": "ust_30y",
+        "change": 4.0,
+        "unit": "bp",
+        "z": 0.99,
+        "percentile": 0.69,
+        "moved": false,
+        "quiet_vol": false
+      },
+      {
+        "bloc": "bills",
+        "instrument": "ust_3m",
+        "change": 1.0,
+        "unit": "bp",
+        "z": 0.25,
+        "percentile": 0.37,
+        "moved": false,
+        "quiet_vol": false
+      },
+      {
+        "bloc": "curve",
+        "instrument": "ust_2s10s",
+        "change": 4.0,
+        "unit": "bp",
+        "z": 1.3,
+        "percentile": 0.82,
+        "moved": true,
+        "quiet_vol": false
+      },
+      {
+        "bloc": "real_rates",
+        "instrument": "ust_real_10y",
+        "change": 0.0,
+        "unit": "bp",
+        "z": -0.09,
+        "percentile": 0.07,
+        "moved": false,
+        "quiet_vol": false
+      },
+      {
+        "bloc": "inflation",
+        "instrument": "be_10y",
+        "change": 4.0,
+        "unit": "bp",
+        "z": 1.95,
+        "percentile": 0.93,
+        "moved": true,
+        "quiet_vol": false
+      }
+    ],
+    "confirmations": [],
+    "largest_moves": [
+      {
+        "name": "5y Inflation Breakeven",
+        "change": 6.0,
+        "unit": "bp",
+        "z": 2.24,
+        "quiet_vol": false
+      },
+      {
+        "name": "10y Inflation Breakeven",
+        "change": 4.0,
+        "unit": "bp",
+        "z": 1.95,
+        "quiet_vol": false
+      },
+      {
+        "name": "2s10s Curve Slope",
+        "change": 4.0,
+        "unit": "bp",
+        "z": 1.3,
+        "quiet_vol": false
+      },
+      {
+        "name": "US 30Y Treasury",
+        "change": 4.0,
+        "unit": "bp",
+        "z": 0.99,
+        "quiet_vol": false
+      },
+      {
+        "name": "US 10Y Treasury",
+        "change": 4.0,
+        "unit": "bp",
+        "z": 0.9,
+        "quiet_vol": false
+      },
+      {
+        "name": "US 5Y Treasury",
+        "change": 4.0,
+        "unit": "bp",
+        "z": 0.81,
+        "quiet_vol": false
+      }
+    ],
+    "notes": [
+      "Core blocs unavailable: equity, dollar, gold, energy. Not classified."
+    ]
+  },
+  "headline": "No clean signal. Composite intensity 0.99, above 76% of sessions.",
+  "body": "Largest moves by z-score:\n  5y Inflation Breakeven: +6.00bp  (z +2.24)\n  10y Inflation Breakeven: +4.00bp  (z +1.95)\n  2s10s Curve Slope: +4.00bp  (z +1.30)\n  US 30Y Treasury: +4.00bp  (z +0.99)\n  US 10Y Treasury: +4.00bp  (z +0.90)\n  US 5Y Treasury: +4.00bp  (z +0.81)\n\nBlocs clearing their move threshold: curve, inflation.\n\nNo cross-asset signature was identified. Most sessions are noise.",
+  "generated": false,
+  "unverified_numbers": []
+}
