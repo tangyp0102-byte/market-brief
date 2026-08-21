@@ -1,0 +1,134 @@
+{
+  "factsheet": {
+    "session": "2026-08-21",
+    "gate": {
+      "verdict": "pass",
+      "half_session": false,
+      "missing": [],
+      "stale": [],
+      "undefined": [],
+      "review": []
+    },
+    "regime": {
+      "id": null,
+      "name": "No clean signal",
+      "confidence": "none",
+      "intensity": 0.63,
+      "intensity_percentile": 0.4
+    },
+    "signals": [
+      {
+        "bloc": "rates",
+        "instrument": "ust_10y",
+        "change": 5.0,
+        "unit": "bp",
+        "z": 1.11,
+        "percentile": 0.74,
+        "moved": true,
+        "quiet_vol": false
+      },
+      {
+        "bloc": "bills",
+        "instrument": "ust_3m",
+        "change": 1.0,
+        "unit": "bp",
+        "z": 0.25,
+        "percentile": 0.37,
+        "moved": false,
+        "quiet_vol": false
+      },
+      {
+        "bloc": "curve",
+        "instrument": "ust_2s10s",
+        "change": 0.0,
+        "unit": "bp",
+        "z": -0.01,
+        "percentile": 0.01,
+        "moved": false,
+        "quiet_vol": false
+      },
+      {
+        "bloc": "real_rates",
+        "instrument": "ust_real_10y",
+        "change": 5.0,
+        "unit": "bp",
+        "z": 1.38,
+        "percentile": 0.84,
+        "moved": true,
+        "quiet_vol": false
+      },
+      {
+        "bloc": "inflation",
+        "instrument": "be_10y",
+        "change": 0.0,
+        "unit": "bp",
+        "z": 0.05,
+        "percentile": 0.04,
+        "moved": false,
+        "quiet_vol": false
+      },
+      {
+        "bloc": "dollar",
+        "instrument": "dxy",
+        "change": -0.05,
+        "unit": "%",
+        "z": -0.15,
+        "percentile": 0.13,
+        "moved": false,
+        "quiet_vol": false
+      }
+    ],
+    "confirmations": [],
+    "largest_moves": [
+      {
+        "name": "US 30Y TIPS Real Yield",
+        "change": 5.0,
+        "unit": "bp",
+        "z": 1.5,
+        "quiet_vol": false
+      },
+      {
+        "name": "US 10Y TIPS Real Yield",
+        "change": 5.0,
+        "unit": "bp",
+        "z": 1.38,
+        "quiet_vol": false
+      },
+      {
+        "name": "US 10Y Treasury",
+        "change": 5.0,
+        "unit": "bp",
+        "z": 1.11,
+        "quiet_vol": false
+      },
+      {
+        "name": "USD/CNY (onshore, PBoC-managed)",
+        "change": -0.1,
+        "unit": "%",
+        "z": -1.03,
+        "quiet_vol": true
+      },
+      {
+        "name": "US 2Y Treasury",
+        "change": 5.0,
+        "unit": "bp",
+        "z": 1.0,
+        "quiet_vol": false
+      },
+      {
+        "name": "US 30Y Treasury",
+        "change": 4.0,
+        "unit": "bp",
+        "z": 0.96,
+        "quiet_vol": false
+      }
+    ],
+    "notes": [
+      "Core blocs unavailable: equity, gold, energy. Not classified."
+    ]
+  },
+  "headline": "No clean signal. Composite intensity 0.63, above 40% of sessions.",
+  "body": "Largest moves by z-score:\n  US 30Y TIPS Real Yield: +5.00bp  (z +1.50)\n  US 10Y TIPS Real Yield: +5.00bp  (z +1.38)\n  US 10Y Treasury: +5.00bp  (z +1.11)\n  USD/CNY (onshore, PBoC-managed): -0.10%  (z -1.03)  [quiet vol period]\n  US 2Y Treasury: +5.00bp  (z +1.00)\n  US 30Y Treasury: +4.00bp  (z +0.96)\n\nBlocs clearing their move threshold: rates, real_rates.\n\nNo cross-asset signature was identified. Most sessions are noise.",
+  "generated": false,
+  "unverified_numbers": []
+}
