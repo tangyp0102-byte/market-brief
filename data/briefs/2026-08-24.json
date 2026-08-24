@@ -1,0 +1,134 @@
+{
+  "factsheet": {
+    "session": "2026-08-24",
+    "gate": {
+      "verdict": "pass",
+      "half_session": false,
+      "missing": [],
+      "stale": [],
+      "undefined": [],
+      "review": []
+    },
+    "regime": {
+      "id": null,
+      "name": "No clean signal",
+      "confidence": "none",
+      "intensity": 0.64,
+      "intensity_percentile": 0.41
+    },
+    "signals": [
+      {
+        "bloc": "rates",
+        "instrument": "ust_30y",
+        "change": -4.0,
+        "unit": "bp",
+        "z": -1.15,
+        "percentile": 0.76,
+        "moved": true,
+        "quiet_vol": false
+      },
+      {
+        "bloc": "bills",
+        "instrument": "ust_3m",
+        "change": -1.0,
+        "unit": "bp",
+        "z": -0.48,
+        "percentile": 0.48,
+        "moved": false,
+        "quiet_vol": false
+      },
+      {
+        "bloc": "curve",
+        "instrument": "ust_2s10s",
+        "change": -4.0,
+        "unit": "bp",
+        "z": -1.36,
+        "percentile": 0.83,
+        "moved": true,
+        "quiet_vol": false
+      },
+      {
+        "bloc": "real_rates",
+        "instrument": "ust_real_10y",
+        "change": -2.0,
+        "unit": "bp",
+        "z": -0.75,
+        "percentile": 0.58,
+        "moved": false,
+        "quiet_vol": false
+      },
+      {
+        "bloc": "inflation",
+        "instrument": "be_10y",
+        "change": -2.0,
+        "unit": "bp",
+        "z": -0.87,
+        "percentile": 0.64,
+        "moved": false,
+        "quiet_vol": false
+      },
+      {
+        "bloc": "dollar",
+        "instrument": "dxy",
+        "change": 0.03,
+        "unit": "%",
+        "z": 0.13,
+        "percentile": 0.11,
+        "moved": false,
+        "quiet_vol": false
+      }
+    ],
+    "confirmations": [],
+    "largest_moves": [
+      {
+        "name": "AUD/USD",
+        "change": 0.73,
+        "unit": "%",
+        "z": 1.77,
+        "quiet_vol": false
+      },
+      {
+        "name": "2s10s Curve Slope",
+        "change": -4.0,
+        "unit": "bp",
+        "z": -1.36,
+        "quiet_vol": false
+      },
+      {
+        "name": "US 30Y Treasury",
+        "change": -4.0,
+        "unit": "bp",
+        "z": -1.15,
+        "quiet_vol": false
+      },
+      {
+        "name": "US 30Y TIPS Real Yield",
+        "change": -3.0,
+        "unit": "bp",
+        "z": -1.1,
+        "quiet_vol": false
+      },
+      {
+        "name": "US 10Y Treasury",
+        "change": -4.0,
+        "unit": "bp",
+        "z": -1.04,
+        "quiet_vol": false
+      },
+      {
+        "name": "10y Inflation Breakeven",
+        "change": -2.0,
+        "unit": "bp",
+        "z": -0.87,
+        "quiet_vol": false
+      }
+    ],
+    "notes": [
+      "Core blocs unavailable: equity, gold, energy. Not classified."
+    ]
+  },
+  "headline": "No clean signal. Composite intensity 0.64, above 41% of sessions.",
+  "body": "Largest moves by z-score:\n  AUD/USD: +0.73%  (z +1.77)\n  2s10s Curve Slope: -4.00bp  (z -1.36)\n  US 30Y Treasury: -4.00bp  (z -1.15)\n  US 30Y TIPS Real Yield: -3.00bp  (z -1.10)\n  US 10Y Treasury: -4.00bp  (z -1.04)\n  10y Inflation Breakeven: -2.00bp  (z -0.87)\n\nBlocs clearing their move threshold: rates, curve.\n\nNo cross-asset signature was identified. Most sessions are noise.",
+  "generated": false,
+  "unverified_numbers": []
+}
