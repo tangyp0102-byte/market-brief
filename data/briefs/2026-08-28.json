@@ -13,18 +13,112 @@
       "id": null,
       "name": "No clean signal",
       "confidence": "none",
-      "intensity": 0.0,
-      "intensity_percentile": 0.0
+      "intensity": 2.9,
+      "intensity_percentile": 1.0
     },
-    "signals": [],
+    "signals": [
+      {
+        "bloc": "rates",
+        "instrument": "ust_2y",
+        "change": 14.0,
+        "unit": "bp",
+        "z": 2.9,
+        "percentile": 0.98,
+        "moved": true,
+        "quiet_vol": false
+      },
+      {
+        "bloc": "bills",
+        "instrument": "ust_3m",
+        "change": 6.0,
+        "unit": "bp",
+        "z": 2.34,
+        "percentile": 0.95,
+        "moved": true,
+        "quiet_vol": false
+      },
+      {
+        "bloc": "curve",
+        "instrument": "ust_2s10s",
+        "change": -8.0,
+        "unit": "bp",
+        "z": -2.76,
+        "percentile": 0.98,
+        "moved": true,
+        "quiet_vol": false
+      },
+      {
+        "bloc": "real_rates",
+        "instrument": "ust_real_10y",
+        "change": 8.0,
+        "unit": "bp",
+        "z": 2.19,
+        "percentile": 0.96,
+        "moved": true,
+        "quiet_vol": false
+      },
+      {
+        "bloc": "inflation",
+        "instrument": "be_10y",
+        "change": -2.0,
+        "unit": "bp",
+        "z": -0.86,
+        "percentile": 0.64,
+        "moved": false,
+        "quiet_vol": false
+      }
+    ],
     "confirmations": [],
-    "largest_moves": [],
+    "largest_moves": [
+      {
+        "name": "US 2Y Treasury",
+        "change": 14.0,
+        "unit": "bp",
+        "z": 2.9,
+        "quiet_vol": false
+      },
+      {
+        "name": "2s10s Curve Slope",
+        "change": -8.0,
+        "unit": "bp",
+        "z": -2.76,
+        "quiet_vol": false
+      },
+      {
+        "name": "US 5Y TIPS Real Yield",
+        "change": 11.0,
+        "unit": "bp",
+        "z": 2.58,
+        "quiet_vol": false
+      },
+      {
+        "name": "US 3M Treasury",
+        "change": 6.0,
+        "unit": "bp",
+        "z": 2.34,
+        "quiet_vol": false
+      },
+      {
+        "name": "5s30s Curve Slope",
+        "change": -7.0,
+        "unit": "bp",
+        "z": -2.33,
+        "quiet_vol": false
+      },
+      {
+        "name": "US 10Y TIPS Real Yield",
+        "change": 8.0,
+        "unit": "bp",
+        "z": 2.19,
+        "quiet_vol": false
+      }
+    ],
     "notes": [
-      "Core blocs unavailable: equity, rates, dollar, gold, energy. Not classified."
+      "Core blocs unavailable: equity, dollar, gold, energy. Not classified."
     ]
   },
-  "headline": "No clean signal. Composite intensity 0.00, above 0% of sessions.",
-  "body": "No instruments recorded a change this session.\n\nNo cross-asset signature was identified. Most sessions are noise.",
+  "headline": "No clean signal. Composite intensity 2.90, above 100% of sessions.",
+  "body": "Largest moves by z-score:\n  US 2Y Treasury: +14.00bp  (z +2.90)\n  2s10s Curve Slope: -8.00bp  (z -2.76)\n  US 5Y TIPS Real Yield: +11.00bp  (z +2.58)\n  US 3M Treasury: +6.00bp  (z +2.34)\n  5s30s Curve Slope: -7.00bp  (z -2.33)\n  US 10Y TIPS Real Yield: +8.00bp  (z +2.19)\n\nBlocs clearing their move threshold: rates, bills, curve, real_rates.\n\nNo cross-asset signature was identified. Most sessions are noise.",
   "generated": false,
   "unverified_numbers": []
 }
