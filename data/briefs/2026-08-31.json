@@ -1,0 +1,124 @@
+{
+  "factsheet": {
+    "session": "2026-08-31",
+    "gate": {
+      "verdict": "pass",
+      "half_session": false,
+      "missing": [],
+      "stale": [],
+      "undefined": [],
+      "review": []
+    },
+    "regime": {
+      "id": null,
+      "name": "No clean signal",
+      "confidence": "none",
+      "intensity": 0.66,
+      "intensity_percentile": 0.44
+    },
+    "signals": [
+      {
+        "bloc": "rates",
+        "instrument": "ust_30y",
+        "change": 3.0,
+        "unit": "bp",
+        "z": 0.66,
+        "percentile": 0.49,
+        "moved": false,
+        "quiet_vol": false
+      },
+      {
+        "bloc": "bills",
+        "instrument": "ust_3m",
+        "change": 1.0,
+        "unit": "bp",
+        "z": 0.3,
+        "percentile": 0.4,
+        "moved": false,
+        "quiet_vol": false
+      },
+      {
+        "bloc": "curve",
+        "instrument": "ust_2s10s",
+        "change": 2.0,
+        "unit": "bp",
+        "z": 0.65,
+        "percentile": 0.51,
+        "moved": false,
+        "quiet_vol": false
+      },
+      {
+        "bloc": "real_rates",
+        "instrument": "ust_real_10y",
+        "change": 2.0,
+        "unit": "bp",
+        "z": 0.42,
+        "percentile": 0.33,
+        "moved": false,
+        "quiet_vol": false
+      },
+      {
+        "bloc": "inflation",
+        "instrument": "be_10y",
+        "change": -0.0,
+        "unit": "bp",
+        "z": 0.05,
+        "percentile": 0.05,
+        "moved": false,
+        "quiet_vol": false
+      }
+    ],
+    "confirmations": [],
+    "largest_moves": [
+      {
+        "name": "US 30Y TIPS Real Yield",
+        "change": 3.0,
+        "unit": "bp",
+        "z": 0.8,
+        "quiet_vol": false
+      },
+      {
+        "name": "US 30Y Treasury",
+        "change": 3.0,
+        "unit": "bp",
+        "z": 0.66,
+        "quiet_vol": false
+      },
+      {
+        "name": "5s30s Curve Slope",
+        "change": 2.0,
+        "unit": "bp",
+        "z": 0.66,
+        "quiet_vol": false
+      },
+      {
+        "name": "2s10s Curve Slope",
+        "change": 2.0,
+        "unit": "bp",
+        "z": 0.65,
+        "quiet_vol": false
+      },
+      {
+        "name": "5y Inflation Breakeven",
+        "change": 1.0,
+        "unit": "bp",
+        "z": 0.47,
+        "quiet_vol": false
+      },
+      {
+        "name": "US 10Y TIPS Real Yield",
+        "change": 2.0,
+        "unit": "bp",
+        "z": 0.42,
+        "quiet_vol": false
+      }
+    ],
+    "notes": [
+      "Core blocs unavailable: equity, dollar, gold, energy. Not classified."
+    ]
+  },
+  "headline": "No clean signal. Composite intensity 0.66, above 44% of sessions.",
+  "body": "Largest moves by z-score:\n  US 30Y TIPS Real Yield: +3.00bp  (z +0.80)\n  US 30Y Treasury: +3.00bp  (z +0.66)\n  5s30s Curve Slope: +2.00bp  (z +0.66)\n  2s10s Curve Slope: +2.00bp  (z +0.65)\n  5y Inflation Breakeven: +1.00bp  (z +0.47)\n  US 10Y TIPS Real Yield: +2.00bp  (z +0.42)\n\nNo cross-asset signature was identified. Most sessions are noise.",
+  "generated": false,
+  "unverified_numbers": []
+}
