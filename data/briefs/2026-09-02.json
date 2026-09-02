@@ -1,0 +1,124 @@
+{
+  "factsheet": {
+    "session": "2026-09-02",
+    "gate": {
+      "verdict": "pass",
+      "half_session": false,
+      "missing": [],
+      "stale": [],
+      "undefined": [],
+      "review": []
+    },
+    "regime": {
+      "id": null,
+      "name": "No clean signal",
+      "confidence": "none",
+      "intensity": 0.31,
+      "intensity_percentile": 0.05
+    },
+    "signals": [
+      {
+        "bloc": "rates",
+        "instrument": "ust_5y",
+        "change": -1.0,
+        "unit": "bp",
+        "z": -0.31,
+        "percentile": 0.26,
+        "moved": false,
+        "quiet_vol": false
+      },
+      {
+        "bloc": "bills",
+        "instrument": "ust_3m",
+        "change": 0.0,
+        "unit": "bp",
+        "z": -0.09,
+        "percentile": 0.22,
+        "moved": false,
+        "quiet_vol": false
+      },
+      {
+        "bloc": "curve",
+        "instrument": "ust_2s10s",
+        "change": 0.0,
+        "unit": "bp",
+        "z": -0.01,
+        "percentile": 0.02,
+        "moved": false,
+        "quiet_vol": false
+      },
+      {
+        "bloc": "real_rates",
+        "instrument": "ust_real_10y",
+        "change": 1.0,
+        "unit": "bp",
+        "z": 0.17,
+        "percentile": 0.15,
+        "moved": false,
+        "quiet_vol": false
+      },
+      {
+        "bloc": "inflation",
+        "instrument": "be_10y",
+        "change": -1.0,
+        "unit": "bp",
+        "z": -0.44,
+        "percentile": 0.35,
+        "moved": false,
+        "quiet_vol": false
+      }
+    ],
+    "confirmations": [],
+    "largest_moves": [
+      {
+        "name": "CBOE 3-Month Volatility Index",
+        "change": -0.6,
+        "unit": "pt",
+        "z": -0.78,
+        "quiet_vol": false
+      },
+      {
+        "name": "5y Inflation Breakeven",
+        "change": -2.0,
+        "unit": "bp",
+        "z": -0.6,
+        "quiet_vol": false
+      },
+      {
+        "name": "10y Inflation Breakeven",
+        "change": -1.0,
+        "unit": "bp",
+        "z": -0.44,
+        "quiet_vol": false
+      },
+      {
+        "name": "5s30s Curve Slope",
+        "change": 1.0,
+        "unit": "bp",
+        "z": 0.33,
+        "quiet_vol": false
+      },
+      {
+        "name": "US 5Y Treasury",
+        "change": -1.0,
+        "unit": "bp",
+        "z": -0.31,
+        "quiet_vol": false
+      },
+      {
+        "name": "US 10Y TIPS Real Yield",
+        "change": 1.0,
+        "unit": "bp",
+        "z": 0.17,
+        "quiet_vol": false
+      }
+    ],
+    "notes": [
+      "Core blocs unavailable: equity, dollar, gold, energy. Not classified."
+    ]
+  },
+  "headline": "No clean signal. Composite intensity 0.31, above 5% of sessions.",
+  "body": "Largest moves by z-score:\n  CBOE 3-Month Volatility Index: -0.60pt  (z -0.78)\n  5y Inflation Breakeven: -2.00bp  (z -0.60)\n  10y Inflation Breakeven: -1.00bp  (z -0.44)\n  5s30s Curve Slope: +1.00bp  (z +0.33)\n  US 5Y Treasury: -1.00bp  (z -0.31)\n  US 10Y TIPS Real Yield: +1.00bp  (z +0.17)\n\nNo cross-asset signature was identified. Most sessions are noise.",
+  "generated": false,
+  "unverified_numbers": []
+}
