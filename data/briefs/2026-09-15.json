@@ -1,0 +1,46 @@
+{
+  "factsheet": {
+    "session": "2026-09-15",
+    "gate": {
+      "verdict": "degraded",
+      "half_session": false,
+      "missing": [],
+      "stale": [
+        "hyg: last observation 2026-09-11 (2 sessions behind, tolerance 1)",
+        "lqd: last observation 2026-09-11 (2 sessions behind, tolerance 1)",
+        "spy: last observation 2026-09-11 (2 sessions behind, tolerance 1)",
+        "rsp: last observation 2026-09-11 (2 sessions behind, tolerance 1)",
+        "xlk: last observation 2026-09-11 (2 sessions behind, tolerance 1)",
+        "xlf: last observation 2026-09-11 (2 sessions behind, tolerance 1)",
+        "xle: last observation 2026-09-11 (2 sessions behind, tolerance 1)",
+        "xlv: last observation 2026-09-11 (2 sessions behind, tolerance 1)",
+        "xli: last observation 2026-09-11 (2 sessions behind, tolerance 1)",
+        "xlp: last observation 2026-09-11 (2 sessions behind, tolerance 1)",
+        "xlu: last observation 2026-09-11 (2 sessions behind, tolerance 1)",
+        "xly: last observation 2026-09-11 (2 sessions behind, tolerance 1)",
+        "xlb: last observation 2026-09-11 (2 sessions behind, tolerance 1)",
+        "xlre: last observation 2026-09-11 (2 sessions behind, tolerance 1)",
+        "xlc: last observation 2026-09-11 (2 sessions behind, tolerance 1)"
+      ],
+      "undefined": [],
+      "review": []
+    },
+    "regime": {
+      "id": null,
+      "name": "No clean signal",
+      "confidence": "none",
+      "intensity": 0.0,
+      "intensity_percentile": 0.0
+    },
+    "signals": [],
+    "confirmations": [],
+    "largest_moves": [],
+    "notes": [
+      "Core blocs unavailable: equity, rates, dollar, gold, energy. Not classified."
+    ]
+  },
+  "headline": "No clean signal. Composite intensity 0.00, above 0% of sessions.",
+  "body": "No instruments recorded a change this session.\n\nNo cross-asset signature was identified. Most sessions are noise.",
+  "generated": false,
+  "unverified_numbers": []
+}
