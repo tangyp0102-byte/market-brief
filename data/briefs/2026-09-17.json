@@ -2,26 +2,10 @@
   "factsheet": {
     "session": "2026-09-17",
     "gate": {
-      "verdict": "degraded",
+      "verdict": "pass",
       "half_session": false,
       "missing": [],
-      "stale": [
-        "hyg: last observation 2026-09-15 (2 sessions behind, tolerance 1)",
-        "lqd: last observation 2026-09-15 (2 sessions behind, tolerance 1)",
-        "spy: last observation 2026-09-15 (2 sessions behind, tolerance 1)",
-        "rsp: last observation 2026-09-15 (2 sessions behind, tolerance 1)",
-        "xlk: last observation 2026-09-15 (2 sessions behind, tolerance 1)",
-        "xlf: last observation 2026-09-15 (2 sessions behind, tolerance 1)",
-        "xle: last observation 2026-09-15 (2 sessions behind, tolerance 1)",
-        "xlv: last observation 2026-09-15 (2 sessions behind, tolerance 1)",
-        "xli: last observation 2026-09-15 (2 sessions behind, tolerance 1)",
-        "xlp: last observation 2026-09-15 (2 sessions behind, tolerance 1)",
-        "xlu: last observation 2026-09-15 (2 sessions behind, tolerance 1)",
-        "xly: last observation 2026-09-15 (2 sessions behind, tolerance 1)",
-        "xlb: last observation 2026-09-15 (2 sessions behind, tolerance 1)",
-        "xlre: last observation 2026-09-15 (2 sessions behind, tolerance 1)",
-        "xlc: last observation 2026-09-15 (2 sessions behind, tolerance 1)"
-      ],
+      "stale": [],
       "undefined": [],
       "review": []
     },
@@ -29,18 +13,112 @@
       "id": null,
       "name": "No clean signal",
       "confidence": "none",
-      "intensity": 0.0,
-      "intensity_percentile": 0.0
+      "intensity": 1.97,
+      "intensity_percentile": 0.98
     },
-    "signals": [],
+    "signals": [
+      {
+        "bloc": "rates",
+        "instrument": "ust_5y",
+        "change": -8.0,
+        "unit": "bp",
+        "z": -1.97,
+        "percentile": 0.94,
+        "moved": true,
+        "quiet_vol": false
+      },
+      {
+        "bloc": "bills",
+        "instrument": "ust_3m",
+        "change": -2.0,
+        "unit": "bp",
+        "z": -0.86,
+        "percentile": 0.73,
+        "moved": true,
+        "quiet_vol": false
+      },
+      {
+        "bloc": "curve",
+        "instrument": "ust_2s10s",
+        "change": 0.0,
+        "unit": "bp",
+        "z": 0.0,
+        "percentile": 0.0,
+        "moved": false,
+        "quiet_vol": false
+      },
+      {
+        "bloc": "real_rates",
+        "instrument": "ust_real_10y",
+        "change": -7.0,
+        "unit": "bp",
+        "z": -2.27,
+        "percentile": 0.97,
+        "moved": true,
+        "quiet_vol": false
+      },
+      {
+        "bloc": "inflation",
+        "instrument": "be_10y",
+        "change": 0.0,
+        "unit": "bp",
+        "z": -0.07,
+        "percentile": 0.08,
+        "moved": false,
+        "quiet_vol": false
+      }
+    ],
     "confirmations": [],
-    "largest_moves": [],
+    "largest_moves": [
+      {
+        "name": "US 10Y TIPS Real Yield",
+        "change": -7.0,
+        "unit": "bp",
+        "z": -2.27,
+        "quiet_vol": false
+      },
+      {
+        "name": "US 5Y Treasury",
+        "change": -8.0,
+        "unit": "bp",
+        "z": -1.97,
+        "quiet_vol": false
+      },
+      {
+        "name": "CBOE 3-Month Volatility Index",
+        "change": -1.18,
+        "unit": "pt",
+        "z": -1.91,
+        "quiet_vol": false
+      },
+      {
+        "name": "US 10Y Treasury",
+        "change": -7.0,
+        "unit": "bp",
+        "z": -1.88,
+        "quiet_vol": false
+      },
+      {
+        "name": "US 30Y TIPS Real Yield",
+        "change": -5.0,
+        "unit": "bp",
+        "z": -1.79,
+        "quiet_vol": false
+      },
+      {
+        "name": "US 30Y Treasury",
+        "change": -6.0,
+        "unit": "bp",
+        "z": -1.73,
+        "quiet_vol": false
+      }
+    ],
     "notes": [
-      "Core blocs unavailable: equity, rates, dollar, gold, energy. Not classified."
+      "Core blocs unavailable: equity, dollar, gold, energy. Not classified."
     ]
   },
-  "headline": "No clean signal. Composite intensity 0.00, above 0% of sessions.",
-  "body": "No instruments recorded a change this session.\n\nNo cross-asset signature was identified. Most sessions are noise.",
+  "headline": "No clean signal. Composite intensity 1.97, above 98% of sessions.",
+  "body": "Largest moves by z-score:\n  US 10Y TIPS Real Yield: -7.00bp  (z -2.27)\n  US 5Y Treasury: -8.00bp  (z -1.97)\n  CBOE 3-Month Volatility Index: -1.18pt  (z -1.91)\n  US 10Y Treasury: -7.00bp  (z -1.88)\n  US 30Y TIPS Real Yield: -5.00bp  (z -1.79)\n  US 30Y Treasury: -6.00bp  (z -1.73)\n\nBlocs clearing their move threshold: rates, bills, real_rates.\n\nNo cross-asset signature was identified. Most sessions are noise.",
   "generated": false,
   "unverified_numbers": []
 }
