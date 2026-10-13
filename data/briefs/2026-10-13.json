@@ -1,0 +1,40 @@
+{
+  "factsheet": {
+    "session": "2026-10-13",
+    "gate": {
+      "verdict": "blocked",
+      "half_session": false,
+      "missing": [],
+      "stale": [
+        "eurusd: last observation 2026-10-09 (2 sessions behind, tolerance 1)",
+        "usdjpy: last observation 2026-10-09 (2 sessions behind, tolerance 1)",
+        "gbpusd: last observation 2026-10-09 (2 sessions behind, tolerance 1)",
+        "usdcad: last observation 2026-10-09 (2 sessions behind, tolerance 1)",
+        "usdsek: last observation 2026-10-09 (2 sessions behind, tolerance 1)",
+        "usdchf: last observation 2026-10-09 (2 sessions behind, tolerance 1)",
+        "usdcny: last observation 2026-10-09 (2 sessions behind, tolerance 1)",
+        "usdmxn: last observation 2026-10-09 (2 sessions behind, tolerance 1)",
+        "audusd: last observation 2026-10-09 (2 sessions behind, tolerance 1)"
+      ],
+      "undefined": [],
+      "review": []
+    },
+    "regime": {
+      "id": null,
+      "name": "No clean signal",
+      "confidence": "none",
+      "intensity": 0.0,
+      "intensity_percentile": 0.0
+    },
+    "signals": [],
+    "confirmations": [],
+    "largest_moves": [],
+    "notes": [
+      "Core blocs unavailable: equity, rates, dollar, gold, energy. Not classified."
+    ]
+  },
+  "headline": "No brief for this session.",
+  "body": "The validation gate blocked publication.",
+  "generated": false,
+  "unverified_numbers": []
+}
