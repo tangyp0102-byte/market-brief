@@ -1,0 +1,194 @@
+{
+  "factsheet": {
+    "session": "2026-10-28",
+    "gate": {
+      "verdict": "pass",
+      "half_session": false,
+      "missing": [],
+      "stale": [],
+      "undefined": [],
+      "review": []
+    },
+    "regime": {
+      "id": null,
+      "name": "No clean signal",
+      "confidence": "none",
+      "intensity": 0.73,
+      "intensity_percentile": 0.52
+    },
+    "signals": [
+      {
+        "bloc": "equity",
+        "instrument": "spx",
+        "change": 0.28,
+        "unit": "%",
+        "z": 0.39,
+        "percentile": 0.37,
+        "moved": false,
+        "quiet_vol": false
+      },
+      {
+        "bloc": "rates",
+        "instrument": "ust_30y",
+        "change": 7.0,
+        "unit": "bp",
+        "z": 1.5,
+        "percentile": 0.87,
+        "moved": true,
+        "quiet_vol": false
+      },
+      {
+        "bloc": "bills",
+        "instrument": "ust_3m",
+        "change": -4.0,
+        "unit": "bp",
+        "z": -1.83,
+        "percentile": 0.93,
+        "moved": true,
+        "quiet_vol": false
+      },
+      {
+        "bloc": "curve",
+        "instrument": "ust_2s10s",
+        "change": 9.0,
+        "unit": "bp",
+        "z": 2.97,
+        "percentile": 0.98,
+        "moved": true,
+        "quiet_vol": false
+      },
+      {
+        "bloc": "real_rates",
+        "instrument": "ust_real_10y",
+        "change": 3.0,
+        "unit": "bp",
+        "z": 0.59,
+        "percentile": 0.46,
+        "moved": false,
+        "quiet_vol": false
+      },
+      {
+        "bloc": "inflation",
+        "instrument": "be_10y",
+        "change": 3.0,
+        "unit": "bp",
+        "z": 1.41,
+        "percentile": 0.85,
+        "moved": true,
+        "quiet_vol": false
+      },
+      {
+        "bloc": "dollar",
+        "instrument": "dxy",
+        "change": 0.33,
+        "unit": "%",
+        "z": 1.14,
+        "percentile": 0.75,
+        "moved": true,
+        "quiet_vol": false
+      },
+      {
+        "bloc": "gold",
+        "instrument": "gold",
+        "change": 0.03,
+        "unit": "%",
+        "z": 0.02,
+        "percentile": 0.02,
+        "moved": false,
+        "quiet_vol": false
+      },
+      {
+        "bloc": "energy",
+        "instrument": "wti",
+        "change": 2.0,
+        "unit": "%",
+        "z": 0.61,
+        "percentile": 0.5,
+        "moved": false,
+        "quiet_vol": false
+      },
+      {
+        "bloc": "industrial",
+        "instrument": "copper",
+        "change": 0.78,
+        "unit": "%",
+        "z": 0.6,
+        "percentile": 0.48,
+        "moved": false,
+        "quiet_vol": false
+      },
+      {
+        "bloc": "vol",
+        "instrument": "vix",
+        "change": -0.61,
+        "unit": "pt",
+        "z": -0.63,
+        "percentile": 0.61,
+        "moved": false,
+        "quiet_vol": false
+      },
+      {
+        "bloc": "credit",
+        "instrument": "credit_excess",
+        "change": 0.08,
+        "unit": "%",
+        "z": 0.47,
+        "percentile": 0.45,
+        "moved": false,
+        "quiet_vol": false
+      }
+    ],
+    "confirmations": [],
+    "largest_moves": [
+      {
+        "name": "Henry Hub Natural Gas (front)",
+        "change": 12.27,
+        "unit": "%",
+        "z": 4.53,
+        "quiet_vol": false
+      },
+      {
+        "name": "2s10s Curve Slope",
+        "change": 9.0,
+        "unit": "bp",
+        "z": 2.97,
+        "quiet_vol": false
+      },
+      {
+        "name": "3m10y Curve Slope",
+        "change": 10.0,
+        "unit": "bp",
+        "z": 2.15,
+        "quiet_vol": false
+      },
+      {
+        "name": "US 3M Treasury",
+        "change": -4.0,
+        "unit": "bp",
+        "z": -1.83,
+        "quiet_vol": false
+      },
+      {
+        "name": "Brent Crude (front)",
+        "change": -2.82,
+        "unit": "%",
+        "z": -1.55,
+        "quiet_vol": false
+      },
+      {
+        "name": "5s30s Curve Slope",
+        "change": 4.0,
+        "unit": "bp",
+        "z": 1.54,
+        "quiet_vol": false
+      }
+    ],
+    "notes": [
+      "Composite intensity 0.73 is below the 65% threshold of 0.85. Most sessions are noise, and this is one of them."
+    ]
+  },
+  "headline": "No clean signal. Composite intensity 0.73, above 52% of sessions.",
+  "body": "Largest moves by z-score:\n  Henry Hub Natural Gas (front): +12.27%  (z +4.53)\n  2s10s Curve Slope: +9.00bp  (z +2.97)\n  3m10y Curve Slope: +10.00bp  (z +2.15)\n  US 3M Treasury: -4.00bp  (z -1.83)\n  Brent Crude (front): -2.82%  (z -1.55)\n  5s30s Curve Slope: +4.00bp  (z +1.54)\n\nBlocs clearing their move threshold: rates, bills, curve, inflation, dollar.\n\nNo cross-asset signature was identified. Most sessions are noise.",
+  "generated": false,
+  "unverified_numbers": []
+}
