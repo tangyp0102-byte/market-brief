@@ -1,0 +1,194 @@
+{
+  "factsheet": {
+    "session": "2026-10-29",
+    "gate": {
+      "verdict": "pass",
+      "half_session": false,
+      "missing": [],
+      "stale": [],
+      "undefined": [],
+      "review": []
+    },
+    "regime": {
+      "id": null,
+      "name": "No clean signal",
+      "confidence": "none",
+      "intensity": 0.76,
+      "intensity_percentile": 0.55
+    },
+    "signals": [
+      {
+        "bloc": "equity",
+        "instrument": "spx",
+        "change": -0.3,
+        "unit": "%",
+        "z": -0.52,
+        "percentile": 0.46,
+        "moved": false,
+        "quiet_vol": false
+      },
+      {
+        "bloc": "rates",
+        "instrument": "ust_10y",
+        "change": -7.0,
+        "unit": "bp",
+        "z": -1.45,
+        "percentile": 0.85,
+        "moved": true,
+        "quiet_vol": false
+      },
+      {
+        "bloc": "bills",
+        "instrument": "ust_3m",
+        "change": 0.0,
+        "unit": "bp",
+        "z": -0.19,
+        "percentile": 0.31,
+        "moved": false,
+        "quiet_vol": false
+      },
+      {
+        "bloc": "curve",
+        "instrument": "ust_2s10s",
+        "change": -1.0,
+        "unit": "bp",
+        "z": -0.26,
+        "percentile": 0.22,
+        "moved": false,
+        "quiet_vol": false
+      },
+      {
+        "bloc": "real_rates",
+        "instrument": "ust_real_10y",
+        "change": -4.0,
+        "unit": "bp",
+        "z": -0.96,
+        "percentile": 0.69,
+        "moved": false,
+        "quiet_vol": false
+      },
+      {
+        "bloc": "inflation",
+        "instrument": "be_10y",
+        "change": -3.0,
+        "unit": "bp",
+        "z": -1.54,
+        "percentile": 0.87,
+        "moved": true,
+        "quiet_vol": false
+      },
+      {
+        "bloc": "dollar",
+        "instrument": "dxy",
+        "change": -0.23,
+        "unit": "%",
+        "z": -1.04,
+        "percentile": 0.72,
+        "moved": true,
+        "quiet_vol": false
+      },
+      {
+        "bloc": "gold",
+        "instrument": "gold",
+        "change": -0.71,
+        "unit": "%",
+        "z": -0.53,
+        "percentile": 0.46,
+        "moved": false,
+        "quiet_vol": false
+      },
+      {
+        "bloc": "energy",
+        "instrument": "wti",
+        "change": -0.07,
+        "unit": "%",
+        "z": -0.25,
+        "percentile": 0.22,
+        "moved": false,
+        "quiet_vol": false
+      },
+      {
+        "bloc": "industrial",
+        "instrument": "copper",
+        "change": -1.26,
+        "unit": "%",
+        "z": -0.98,
+        "percentile": 0.71,
+        "moved": true,
+        "quiet_vol": false
+      },
+      {
+        "bloc": "vol",
+        "instrument": "vix",
+        "change": 0.29,
+        "unit": "pt",
+        "z": 0.27,
+        "percentile": 0.32,
+        "moved": false,
+        "quiet_vol": false
+      },
+      {
+        "bloc": "credit",
+        "instrument": "credit_excess",
+        "change": -0.24,
+        "unit": "%",
+        "z": -1.09,
+        "percentile": 0.79,
+        "moved": true,
+        "quiet_vol": false
+      }
+    ],
+    "confirmations": [],
+    "largest_moves": [
+      {
+        "name": "Equal Weight / Cap Weight",
+        "change": 1.59,
+        "unit": "%",
+        "z": 3.12,
+        "quiet_vol": false
+      },
+      {
+        "name": "Real Estate Sector",
+        "change": 2.21,
+        "unit": "%",
+        "z": 2.88,
+        "quiet_vol": false
+      },
+      {
+        "name": "Health Care Sector",
+        "change": 2.4,
+        "unit": "%",
+        "z": 2.06,
+        "quiet_vol": false
+      },
+      {
+        "name": "Invesco S&P 500 Equal Weight ETF",
+        "change": 1.2,
+        "unit": "%",
+        "z": 2.06,
+        "quiet_vol": false
+      },
+      {
+        "name": "Financials Sector",
+        "change": 1.44,
+        "unit": "%",
+        "z": 1.94,
+        "quiet_vol": false
+      },
+      {
+        "name": "Brent Crude (front)",
+        "change": -3.27,
+        "unit": "%",
+        "z": -1.76,
+        "quiet_vol": false
+      }
+    ],
+    "notes": [
+      "Composite intensity 0.76 is below the 65% threshold of 0.85. Most sessions are noise, and this is one of them."
+    ]
+  },
+  "headline": "No clean signal. Composite intensity 0.76, above 55% of sessions.",
+  "body": "Largest moves by z-score:\n  Equal Weight / Cap Weight: +1.59%  (z +3.12)\n  Real Estate Sector: +2.21%  (z +2.88)\n  Health Care Sector: +2.40%  (z +2.06)\n  Invesco S&P 500 Equal Weight ETF: +1.20%  (z +2.06)\n  Financials Sector: +1.44%  (z +1.94)\n  Brent Crude (front): -3.27%  (z -1.76)\n\nBlocs clearing their move threshold: rates, inflation, dollar, industrial, credit.\n\nNo cross-asset signature was identified. Most sessions are noise.",
+  "generated": false,
+  "unverified_numbers": []
+}
