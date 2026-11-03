@@ -1,0 +1,194 @@
+{
+  "factsheet": {
+    "session": "2026-11-02",
+    "gate": {
+      "verdict": "pass",
+      "half_session": false,
+      "missing": [],
+      "stale": [],
+      "undefined": [],
+      "review": []
+    },
+    "regime": {
+      "id": null,
+      "name": "No clean signal",
+      "confidence": "none",
+      "intensity": 1.15,
+      "intensity_percentile": 0.84
+    },
+    "signals": [
+      {
+        "bloc": "equity",
+        "instrument": "spx",
+        "change": -0.51,
+        "unit": "%",
+        "z": -0.76,
+        "percentile": 0.61,
+        "moved": false,
+        "quiet_vol": false
+      },
+      {
+        "bloc": "rates",
+        "instrument": "ust_30y",
+        "change": -3.0,
+        "unit": "bp",
+        "z": -0.69,
+        "percentile": 0.5,
+        "moved": false,
+        "quiet_vol": false
+      },
+      {
+        "bloc": "bills",
+        "instrument": "ust_3m",
+        "change": 5.0,
+        "unit": "bp",
+        "z": 1.88,
+        "percentile": 0.93,
+        "moved": true,
+        "quiet_vol": false
+      },
+      {
+        "bloc": "curve",
+        "instrument": "ust_2s10s",
+        "change": -6.0,
+        "unit": "bp",
+        "z": -1.77,
+        "percentile": 0.91,
+        "moved": true,
+        "quiet_vol": false
+      },
+      {
+        "bloc": "real_rates",
+        "instrument": "ust_real_10y",
+        "change": 2.0,
+        "unit": "bp",
+        "z": 0.37,
+        "percentile": 0.29,
+        "moved": false,
+        "quiet_vol": false
+      },
+      {
+        "bloc": "inflation",
+        "instrument": "be_10y",
+        "change": -5.0,
+        "unit": "bp",
+        "z": -2.55,
+        "percentile": 0.98,
+        "moved": true,
+        "quiet_vol": false
+      },
+      {
+        "bloc": "dollar",
+        "instrument": "dxy",
+        "change": 0.1,
+        "unit": "%",
+        "z": 0.26,
+        "percentile": 0.23,
+        "moved": false,
+        "quiet_vol": false
+      },
+      {
+        "bloc": "gold",
+        "instrument": "gold",
+        "change": 0.94,
+        "unit": "%",
+        "z": 0.9,
+        "percentile": 0.69,
+        "moved": false,
+        "quiet_vol": false
+      },
+      {
+        "bloc": "energy",
+        "instrument": "wti",
+        "change": -7.25,
+        "unit": "%",
+        "z": -3.13,
+        "percentile": 0.99,
+        "moved": true,
+        "quiet_vol": false
+      },
+      {
+        "bloc": "industrial",
+        "instrument": "copper",
+        "change": -0.14,
+        "unit": "%",
+        "z": -0.09,
+        "percentile": 0.09,
+        "moved": false,
+        "quiet_vol": false
+      },
+      {
+        "bloc": "vol",
+        "instrument": "vix",
+        "change": 1.73,
+        "unit": "pt",
+        "z": 1.6,
+        "percentile": 0.9,
+        "moved": true,
+        "quiet_vol": false
+      },
+      {
+        "bloc": "credit",
+        "instrument": "credit_excess",
+        "change": -0.73,
+        "unit": "%",
+        "z": -3.31,
+        "percentile": 0.98,
+        "moved": true,
+        "quiet_vol": false
+      }
+    ],
+    "confirmations": [],
+    "largest_moves": [
+      {
+        "name": "Brent Crude (front)",
+        "change": -10.99,
+        "unit": "%",
+        "z": -5.26,
+        "quiet_vol": false
+      },
+      {
+        "name": "HY Credit Excess (duration-hedged)",
+        "change": -0.73,
+        "unit": "%",
+        "z": -3.31,
+        "quiet_vol": false
+      },
+      {
+        "name": "WTI Crude (front)",
+        "change": -7.25,
+        "unit": "%",
+        "z": -3.13,
+        "quiet_vol": false
+      },
+      {
+        "name": "Energy Sector",
+        "change": -3.96,
+        "unit": "%",
+        "z": -3.12,
+        "quiet_vol": false
+      },
+      {
+        "name": "5y Inflation Breakeven",
+        "change": -7.0,
+        "unit": "bp",
+        "z": -2.93,
+        "quiet_vol": false
+      },
+      {
+        "name": "iShares High Yield Corp Bond ETF",
+        "change": -0.7,
+        "unit": "%",
+        "z": -2.6,
+        "quiet_vol": false
+      }
+    ],
+    "notes": [
+      "Active session but no rule matched. Blocs that moved: bills, curve, inflation, energy, vol, credit. A day can be busy without having a coherent cross-asset signature."
+    ]
+  },
+  "headline": "No clean signal. Composite intensity 1.15, above 84% of sessions.",
+  "body": "Largest moves by z-score:\n  Brent Crude (front): -10.99%  (z -5.26)\n  HY Credit Excess (duration-hedged): -0.73%  (z -3.31)\n  WTI Crude (front): -7.25%  (z -3.13)\n  Energy Sector: -3.96%  (z -3.12)\n  5y Inflation Breakeven: -7.00bp  (z -2.93)\n  iShares High Yield Corp Bond ETF: -0.70%  (z -2.60)\n\nBlocs clearing their move threshold: bills, curve, inflation, energy, vol, credit.\n\nNo cross-asset signature was identified. Most sessions are noise.",
+  "generated": false,
+  "unverified_numbers": []
+}
