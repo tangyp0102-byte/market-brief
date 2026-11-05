@@ -1,0 +1,210 @@
+{
+  "factsheet": {
+    "session": "2026-11-04",
+    "gate": {
+      "verdict": "pass",
+      "half_session": false,
+      "missing": [],
+      "stale": [],
+      "undefined": [],
+      "review": []
+    },
+    "regime": {
+      "id": "goldilocks",
+      "name": "Dovish / goldilocks",
+      "confidence": "strong",
+      "intensity": 2.3,
+      "intensity_percentile": 0.99
+    },
+    "signals": [
+      {
+        "bloc": "equity",
+        "instrument": "spx",
+        "change": 1.58,
+        "unit": "%",
+        "z": 2.54,
+        "percentile": 0.97,
+        "moved": true,
+        "quiet_vol": false
+      },
+      {
+        "bloc": "rates",
+        "instrument": "ust_10y",
+        "change": -5.0,
+        "unit": "bp",
+        "z": -1.05,
+        "percentile": 0.72,
+        "moved": true,
+        "quiet_vol": false
+      },
+      {
+        "bloc": "bills",
+        "instrument": "ust_3m",
+        "change": 0.0,
+        "unit": "bp",
+        "z": -0.23,
+        "percentile": 0.34,
+        "moved": false,
+        "quiet_vol": false
+      },
+      {
+        "bloc": "curve",
+        "instrument": "ust_2s10s",
+        "change": -2.0,
+        "unit": "bp",
+        "z": -0.53,
+        "percentile": 0.43,
+        "moved": false,
+        "quiet_vol": false
+      },
+      {
+        "bloc": "real_rates",
+        "instrument": "ust_real_10y",
+        "change": -1.0,
+        "unit": "bp",
+        "z": -0.31,
+        "percentile": 0.25,
+        "moved": false,
+        "quiet_vol": false
+      },
+      {
+        "bloc": "inflation",
+        "instrument": "be_10y",
+        "change": -4.0,
+        "unit": "bp",
+        "z": -1.96,
+        "percentile": 0.93,
+        "moved": true,
+        "quiet_vol": false
+      },
+      {
+        "bloc": "dollar",
+        "instrument": "dxy",
+        "change": -0.04,
+        "unit": "%",
+        "z": -0.27,
+        "percentile": 0.23,
+        "moved": false,
+        "quiet_vol": false
+      },
+      {
+        "bloc": "gold",
+        "instrument": "gold",
+        "change": 5.11,
+        "unit": "%",
+        "z": 4.18,
+        "percentile": 0.99,
+        "moved": true,
+        "quiet_vol": false
+      },
+      {
+        "bloc": "energy",
+        "instrument": "wti",
+        "change": -9.2,
+        "unit": "%",
+        "z": -3.63,
+        "percentile": 0.99,
+        "moved": true,
+        "quiet_vol": false
+      },
+      {
+        "bloc": "industrial",
+        "instrument": "copper",
+        "change": 1.01,
+        "unit": "%",
+        "z": 0.79,
+        "percentile": 0.61,
+        "moved": false,
+        "quiet_vol": false
+      },
+      {
+        "bloc": "vol",
+        "instrument": "vix",
+        "change": -4.22,
+        "unit": "pt",
+        "z": -4.08,
+        "percentile": 0.99,
+        "moved": true,
+        "quiet_vol": false
+      },
+      {
+        "bloc": "credit",
+        "instrument": "credit_excess",
+        "change": 0.54,
+        "unit": "%",
+        "z": 2.47,
+        "percentile": 0.96,
+        "moved": true,
+        "quiet_vol": false
+      }
+    ],
+    "confirmations": [
+      {
+        "id": "vol_down",
+        "holds": true,
+        "detail": "VIX -4.22pt"
+      },
+      {
+        "id": "credit_firm",
+        "holds": true,
+        "detail": "duration-hedged HY +0.54%"
+      },
+      {
+        "id": "dollar_down",
+        "holds": true,
+        "detail": "dxy -0.04%"
+      }
+    ],
+    "largest_moves": [
+      {
+        "name": "USD/CNY (onshore, PBoC-managed)",
+        "change": 0.33,
+        "unit": "%",
+        "z": 4.81,
+        "quiet_vol": true
+      },
+      {
+        "name": "Consumer Discretionary Sector",
+        "change": 4.26,
+        "unit": "%",
+        "z": 4.26,
+        "quiet_vol": false
+      },
+      {
+        "name": "Financials Sector",
+        "change": 3.51,
+        "unit": "%",
+        "z": 4.22,
+        "quiet_vol": false
+      },
+      {
+        "name": "Gold (front)",
+        "change": 5.11,
+        "unit": "%",
+        "z": 4.18,
+        "quiet_vol": false
+      },
+      {
+        "name": "CBOE 3-Month Volatility Index",
+        "change": -2.47,
+        "unit": "pt",
+        "z": -4.18,
+        "quiet_vol": false
+      },
+      {
+        "name": "CBOE Volatility Index",
+        "change": -4.22,
+        "unit": "pt",
+        "z": -4.08,
+        "quiet_vol": false
+      }
+    ],
+    "notes": [
+      "yields fall and equities rally: easing without a growth scare"
+    ]
+  },
+  "headline": "Dovish / goldilocks (strong confidence).",
+  "body": "WHAT MOVED\n\nThe S&P 500 rose 1.58 percent while the 10-year Treasury yield fell 5 basis points, accompanied by a 5.11 percent surge in gold and a sharp 9.2 percent drop in WTI crude. The VIX declined 4.22 points, and breakeven inflation expectations fell 4.0 basis points, suggesting a broad risk-on repricing across both traditional and alternative safe havens.\n\nLIKELY DRIVER\n\nThe pattern is consistent with a dovish or goldilocks regime reasserting itself with strong conviction. Equity strength paired with falling long-end yields and collapsing oil prices would be typical of a scenario where growth concerns recede while policy accommodation remains expected, allowing both equities and real assets like gold to rally without inflation pressures anchoring nominal rates higher. The 0.54 percent gain in duration-hedged credit spreads and the four-point drop in the VIX reinforce an appetite for risk assets within a stable macro backdrop.\n\nWHAT TO WATCH\n\nConfirmation would come from sustained equity outperformance in cyclical sectors like Consumer Discretionary, which gained 4.26 percent, holding alongside these lower yields. Watch whether the 10-year stays below recent levels and whether credit spreads continue to tighten; a reversal in either\u2014particularly a rebound in long yields or widening in excess credit\u2014would signal that today's easing narrative is losing traction.",
+  "generated": true,
+  "unverified_numbers": []
+}
