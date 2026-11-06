@@ -1,0 +1,221 @@
+{
+  "factsheet": {
+    "session": "2026-11-05",
+    "gate": {
+      "verdict": "pass",
+      "half_session": false,
+      "missing": [],
+      "stale": [],
+      "undefined": [],
+      "review": []
+    },
+    "regime": {
+      "id": "growth_scare",
+      "name": "Growth scare / flight to quality",
+      "confidence": "mixed",
+      "intensity": 1.71,
+      "intensity_percentile": 0.97
+    },
+    "signals": [
+      {
+        "bloc": "equity",
+        "instrument": "spx",
+        "change": -4.36,
+        "unit": "%",
+        "z": -6.49,
+        "percentile": 1.0,
+        "moved": true,
+        "quiet_vol": false
+      },
+      {
+        "bloc": "rates",
+        "instrument": "ust_2y",
+        "change": -12.0,
+        "unit": "bp",
+        "z": -2.28,
+        "percentile": 0.96,
+        "moved": true,
+        "quiet_vol": false
+      },
+      {
+        "bloc": "bills",
+        "instrument": "ust_3m",
+        "change": -4.0,
+        "unit": "bp",
+        "z": -1.85,
+        "percentile": 0.93,
+        "moved": true,
+        "quiet_vol": false
+      },
+      {
+        "bloc": "curve",
+        "instrument": "ust_2s10s",
+        "change": 6.0,
+        "unit": "bp",
+        "z": 1.83,
+        "percentile": 0.92,
+        "moved": true,
+        "quiet_vol": false
+      },
+      {
+        "bloc": "real_rates",
+        "instrument": "ust_real_10y",
+        "change": -4.0,
+        "unit": "bp",
+        "z": -0.95,
+        "percentile": 0.68,
+        "moved": false,
+        "quiet_vol": false
+      },
+      {
+        "bloc": "inflation",
+        "instrument": "be_10y",
+        "change": -2.0,
+        "unit": "bp",
+        "z": -0.93,
+        "percentile": 0.68,
+        "moved": false,
+        "quiet_vol": false
+      },
+      {
+        "bloc": "dollar",
+        "instrument": "dxy",
+        "change": -0.24,
+        "unit": "%",
+        "z": -1.04,
+        "percentile": 0.72,
+        "moved": true,
+        "quiet_vol": false
+      },
+      {
+        "bloc": "gold",
+        "instrument": "gold",
+        "change": -0.11,
+        "unit": "%",
+        "z": 0.01,
+        "percentile": 0.01,
+        "moved": false,
+        "quiet_vol": false
+      },
+      {
+        "bloc": "energy",
+        "instrument": "wti",
+        "change": 3.64,
+        "unit": "%",
+        "z": 1.24,
+        "percentile": 0.81,
+        "moved": true,
+        "quiet_vol": false
+      },
+      {
+        "bloc": "industrial",
+        "instrument": "copper",
+        "change": -2.42,
+        "unit": "%",
+        "z": -1.78,
+        "percentile": 0.92,
+        "moved": true,
+        "quiet_vol": false
+      },
+      {
+        "bloc": "vol",
+        "instrument": "vix",
+        "change": 11.57,
+        "unit": "pt",
+        "z": 9.7,
+        "percentile": 1.0,
+        "moved": true,
+        "quiet_vol": false
+      },
+      {
+        "bloc": "credit",
+        "instrument": "credit_excess",
+        "change": -0.63,
+        "unit": "%",
+        "z": -2.46,
+        "percentile": 0.96,
+        "moved": true,
+        "quiet_vol": false
+      }
+    ],
+    "confirmations": [
+      {
+        "id": "vol_up",
+        "holds": true,
+        "detail": "VIX +11.57pt"
+      },
+      {
+        "id": "credit_weak",
+        "holds": true,
+        "detail": "duration-hedged HY -0.63%"
+      },
+      {
+        "id": "defensives_lead",
+        "holds": true,
+        "detail": "defensives -1.32% vs cyclicals -3.44%"
+      },
+      {
+        "id": "gold_up",
+        "holds": false,
+        "detail": "gold -0.11%"
+      },
+      {
+        "id": "dollar_up",
+        "holds": false,
+        "detail": "dxy -0.24%"
+      }
+    ],
+    "largest_moves": [
+      {
+        "name": "CBOE 3-Month Volatility Index",
+        "change": 6.75,
+        "unit": "pt",
+        "z": 9.9,
+        "quiet_vol": false
+      },
+      {
+        "name": "CBOE Volatility Index",
+        "change": 11.57,
+        "unit": "pt",
+        "z": 9.7,
+        "quiet_vol": false
+      },
+      {
+        "name": "VIX / VIX3M Term Structure",
+        "change": 24.84,
+        "unit": "%",
+        "z": 6.94,
+        "quiet_vol": false
+      },
+      {
+        "name": "SPDR S&P 500 ETF",
+        "change": -4.41,
+        "unit": "%",
+        "z": -6.62,
+        "quiet_vol": false
+      },
+      {
+        "name": "S&P 500",
+        "change": -4.36,
+        "unit": "%",
+        "z": -6.49,
+        "quiet_vol": false
+      },
+      {
+        "name": "Nasdaq 100",
+        "change": -6.36,
+        "unit": "%",
+        "z": -5.54,
+        "quiet_vol": false
+      }
+    ],
+    "notes": [
+      "equities and yields fall together: demand for duration and safety",
+      "CONFLICT: gold_up, dollar_up did not corroborate. The tape looks like growth scare / flight to quality but some confirming signals disagree. Reported rather than resolved."
+    ]
+  },
+  "headline": "Growth scare / flight to quality (mixed confidence).",
+  "body": "WHAT MOVED\n\nThe S&P 500 fell 4.36 percent on extreme volume, while the VIX spiked 11.57 points to its ninety-ninth percentile. Treasury yields compressed sharply, with the two-year falling 12.0 basis points and the three-month falling 4.0 basis points, while the two-to-ten curve steepened 6.0 basis points. Credit spreads widened with duration-hedged high-yield down 0.63 percent, and copper declined 2.42 percent alongside a 3.64 percent rise in WTI.\n\nLIKELY DRIVER\n\nThe pattern is consistent with a growth scare or flight-to-quality episode. Equities collapsed on a sharp vol spike, rates fell across the curve as investors demanded safety, and credit deteriorated despite the curve steepening\u2014a sequence typical of demand shifting from risk assets to duration. The steepening two-to-ten spread and resilience of long rates alongside the two-year decline would be consistent with near-term growth concerns rather than an inflation shock.\n\nWHAT TO WATCH\n\nWhether the dollar and gold stabilize or resume their typical safe-haven appreciation would either confirm or challenge this reading; both declined today despite the regime label and the yield collapse, creating a conflict in the cross-asset message that warrants resolution in coming sessions.",
+  "generated": true,
+  "unverified_numbers": []
+}
