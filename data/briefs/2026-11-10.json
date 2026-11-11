@@ -1,0 +1,194 @@
+{
+  "factsheet": {
+    "session": "2026-11-10",
+    "gate": {
+      "verdict": "pass",
+      "half_session": false,
+      "missing": [],
+      "stale": [],
+      "undefined": [],
+      "review": []
+    },
+    "regime": {
+      "id": null,
+      "name": "No clean signal",
+      "confidence": "none",
+      "intensity": 1.3,
+      "intensity_percentile": 0.91
+    },
+    "signals": [
+      {
+        "bloc": "equity",
+        "instrument": "spx",
+        "change": -0.38,
+        "unit": "%",
+        "z": -0.36,
+        "percentile": 0.34,
+        "moved": false,
+        "quiet_vol": false
+      },
+      {
+        "bloc": "rates",
+        "instrument": "ust_2y",
+        "change": 17.0,
+        "unit": "bp",
+        "z": 2.85,
+        "percentile": 0.98,
+        "moved": true,
+        "quiet_vol": false
+      },
+      {
+        "bloc": "bills",
+        "instrument": "ust_3m",
+        "change": 6.0,
+        "unit": "bp",
+        "z": 2.1,
+        "percentile": 0.95,
+        "moved": true,
+        "quiet_vol": false
+      },
+      {
+        "bloc": "curve",
+        "instrument": "ust_2s10s",
+        "change": -7.0,
+        "unit": "bp",
+        "z": -1.9,
+        "percentile": 0.93,
+        "moved": true,
+        "quiet_vol": false
+      },
+      {
+        "bloc": "real_rates",
+        "instrument": "ust_real_10y",
+        "change": 12.0,
+        "unit": "bp",
+        "z": 2.5,
+        "percentile": 0.98,
+        "moved": true,
+        "quiet_vol": false
+      },
+      {
+        "bloc": "inflation",
+        "instrument": "be_10y",
+        "change": -2.0,
+        "unit": "bp",
+        "z": -0.95,
+        "percentile": 0.68,
+        "moved": false,
+        "quiet_vol": false
+      },
+      {
+        "bloc": "dollar",
+        "instrument": "dxy",
+        "change": -0.52,
+        "unit": "%",
+        "z": -2.06,
+        "percentile": 0.95,
+        "moved": true,
+        "quiet_vol": false
+      },
+      {
+        "bloc": "gold",
+        "instrument": "gold",
+        "change": -1.62,
+        "unit": "%",
+        "z": -1.12,
+        "percentile": 0.78,
+        "moved": true,
+        "quiet_vol": false
+      },
+      {
+        "bloc": "energy",
+        "instrument": "wti",
+        "change": -0.29,
+        "unit": "%",
+        "z": -0.13,
+        "percentile": 0.11,
+        "moved": false,
+        "quiet_vol": false
+      },
+      {
+        "bloc": "industrial",
+        "instrument": "copper",
+        "change": -0.55,
+        "unit": "%",
+        "z": -0.35,
+        "percentile": 0.32,
+        "moved": false,
+        "quiet_vol": false
+      },
+      {
+        "bloc": "vol",
+        "instrument": "vix",
+        "change": -0.46,
+        "unit": "pt",
+        "z": -0.26,
+        "percentile": 0.31,
+        "moved": false,
+        "quiet_vol": false
+      },
+      {
+        "bloc": "credit",
+        "instrument": "credit_excess",
+        "change": 0.02,
+        "unit": "%",
+        "z": 0.2,
+        "percentile": 0.19,
+        "moved": false,
+        "quiet_vol": false
+      }
+    ],
+    "confirmations": [],
+    "largest_moves": [
+      {
+        "name": "US 2Y Treasury",
+        "change": 17.0,
+        "unit": "bp",
+        "z": 2.85,
+        "quiet_vol": false
+      },
+      {
+        "name": "EUR/USD",
+        "change": 0.67,
+        "unit": "%",
+        "z": 2.63,
+        "quiet_vol": false
+      },
+      {
+        "name": "US 10Y TIPS Real Yield",
+        "change": 12.0,
+        "unit": "bp",
+        "z": 2.5,
+        "quiet_vol": false
+      },
+      {
+        "name": "US 5Y Treasury",
+        "change": 14.0,
+        "unit": "bp",
+        "z": 2.42,
+        "quiet_vol": false
+      },
+      {
+        "name": "US 5Y TIPS Real Yield",
+        "change": 14.0,
+        "unit": "bp",
+        "z": 2.38,
+        "quiet_vol": false
+      },
+      {
+        "name": "USD/SEK",
+        "change": -0.93,
+        "unit": "%",
+        "z": -2.27,
+        "quiet_vol": false
+      }
+    ],
+    "notes": [
+      "Active session but no rule matched. Blocs that moved: rates, bills, curve, real_rates, dollar, gold. A day can be busy without having a coherent cross-asset signature."
+    ]
+  },
+  "headline": "No clean signal. Composite intensity 1.30, above 91% of sessions.",
+  "body": "Largest moves by z-score:\n  US 2Y Treasury: +17.00bp  (z +2.85)\n  EUR/USD: +0.67%  (z +2.63)\n  US 10Y TIPS Real Yield: +12.00bp  (z +2.50)\n  US 5Y Treasury: +14.00bp  (z +2.42)\n  US 5Y TIPS Real Yield: +14.00bp  (z +2.38)\n  USD/SEK: -0.93%  (z -2.27)\n\nBlocs clearing their move threshold: rates, bills, curve, real_rates, dollar, gold.\n\nNo cross-asset signature was identified. Most sessions are noise.",
+  "generated": false,
+  "unverified_numbers": []
+}
