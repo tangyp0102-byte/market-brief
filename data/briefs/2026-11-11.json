@@ -1,0 +1,144 @@
+{
+  "factsheet": {
+    "session": "2026-11-11",
+    "gate": {
+      "verdict": "pass",
+      "half_session": false,
+      "missing": [],
+      "stale": [],
+      "undefined": [],
+      "review": []
+    },
+    "regime": {
+      "id": null,
+      "name": "No clean signal",
+      "confidence": "none",
+      "intensity": 1.01,
+      "intensity_percentile": 0.77
+    },
+    "signals": [
+      {
+        "bloc": "equity",
+        "instrument": "spx",
+        "change": 1.31,
+        "unit": "%",
+        "z": 1.47,
+        "percentile": 0.85,
+        "moved": true,
+        "quiet_vol": false
+      },
+      {
+        "bloc": "dollar",
+        "instrument": "dxy",
+        "change": 0.51,
+        "unit": "%",
+        "z": 1.68,
+        "percentile": 0.9,
+        "moved": true,
+        "quiet_vol": false
+      },
+      {
+        "bloc": "gold",
+        "instrument": "gold",
+        "change": -1.07,
+        "unit": "%",
+        "z": -0.7,
+        "percentile": 0.59,
+        "moved": false,
+        "quiet_vol": false
+      },
+      {
+        "bloc": "energy",
+        "instrument": "wti",
+        "change": -0.5,
+        "unit": "%",
+        "z": -0.2,
+        "percentile": 0.17,
+        "moved": false,
+        "quiet_vol": false
+      },
+      {
+        "bloc": "industrial",
+        "instrument": "copper",
+        "change": 0.51,
+        "unit": "%",
+        "z": 0.41,
+        "percentile": 0.36,
+        "moved": false,
+        "quiet_vol": false
+      },
+      {
+        "bloc": "vol",
+        "instrument": "vix",
+        "change": -1.97,
+        "unit": "pt",
+        "z": -0.98,
+        "percentile": 0.76,
+        "moved": true,
+        "quiet_vol": false
+      },
+      {
+        "bloc": "credit",
+        "instrument": "credit_excess",
+        "change": 0.22,
+        "unit": "%",
+        "z": 0.94,
+        "percentile": 0.73,
+        "moved": true,
+        "quiet_vol": false
+      }
+    ],
+    "confirmations": [],
+    "largest_moves": [
+      {
+        "name": "GBP/USD",
+        "change": -0.69,
+        "unit": "%",
+        "z": -2.23,
+        "quiet_vol": false
+      },
+      {
+        "name": "Technology Sector",
+        "change": 3.23,
+        "unit": "%",
+        "z": 1.78,
+        "quiet_vol": false
+      },
+      {
+        "name": "US Dollar Index (reconstructed)",
+        "change": 0.51,
+        "unit": "%",
+        "z": 1.68,
+        "quiet_vol": false
+      },
+      {
+        "name": "Nasdaq 100",
+        "change": 2.28,
+        "unit": "%",
+        "z": 1.63,
+        "quiet_vol": false
+      },
+      {
+        "name": "AUD/USD",
+        "change": -0.75,
+        "unit": "%",
+        "z": -1.62,
+        "quiet_vol": false
+      },
+      {
+        "name": "USD/CAD",
+        "change": 0.48,
+        "unit": "%",
+        "z": 1.61,
+        "quiet_vol": false
+      }
+    ],
+    "notes": [
+      "Core blocs unavailable: rates. Not classified."
+    ]
+  },
+  "headline": "No clean signal. Composite intensity 1.01, above 77% of sessions.",
+  "body": "Largest moves by z-score:\n  GBP/USD: -0.69%  (z -2.23)\n  Technology Sector: +3.23%  (z +1.78)\n  US Dollar Index (reconstructed): +0.51%  (z +1.68)\n  Nasdaq 100: +2.28%  (z +1.63)\n  AUD/USD: -0.75%  (z -1.62)\n  USD/CAD: +0.48%  (z +1.61)\n\nBlocs clearing their move threshold: equity, dollar, vol, credit.\n\nNo cross-asset signature was identified. Most sessions are noise.",
+  "generated": false,
+  "unverified_numbers": []
+}
