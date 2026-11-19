@@ -1,0 +1,194 @@
+{
+  "factsheet": {
+    "session": "2026-11-18",
+    "gate": {
+      "verdict": "pass",
+      "half_session": false,
+      "missing": [],
+      "stale": [],
+      "undefined": [],
+      "review": []
+    },
+    "regime": {
+      "id": null,
+      "name": "No clean signal",
+      "confidence": "none",
+      "intensity": 1.18,
+      "intensity_percentile": 0.85
+    },
+    "signals": [
+      {
+        "bloc": "equity",
+        "instrument": "spx",
+        "change": -0.23,
+        "unit": "%",
+        "z": -0.17,
+        "percentile": 0.17,
+        "moved": false,
+        "quiet_vol": false
+      },
+      {
+        "bloc": "rates",
+        "instrument": "ust_30y",
+        "change": -5.0,
+        "unit": "bp",
+        "z": -1.16,
+        "percentile": 0.76,
+        "moved": true,
+        "quiet_vol": false
+      },
+      {
+        "bloc": "bills",
+        "instrument": "ust_3m",
+        "change": 1.0,
+        "unit": "bp",
+        "z": 0.09,
+        "percentile": 0.21,
+        "moved": false,
+        "quiet_vol": false
+      },
+      {
+        "bloc": "curve",
+        "instrument": "ust_2s10s",
+        "change": -3.0,
+        "unit": "bp",
+        "z": -0.76,
+        "percentile": 0.58,
+        "moved": false,
+        "quiet_vol": false
+      },
+      {
+        "bloc": "real_rates",
+        "instrument": "ust_real_10y",
+        "change": -1.0,
+        "unit": "bp",
+        "z": -0.39,
+        "percentile": 0.31,
+        "moved": false,
+        "quiet_vol": false
+      },
+      {
+        "bloc": "inflation",
+        "instrument": "be_10y",
+        "change": -2.0,
+        "unit": "bp",
+        "z": -0.85,
+        "percentile": 0.63,
+        "moved": false,
+        "quiet_vol": false
+      },
+      {
+        "bloc": "dollar",
+        "instrument": "dxy",
+        "change": 0.03,
+        "unit": "%",
+        "z": -0.17,
+        "percentile": 0.16,
+        "moved": false,
+        "quiet_vol": false
+      },
+      {
+        "bloc": "gold",
+        "instrument": "gold",
+        "change": -3.8,
+        "unit": "%",
+        "z": -2.68,
+        "percentile": 0.97,
+        "moved": true,
+        "quiet_vol": false
+      },
+      {
+        "bloc": "energy",
+        "instrument": "wti",
+        "change": -4.72,
+        "unit": "%",
+        "z": -1.69,
+        "percentile": 0.9,
+        "moved": true,
+        "quiet_vol": false
+      },
+      {
+        "bloc": "industrial",
+        "instrument": "copper",
+        "change": -5.28,
+        "unit": "%",
+        "z": -3.67,
+        "percentile": 0.99,
+        "moved": true,
+        "quiet_vol": false
+      },
+      {
+        "bloc": "vol",
+        "instrument": "vix",
+        "change": -0.9,
+        "unit": "pt",
+        "z": -0.49,
+        "percentile": 0.52,
+        "moved": false,
+        "quiet_vol": false
+      },
+      {
+        "bloc": "credit",
+        "instrument": "credit_excess",
+        "change": -0.01,
+        "unit": "%",
+        "z": 0.12,
+        "percentile": 0.12,
+        "moved": false,
+        "quiet_vol": false
+      }
+    ],
+    "confirmations": [],
+    "largest_moves": [
+      {
+        "name": "Copper (front)",
+        "change": -5.28,
+        "unit": "%",
+        "z": -3.67,
+        "quiet_vol": false
+      },
+      {
+        "name": "Gold (front)",
+        "change": -3.8,
+        "unit": "%",
+        "z": -2.68,
+        "quiet_vol": false
+      },
+      {
+        "name": "Energy Sector",
+        "change": -3.27,
+        "unit": "%",
+        "z": -2.1,
+        "quiet_vol": false
+      },
+      {
+        "name": "Health Care Sector",
+        "change": -2.2,
+        "unit": "%",
+        "z": -2.07,
+        "quiet_vol": false
+      },
+      {
+        "name": "Silver (front)",
+        "change": -5.0,
+        "unit": "%",
+        "z": -1.85,
+        "quiet_vol": true
+      },
+      {
+        "name": "Henry Hub Natural Gas (front)",
+        "change": 5.42,
+        "unit": "%",
+        "z": 1.71,
+        "quiet_vol": false
+      }
+    ],
+    "notes": [
+      "Active session but no rule matched. Blocs that moved: rates, gold, energy, industrial. A day can be busy without having a coherent cross-asset signature."
+    ]
+  },
+  "headline": "No clean signal. Composite intensity 1.18, above 85% of sessions.",
+  "body": "Largest moves by z-score:\n  Copper (front): -5.28%  (z -3.67)\n  Gold (front): -3.80%  (z -2.68)\n  Energy Sector: -3.27%  (z -2.10)\n  Health Care Sector: -2.20%  (z -2.07)\n  Silver (front): -5.00%  (z -1.85)  [quiet vol period]\n  Henry Hub Natural Gas (front): +5.42%  (z +1.71)\n\nBlocs clearing their move threshold: rates, gold, energy, industrial.\n\nNo cross-asset signature was identified. Most sessions are noise.",
+  "generated": false,
+  "unverified_numbers": []
+}
