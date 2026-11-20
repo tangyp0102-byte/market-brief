@@ -1,0 +1,194 @@
+{
+  "factsheet": {
+    "session": "2026-11-19",
+    "gate": {
+      "verdict": "pass",
+      "half_session": false,
+      "missing": [],
+      "stale": [],
+      "undefined": [],
+      "review": []
+    },
+    "regime": {
+      "id": null,
+      "name": "No clean signal",
+      "confidence": "none",
+      "intensity": 1.38,
+      "intensity_percentile": 0.92
+    },
+    "signals": [
+      {
+        "bloc": "equity",
+        "instrument": "spx",
+        "change": -2.02,
+        "unit": "%",
+        "z": -2.01,
+        "percentile": 0.94,
+        "moved": true,
+        "quiet_vol": false
+      },
+      {
+        "bloc": "rates",
+        "instrument": "ust_2y",
+        "change": -4.0,
+        "unit": "bp",
+        "z": -0.78,
+        "percentile": 0.61,
+        "moved": false,
+        "quiet_vol": false
+      },
+      {
+        "bloc": "bills",
+        "instrument": "ust_3m",
+        "change": 0.0,
+        "unit": "bp",
+        "z": -0.29,
+        "percentile": 0.39,
+        "moved": false,
+        "quiet_vol": false
+      },
+      {
+        "bloc": "curve",
+        "instrument": "ust_2s10s",
+        "change": 1.0,
+        "unit": "bp",
+        "z": 0.39,
+        "percentile": 0.32,
+        "moved": false,
+        "quiet_vol": false
+      },
+      {
+        "bloc": "real_rates",
+        "instrument": "ust_real_10y",
+        "change": 0.0,
+        "unit": "bp",
+        "z": -0.16,
+        "percentile": 0.14,
+        "moved": false,
+        "quiet_vol": false
+      },
+      {
+        "bloc": "inflation",
+        "instrument": "be_10y",
+        "change": -3.0,
+        "unit": "bp",
+        "z": -1.31,
+        "percentile": 0.82,
+        "moved": true,
+        "quiet_vol": false
+      },
+      {
+        "bloc": "dollar",
+        "instrument": "dxy",
+        "change": 0.2,
+        "unit": "%",
+        "z": 0.43,
+        "percentile": 0.35,
+        "moved": false,
+        "quiet_vol": false
+      },
+      {
+        "bloc": "gold",
+        "instrument": "gold",
+        "change": -5.11,
+        "unit": "%",
+        "z": -3.52,
+        "percentile": 0.99,
+        "moved": true,
+        "quiet_vol": false
+      },
+      {
+        "bloc": "energy",
+        "instrument": "wti",
+        "change": -0.41,
+        "unit": "%",
+        "z": -0.16,
+        "percentile": 0.14,
+        "moved": false,
+        "quiet_vol": false
+      },
+      {
+        "bloc": "industrial",
+        "instrument": "copper",
+        "change": -2.55,
+        "unit": "%",
+        "z": -1.52,
+        "percentile": 0.87,
+        "moved": true,
+        "quiet_vol": false
+      },
+      {
+        "bloc": "vol",
+        "instrument": "vix",
+        "change": 3.88,
+        "unit": "pt",
+        "z": 1.72,
+        "percentile": 0.91,
+        "moved": true,
+        "quiet_vol": false
+      },
+      {
+        "bloc": "credit",
+        "instrument": "credit_excess",
+        "change": -0.25,
+        "unit": "%",
+        "z": -0.79,
+        "percentile": 0.66,
+        "moved": false,
+        "quiet_vol": false
+      }
+    ],
+    "confirmations": [],
+    "largest_moves": [
+      {
+        "name": "Gold (front)",
+        "change": -5.11,
+        "unit": "%",
+        "z": -3.52,
+        "quiet_vol": false
+      },
+      {
+        "name": "USD/MXN",
+        "change": 2.37,
+        "unit": "%",
+        "z": 3.38,
+        "quiet_vol": false
+      },
+      {
+        "name": "Silver (front)",
+        "change": -7.22,
+        "unit": "%",
+        "z": -2.69,
+        "quiet_vol": true
+      },
+      {
+        "name": "Consumer Discretionary Sector",
+        "change": -2.79,
+        "unit": "%",
+        "z": -2.19,
+        "quiet_vol": false
+      },
+      {
+        "name": "Invesco S&P 500 Equal Weight ETF",
+        "change": -1.76,
+        "unit": "%",
+        "z": -2.08,
+        "quiet_vol": false
+      },
+      {
+        "name": "CBOE 3-Month Volatility Index",
+        "change": 2.74,
+        "unit": "pt",
+        "z": 2.04,
+        "quiet_vol": false
+      }
+    ],
+    "notes": [
+      "Active session but no rule matched. Blocs that moved: equity, inflation, gold, industrial, vol. A day can be busy without having a coherent cross-asset signature."
+    ]
+  },
+  "headline": "No clean signal. Composite intensity 1.38, above 92% of sessions.",
+  "body": "Largest moves by z-score:\n  Gold (front): -5.11%  (z -3.52)\n  USD/MXN: +2.37%  (z +3.38)\n  Silver (front): -7.22%  (z -2.69)  [quiet vol period]\n  Consumer Discretionary Sector: -2.79%  (z -2.19)\n  Invesco S&P 500 Equal Weight ETF: -1.76%  (z -2.08)\n  CBOE 3-Month Volatility Index: +2.74pt  (z +2.04)\n\nBlocs clearing their move threshold: equity, inflation, gold, industrial, vol.\n\nNo cross-asset signature was identified. Most sessions are noise.",
+  "generated": false,
+  "unverified_numbers": []
+}
