@@ -1,0 +1,194 @@
+{
+  "factsheet": {
+    "session": "2026-11-24",
+    "gate": {
+      "verdict": "pass",
+      "half_session": false,
+      "missing": [],
+      "stale": [],
+      "undefined": [],
+      "review": []
+    },
+    "regime": {
+      "id": null,
+      "name": "No clean signal",
+      "confidence": "none",
+      "intensity": 0.95,
+      "intensity_percentile": 0.73
+    },
+    "signals": [
+      {
+        "bloc": "equity",
+        "instrument": "spx",
+        "change": -0.5,
+        "unit": "%",
+        "z": -0.32,
+        "percentile": 0.3,
+        "moved": false,
+        "quiet_vol": false
+      },
+      {
+        "bloc": "rates",
+        "instrument": "ust_5y",
+        "change": -5.0,
+        "unit": "bp",
+        "z": -0.88,
+        "percentile": 0.65,
+        "moved": false,
+        "quiet_vol": false
+      },
+      {
+        "bloc": "bills",
+        "instrument": "ust_3m",
+        "change": -1.0,
+        "unit": "bp",
+        "z": -0.69,
+        "percentile": 0.65,
+        "moved": false,
+        "quiet_vol": false
+      },
+      {
+        "bloc": "curve",
+        "instrument": "ust_2s10s",
+        "change": -1.0,
+        "unit": "bp",
+        "z": -0.2,
+        "percentile": 0.17,
+        "moved": false,
+        "quiet_vol": false
+      },
+      {
+        "bloc": "real_rates",
+        "instrument": "ust_real_10y",
+        "change": 0.0,
+        "unit": "bp",
+        "z": -0.15,
+        "percentile": 0.13,
+        "moved": false,
+        "quiet_vol": false
+      },
+      {
+        "bloc": "inflation",
+        "instrument": "be_10y",
+        "change": -1.0,
+        "unit": "bp",
+        "z": -0.32,
+        "percentile": 0.26,
+        "moved": false,
+        "quiet_vol": false
+      },
+      {
+        "bloc": "dollar",
+        "instrument": "dxy",
+        "change": 0.43,
+        "unit": "%",
+        "z": 1.33,
+        "percentile": 0.82,
+        "moved": true,
+        "quiet_vol": false
+      },
+      {
+        "bloc": "gold",
+        "instrument": "gold",
+        "change": -2.45,
+        "unit": "%",
+        "z": -1.4,
+        "percentile": 0.84,
+        "moved": true,
+        "quiet_vol": false
+      },
+      {
+        "bloc": "energy",
+        "instrument": "wti",
+        "change": 2.35,
+        "unit": "%",
+        "z": 0.83,
+        "percentile": 0.64,
+        "moved": false,
+        "quiet_vol": false
+      },
+      {
+        "bloc": "industrial",
+        "instrument": "copper",
+        "change": -4.7,
+        "unit": "%",
+        "z": -2.78,
+        "percentile": 0.98,
+        "moved": true,
+        "quiet_vol": false
+      },
+      {
+        "bloc": "vol",
+        "instrument": "vix",
+        "change": -0.26,
+        "unit": "pt",
+        "z": -0.17,
+        "percentile": 0.2,
+        "moved": false,
+        "quiet_vol": false
+      },
+      {
+        "bloc": "credit",
+        "instrument": "credit_excess",
+        "change": -0.28,
+        "unit": "%",
+        "z": -0.77,
+        "percentile": 0.65,
+        "moved": false,
+        "quiet_vol": false
+      }
+    ],
+    "confirmations": [],
+    "largest_moves": [
+      {
+        "name": "Copper (front)",
+        "change": -4.7,
+        "unit": "%",
+        "z": -2.78,
+        "quiet_vol": false
+      },
+      {
+        "name": "Health Care Sector",
+        "change": 2.95,
+        "unit": "%",
+        "z": 2.45,
+        "quiet_vol": false
+      },
+      {
+        "name": "USD/CNY (onshore, PBoC-managed)",
+        "change": -0.19,
+        "unit": "%",
+        "z": -2.03,
+        "quiet_vol": true
+      },
+      {
+        "name": "Silver (front)",
+        "change": -5.53,
+        "unit": "%",
+        "z": -1.83,
+        "quiet_vol": false
+      },
+      {
+        "name": "5s30s Curve Slope",
+        "change": 6.0,
+        "unit": "bp",
+        "z": 1.83,
+        "quiet_vol": false
+      },
+      {
+        "name": "EUR/USD",
+        "change": -0.58,
+        "unit": "%",
+        "z": -1.72,
+        "quiet_vol": false
+      }
+    ],
+    "notes": [
+      "Active session but no rule matched. Blocs that moved: dollar, gold, industrial. A day can be busy without having a coherent cross-asset signature."
+    ]
+  },
+  "headline": "No clean signal. Composite intensity 0.95, above 73% of sessions.",
+  "body": "Largest moves by z-score:\n  Copper (front): -4.70%  (z -2.78)\n  Health Care Sector: +2.95%  (z +2.45)\n  USD/CNY (onshore, PBoC-managed): -0.19%  (z -2.03)  [quiet vol period]\n  Silver (front): -5.53%  (z -1.83)\n  5s30s Curve Slope: +6.00bp  (z +1.83)\n  EUR/USD: -0.58%  (z -1.72)\n\nBlocs clearing their move threshold: dollar, gold, industrial.\n\nNo cross-asset signature was identified. Most sessions are noise.",
+  "generated": false,
+  "unverified_numbers": []
+}
