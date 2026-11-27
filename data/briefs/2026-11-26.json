@@ -1,0 +1,81 @@
+{
+  "factsheet": {
+    "session": "2026-11-26",
+    "gate": {
+      "verdict": "blocked",
+      "half_session": false,
+      "missing": [],
+      "stale": [],
+      "undefined": [],
+      "review": []
+    },
+    "regime": {
+      "id": null,
+      "name": "No clean signal",
+      "confidence": "none",
+      "intensity": 1.36,
+      "intensity_percentile": 0.92
+    },
+    "signals": [
+      {
+        "bloc": "dollar",
+        "instrument": "dxy",
+        "change": -0.11,
+        "unit": "%",
+        "z": -0.62,
+        "percentile": 0.5,
+        "moved": false,
+        "quiet_vol": false
+      },
+      {
+        "bloc": "gold",
+        "instrument": "gold",
+        "change": 3.58,
+        "unit": "%",
+        "z": 2.54,
+        "percentile": 0.96,
+        "moved": true,
+        "quiet_vol": false
+      },
+      {
+        "bloc": "energy",
+        "instrument": "wti",
+        "change": 2.52,
+        "unit": "%",
+        "z": 0.92,
+        "percentile": 0.69,
+        "moved": false,
+        "quiet_vol": false
+      },
+      {
+        "bloc": "industrial",
+        "instrument": "copper",
+        "change": 5.7,
+        "unit": "%",
+        "z": 3.55,
+        "percentile": 0.99,
+        "moved": true,
+        "quiet_vol": false
+      },
+      {
+        "bloc": "vol",
+        "instrument": "vix",
+        "change": -1.49,
+        "unit": "pt",
+        "z": -0.63,
+        "percentile": 0.62,
+        "moved": false,
+        "quiet_vol": false
+      }
+    ],
+    "confirmations": [],
+    "largest_moves": [],
+    "notes": [
+      "Core blocs unavailable: equity, rates. Not classified."
+    ]
+  },
+  "headline": "No brief for this session.",
+  "body": "The validation gate blocked publication.",
+  "generated": false,
+  "unverified_numbers": []
+}
